@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.QnaMapper">
+
+	<insert id="create">
+		<selectKey keyProperty="qnaNo" resultType="int" order="BEFORE">
+			SELECT SEQ_QNA.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO QNA (QNA_NO, QNA_TITLE, QNA_CONTENT, MEMBER_NO)
+		VALUES 
+		(#{qnaNo}, #{qnaTitle}, #{qnaContent}, #{memberNo})
+	</insert>
+
+	<select id="read" resultType="com.mit.domain.QnaVO">
+		SELECT
+		Q.QNA_NO, Q.QNA_TITLE, Q.QNA_CONTENT, Q.QNA_DATE, M.MEMBER_NAME, M.MEMBER_NO
+		FROM QNA Q, MEMBER M
+		WHERE M.MEMBER_NO = Q.MEMBER_NO
+		AND QNA_NO = #{qnaNo}
+	</select>
+
+	<update id="update">
+		UPDATE QNA
+		SET QNA_TITLE = #{qnaTitle}, 
+		QNA_CONTENT = #{qnaContent}
+		WHERE QNA_NO = #{qnaNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM QNA
+		WHERE QNA_NO = #{qnaNo}
+	</delete>
+
+	
+	<select id="listSearch" resultType="com.mit.domain.QnaVO">
+		<![CDATA[
+			SELECT * FROM (
+				SELECT
+				ROWNUM RNUM, QNA_NO, QNA_TITLE, QNA_CONTENT, QNA_DATE, MEMBER_NO, MEMBER_NAME
+      			FROM ( 
+      				SELECT
+      				Q.QNA_NO, Q.QNA_TITLE, Q.QNA_CONTENT, Q.QNA_DATE, M.MEMBER_NO, M.MEMBER_NAME
+      				FROM
+      				QNA Q, MEMBER M
+      				WHERE M.MEMBER_NO = Q.MEMBER_NO
+      				AND Q.QNA_NO > 0
+		]]>
+
+		<![CDATA[
+			ORDER BY Q.QNA_NO ASC))
+			ORDER BY QNA_NO DESC, QNA_DATE DESC
+		]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM QNA
+			WHERE QNA_NO > 0
+		]]>
+		
+	</select>
+		
+	<insert id="insertFile">
+		INSERT INTO QNA_FILE(FILE_NO, FILE_NAME, QNA_NO)
+		VALUES(SEQ_QNA_FILE.NEXTVAL, #{fileName}, #{qnaNo})
+	</insert>
+
+	<insert id="deleteFile">
+		DELETE FROM QNA_FILE WHERE QNA_NO = #{qnaNo}
+	</insert>
+
+	<select id="fileList" resultType="com.mit.domain.QnaFileVO">
+		SELECT
+		QNA_NO
+		,SUBSTR(FILE_NAME, 50) AS FILE_NAME
+		,FILE_NAME AS FILE_LOCATION
+		,QNA_NO
+		FROM
+		QNA_FILE
+		WHERE
+		QNA_NO = #{qnaNo}
+	</select>
+	
+	
+
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.PhotoMapper">
+
+	<insert id="create">
+		<selectKey keyProperty="photoNo" resultType="int"
+			order="BEFORE">
+			SELECT SEQ_PHOTO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO PHOTO (PHOTO_NO, PHOTO_TITLE, PHOTO_CONTENT, MEMBER_NO)
+		VALUES (#{photoNo}, #{photoTitle}, #{photoContent}, #{memberNo})
+	</insert>
+
+	<select id="read" resultType="com.mit.domain.PhotoVO">
+		SELECT
+		P.PHOTO_NO, P.PHOTO_TITLE,
+		P.PHOTO_CONTENT, P.PHOTO_DATE, M.MEMBER_NAME, M.MEMBER_NO
+		FROM PHOTO P,
+		MEMBER M
+		WHERE M.MEMBER_NO = P.MEMBER_NO
+		AND PHOTO_NO = #{photoNo}
+	</select>
+
+
+	<update id="update">
+		UPDATE PHOTO
+		SET
+		PHOTO_TITLE = #{photoTitle},
+		PHOTO_CONTENT = #{photoContent}
+		WHERE PHOTO_NO = #{photoNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM PHOTO
+		WHERE PHOTO_NO = #{photoNo}
+	</delete>
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()"> and PHOTO_TITLE like '%' || #{keyword} || '%' </if>
+			<if test="searchType == 'c'.toString()"> and PHOTO_CONTENT like '%' || #{keyword} || '%'   </if>
+			<if test="searchType == 'n'.toString()"> and P.MEMBER_NO like '%' || #{keyword} || '%'   </if>
+			<if test="searchType == 'tc'.toString()"> and (PHOTO_TITLE like '%' || #{keyword} || '%' OR
+				PHOTO_CONTENT like '%' || #{keyword} || '%')</if>
+			<if test="searchType == 'cn'.toString()"> and (PHOTO_CONTENT like '%' || #{keyword} || '%' OR
+				P.MEMBER_NO like '%' || #{keyword} || '%')</if>
+			<if test="searchType == 'tcn'.toString()"> and (PHOTO_TITLE like '%' || #{keyword} || '%' OR
+				PHOTO_CONTENT like '%' || #{keyword} || '%' OR P.MEMBER_NO like '%'
+				||#{keyword} || '%')</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="com.mit.domain.PhotoVO">
+		<![CDATA[
+				SELECT * FROM (
+				SELECT
+				ROWNUM RNUM, PHOTO_NO, PHOTO_TITLE, PHOTO_CONTENT, PHOTO_DATE, MEMBER_NO, MEMBER_NAME, PHOTO_IMAGE
+      			FROM (
+      				SELECT
+      				P.PHOTO_NO, P.PHOTO_TITLE, P.PHOTO_CONTENT, P.PHOTO_DATE, M.MEMBER_NO, M.MEMBER_NAME, 
+                    (SELECT MAX(FILE_NAME) FROM PHOTO_FILE WHERE PHOTO_NO = P.PHOTO_NO) AS PHOTO_IMAGE
+      				FROM
+      				PHOTO P, MEMBER M
+      				WHERE M.MEMBER_NO = P.MEMBER_NO
+      				AND P.PHOTO_NO > 0
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+			ORDER BY P.PHOTO_NO DESC) WHERE PHOTO_IMAGE IS NOT NULL)
+			WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd})
+			ORDER BY PHOTO_NO DESC, PHOTO_DATE DESC
+		]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM PHOTO P
+			WHERE P.PHOTO_NO > 0
+		]]>
+		<include refid="search"></include>
+	</select>
+
+	<insert id="insertFile">
+		INSERT INTO PHOTO_FILE (FILE_NO, FILE_NAME, PHOTO_NO)
+		VALUES(SEQ_PHOTO_FILE.NEXTVAL, #{fileName}, #{photoNo})
+	</insert>
+
+	<insert id="deleteFile">
+		DELETE FROM PHOTO_FILE WHERE PHOTO_NO = #{photoNo}
+	</insert>
+
+	<select id="fileList" resultType="com.mit.domain.PhotoFileVO">
+		SELECT
+		FILE_NO,
+		SUBSTR(FILE_NAME, 50) AS FILE_NAME,
+		FILE_NAME AS FILE_LOCATION,
+		PHOTO_NO
+		FROM PHOTO_FILE
+		WHERE PHOTO_NO = #{photoNo}
+	</select>
+
+</mapper>

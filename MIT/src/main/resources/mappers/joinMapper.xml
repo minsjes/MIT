@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.JoinMapper">
+	
+	<insert id="create">
+		INSERT INTO JOIN (JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE, JOIN_TEXT, MEMBER_NO)
+		VALUES(#{joinNo}, #{joinPw}, #{joinName}, #{joinPhone}, #{joinText}, 12345678)
+	</insert>
+	
+	<select id="read" resultType="com.mit.domain.JoinVO">
+		SELECT JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_TEXT, ALLOW_STATUS, JOIN_DATE, ALLOW_DATE
+		FROM JOIN
+		WHERE JOIN_NO = #{joinNo}
+	</select>
+	
+	<update id="update">
+		UPDATE JOIN
+		SET
+		ALLOW_STATUS = #{allowStatus},
+		ALLOW_DATE = SYSDATE
+		WHERE MEMBER_NO = #{memberNo} AND JOIN_NO = #{joinNo}
+	</update> <!-- 관리자 번호 12345678 만 -->
+	
+	<delete id="delete">
+		DELETE FROM JOIN
+		WHERE MEMBER_NO = #{memberNo} AND JOIN_NO = #{joinNo}
+	</delete> <!-- 관리자 번호 12345678만 -->
+	
+	
+	<select id="listSearch" resultType="com.mit.domain.JoinVO">
+		<![CDATA[
+			SELECT * FROM (
+				SELECT
+					ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, ALLOW_STATUS, JOIN_DATE, ALLOW_DATE
+				from
+					JOIN WHERE ROWNUM >0)
+		]]>
+		<![CDATA[
+		
+		]]>
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM JOIN
+			WHERE ROWNUM > 0
+		]]>
+	</select>
+	
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER M, JOIN J
+		WHERE M.MEMBER_NO = #{joinNo}
+		OR J.JOIN_NO = #{joinNo}
+	</select>
+</mapper>

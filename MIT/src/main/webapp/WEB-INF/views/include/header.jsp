@@ -51,6 +51,7 @@
 					</c:if>
 					<c:if test="${null ne login.memberNo}">
 						<li><a class="dropdown-item" href="/member/myreadPage?memberNo=${login.memberNo}">내 정보</a></li>
+						<li><a class="dropdown-item" href="#">쪽지함</a></li>
 						<li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
 					</c:if>
 				</ul>
@@ -78,6 +79,11 @@
 						</c:if>
 						
 						<div class="sb-sidenav-menu-heading">MENU</div>
+						<a class="nav-link" href="#">
+							<div class="sb-nav-link-icon">
+								<i class="bi bi-emoji-sunglasses"></i>
+							</div> 동아리 소개
+						</a>
 						<a class="nav-link" href="/notice/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-megaphone"></i>
@@ -86,17 +92,22 @@
 						<a class="nav-link" href="/calendar/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-calendar-check"></i>
-							</div> 일정 게시판
+							</div> 동아리 일정
 						</a>
 						<a class="nav-link" href="/info/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-share-fill"></i>
-							</div> 정보 공유 게시판
+							</div> 진로 정보 공유 게시판
 						</a>
 						<a class="nav-link" href="/qna/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-question-diamond"></i>
-							</div> 문의 게시판
+							</div> 질문 게시판
+						</a>
+						<a class="nav-link" href="#">
+							<div class="sb-nav-link-icon">
+								<i class="bi bi-pencil"></i>
+							</div> 스터디 게시판
 						</a>
 						<a class="nav-link" href="/free/list">
 							<div class="sb-nav-link-icon">
@@ -105,8 +116,8 @@
 						</a>
 						<a class="nav-link" href="/photo/list">
 							<div class="sb-nav-link-icon">
-								<i class="bi bi-image"></i>
-							</div> 포토 갤러리
+								<i class="bi bi-pencil-square"></i>
+							</div> 건의사항
 						</a>
 					</div>
 				</div>

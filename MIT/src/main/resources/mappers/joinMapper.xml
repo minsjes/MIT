@@ -4,12 +4,12 @@
 <mapper namespace="com.mit.mapper.JoinMapper">
 	
 	<insert id="create">
-		INSERT INTO JOIN (JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE, JOIN_TEXT, MEMBER_NO)
-		VALUES(#{joinNo}, #{joinPw}, #{joinName}, #{joinPhone}, #{joinText}, 12345678)
+		INSERT INTO JOIN (JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE, JOIN_CLASS, JOIN_TEXT, MEMBER_NO)
+		VALUES(#{joinNo}, #{joinPw}, #{joinName}, #{joinPhone}, #{joinClass}, #{joinText}, 12345678)
 	</insert>
 	
 	<select id="read" resultType="com.mit.domain.JoinVO">
-		SELECT JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_TEXT, ALLOW_STATUS, JOIN_DATE, ALLOW_DATE
+		SELECT JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_CALSS, JOIN_TEXT, JOIN_DATE, ALLOW_STATUS
 		FROM JOIN
 		WHERE JOIN_NO = #{joinNo}
 	</select>
@@ -17,8 +17,7 @@
 	<update id="update">
 		UPDATE JOIN
 		SET
-		ALLOW_STATUS = #{allowStatus},
-		ALLOW_DATE = SYSDATE
+		ALLOW_STATUS = #{allowStatus}
 		WHERE MEMBER_NO = #{memberNo} AND JOIN_NO = #{joinNo}
 	</update> <!-- 관리자 번호 12345678 만 -->
 	
@@ -32,20 +31,9 @@
 		<![CDATA[
 			SELECT * FROM (
 				SELECT
-					ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, ALLOW_STATUS, JOIN_DATE, ALLOW_DATE
+					ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_CLASS, JOIN_DATE, ALLOW_STATUS
 				from
 					JOIN WHERE ROWNUM >0)
-		]]>
-		<![CDATA[
-		
-		]]>
-	</select>
-	
-	<select id="listSearchCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*)
-			FROM JOIN
-			WHERE ROWNUM > 0
 		]]>
 	</select>
 	

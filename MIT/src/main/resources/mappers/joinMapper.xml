@@ -4,7 +4,7 @@
 <mapper namespace="com.mit.mapper.JoinMapper">
 	
 	<insert id="create">
-		INSERT INTO JOIN (JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE, JOIN_CLASS, JOIN_TEXT, MEMBER_NO)
+		INSERT INTO JOIN (JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE, JOIN_CLASS, JOIN_TEXT , MEMBER_NO)
 		VALUES(#{joinNo}, #{joinPw}, #{joinName}, #{joinPhone}, #{joinClass}, #{joinText}, 12345678)
 	</insert>
 	

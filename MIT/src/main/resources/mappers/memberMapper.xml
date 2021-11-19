@@ -51,8 +51,7 @@
 		    SELECT COUNT(*)
 		    FROM MEMBER
 		    WHERE MEMBER_NO = #{memberNo}
-		    ) +
-		    (
+		    ) + (
 		    SELECT COUNT(*)
 		    FROM JOIN
 		    WHERE JOIN_NO = #{memberNo}

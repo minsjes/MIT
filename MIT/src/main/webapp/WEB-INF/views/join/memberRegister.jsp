@@ -59,6 +59,15 @@
 									<input type="text" class="form-control" id="joinPhone" name="joinPhone" placeholder="010-1234-1234">
 								</div>
 								<div class="form-group">
+									<label class="form-control-label">가입자 유형</label>
+									<p>
+									<input type="radio" name="radio" id="memType1" value="memType">
+									<label class="form-control-label">재학생</label> &nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="radio" id="memType2" value="memType">
+									<label class="form-control-label">졸업생</label>
+									</p>
+								</div>	
+								<div class="form-group">
 									<label class="form-control-label">가입 사유</label>
 									<textarea class="form-control" id="joinText" name="joinText" rows="5" placeholder="사유를 반드시 써주세요." style="font-weight: bold;"></textarea>
 								</div>

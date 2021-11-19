@@ -44,8 +44,6 @@ public class HomeController {
 		
 		model.addAttribute("list", service.list());
 		
-		model.addAttribute("listSearch", service.listSearch(cri));
-		
 		return "index";
    }
 }

@@ -39,7 +39,7 @@ public class JoinServiceImpl implements JoinService {
 		int joinNo = vo.getJoinNo();
 		
 		if(allowStatus == "1") {
-			mDao.create(joinNo);
+			mDao.change(joinNo);
 		}
 	}
 

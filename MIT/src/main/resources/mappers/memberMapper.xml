@@ -4,62 +4,53 @@
 <mapper namespace="com.mit.mapper.MemberMapper">
 
 	<select id="login" resultType="com.mit.domain.MemberVO">
-		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS
-		FROM
-			MEMBER
+		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE
+		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo} AND MEMBER_PW = #{memberPw}
 	</select>
 	
-	<insert id="create">
-		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE)
-		SELECT JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE
+	<insert id="change">
+		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS)
+		SELECT JOIN_NO, JOIN_PW, JOIN_NAME, JOIN_PHONE, JOIN_CLASS
 		FROM JOIN
 		WHERE JOIN_NO = #{joinNo}
 	</insert>
 	
+	<insert id="create">
+		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS)
+		VALUES(#{memberNo}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberClass});
+		WHERE 12345678 = #{adminNo}
+	</insert>
+	
 	<select id="read" resultType="com.mit.domain.MemberVO">
-		SELECT
-		MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS
-		FROM
-		MEMBER
-		WHERE MEMBER_NO =
-		#{memberNo}
+		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE, DORMANCY_STATUS
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<update id="update">
-		UPDATE MEMBER SET MEMBER_PW =#{memberPw},
-		MEMBER_NAME =#{memberName},
-		MEMBER_PHONE=#{memberPhone},
-		MEMBER_CLASS=#{memberClass}
+		UPDATE MEMBER SET MEMBER_PW = #{memberPw},
+		MEMBER_NAME = #{memberName},
+		MEMBER_PHONE = #{memberPhone},
+		MEMBER_CLASS = #{memberClass},
+		DORMANCY_STATUS = #{dormancyStatus}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
-	<delete id="delete">
-		DELETE FROM MEMBER WHERE MEMBER_NO = #{memberNo}
-	</delete>
-	
 	<select id="listSearch" resultType="com.mit.domain.MemberVO">
-		<![CDATA[
 		SELECT * FROM (
-			SELECT
-				ROWNUM RNUM, MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS
-			from
-				MEMBER WHERE ROWNUM >0)
-			]]>
-
-			<![CDATA[
-					
-			]]>
+		SELECT
+		ROWNUM RNUM, MEMBER_NO, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE, DORMANCY_STATUS
+		FROM MEMBER
+		WHERE ROWNUM >0
+		)
 	</select>
 	
-	<select id="listSearchCount" resultType="int">
-		<![CDATA[
+	<select id="idCheck" resultType="int">
 		SELECT COUNT(*)
-		FROM
-				MEMBER WHERE ROWNUM >0
-			]]>
-	
-	
+		FROM MEMBER M, JOIN J
+		WHERE M.MEMBER_NO = #{memberNo}
+		OR J.JOIN_NO = #{memberNo}
 	</select>
 	
 </mapper>

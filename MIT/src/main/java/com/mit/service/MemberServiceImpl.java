@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.mit.domain.MemberVO;
-import com.mit.domain.SearchCriteria;
 import com.mit.dto.LoginDTO;
 import com.mit.persistence.MemberDAO;
 
@@ -20,12 +19,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO login(LoginDTO dto) throws Exception {
 		return dao.login(dto);
-		//return dao.login(dto);
 	}
-
+	
 	@Override
-	public MemberVO read(int memberno) throws Exception {
-		return dao.read(memberno);
+	public void register(MemberVO vo) throws Exception {
+		dao.create(vo);
+	}
+	
+	@Override
+	public MemberVO read(int memberNo) throws Exception {
+		return dao.read(memberNo);
 	}
 
 	@Override
@@ -35,19 +38,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void remove(int memberno) throws Exception {
-		dao.delete(memberno);
-		
-	}
-
-	@Override
 	public List<MemberVO> listSearch() throws Exception {
 		return dao.listSearch();
 	}
 
 	@Override
-	public int listSearchCount() throws Exception {
-		return dao.listSearchCount();
+	public int idCheck(int memberNo) throws Exception {
+		return dao.idCheck(memberNo);
 	}
-
 }

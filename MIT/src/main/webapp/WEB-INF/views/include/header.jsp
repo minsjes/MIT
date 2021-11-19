@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="MIT Website" />
-	<meta name="author" content="" />
+	<meta name="author" content="MIT" />
 	
 	<title>MIT</title>
 	
@@ -114,7 +113,7 @@
 								<i class="bi bi-chat-square-text"></i>
 							</div> 자유 게시판
 						</a>
-						<a class="nav-link" href="/photo/list">
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-pencil-square"></i>
 							</div> 건의사항

@@ -96,47 +96,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-6 col-12-small">
-					<div class="card mb-4">
-						<div class="card-header">
-							<a href="/photo/list" style="text-decoration: none; color: black;">
-								<i class="bi bi-image"></i> 포토 갤러리 
-							</a>
-						</div>
-						<div class="card-body" style="padding-bottom: 5px; padding-top: 30px;">
-						<c:if test="${empty listSearch}">
-							<div class="dataTable-container">
-								<table id="datatablesSimple" class="dataTable-table">
-									<thead>
-										<tr>
-											<th style="text-align: center;">등록된 게시물이 없습니다.</th>
-										</tr>
-									</thead>
-								</table>
-							</div>
-						</c:if>
-						<c:if test="${!empty listSearch}">
-							<div class="row">
-								<c:forEach items="${listSearch}" var="photoVO" varStatus="status" begin="0" end="3">
-									<div class="col-xl-6 col-md-6">
-										<div class="card mb-4">
-											<div class="card-header">
-												<i class="bi bi-image"></i>
-												<a href='/photo/read?photoNo=${photoVO.photoNo}'>
-													${photoVO.photoTitle}
-												</a>
-											</div>
-											<div class="card-body">
-												<img class="img-fluid" src="/displayFile?fileName=${photoVO.photoImage}" alt="" width="100%" height="40">
-											</div>
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-						</c:if>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</main>

@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.mit.domain.MemberVO;
-import com.mit.domain.SearchCriteria;
 import com.mit.dto.LoginDTO;
 
 	@Repository
@@ -23,10 +22,15 @@ import com.mit.dto.LoginDTO;
 	public MemberVO login(LoginDTO dto) throws Exception {
 		return session.selectOne(namespace+".login", dto);
 	}
+	
+	@Override
+	public void change(int joinNo) throws Exception {
+		session.insert(namespace + ".change", joinNo);
+	}
 
 	@Override
-	public void create(int joinNo) throws Exception {
-		session.insert(namespace + ".create", joinNo);
+	public void create(MemberVO vo) throws Exception {
+		session.insert(namespace + ".create", vo);
 	}
 
 	@Override
@@ -40,18 +44,12 @@ import com.mit.dto.LoginDTO;
 	}
 
 	@Override
-	public void delete(int memberNo) throws Exception {
-		session.delete(namespace + ".delete", memberNo);
-	}
-
-	@Override
 	public List<MemberVO> listSearch() throws Exception {
 		return session.selectList(namespace + ".listSearch");
 	}
 
 	@Override
-	public int listSearchCount() throws Exception {
-		return session.selectOne(namespace + ".listSearchCount");
+	public int idCheck(int memberNo) throws Exception {
+		return session.selectOne(namespace + ".idCheck", memberNo);
 	}
-
 }

@@ -1,12 +1,34 @@
 package com.mit.domain;
 
+import java.util.Date;
+
 public class MemberVO {
 	
+	private int adminNo;
+	
+	public int getAdminNo() {
+		return adminNo;
+	}
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
+	}
+	
+	private int rnum;
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	private int memberNo ;
 	private String memberPw;
 	private String memberName;
 	private String memberPhone;
 	private String memberClass;
+	private Date allowDate;
+	private String dormancyStatus;
 	
 	public int getMemberNo() {
 		return memberNo;
@@ -38,13 +60,23 @@ public class MemberVO {
 	public void setMemberClass(String memberClass) {
 		this.memberClass = memberClass;
 	}
+	public Date getAllowDate() {
+		return allowDate;
+	}
+	public void setAllowDate(Date allowDate) {
+		this.allowDate = allowDate;
+	}
+	public String getDormancyStatus() {
+		return dormancyStatus;
+	}
+	public void setDormancyStatus(String dormancyStatus) {
+		this.dormancyStatus = dormancyStatus;
+	}
 	
 	@Override
 	public String toString() {
 		return "MemberVO [memberNo=" + memberNo + ", memberPw=" + memberPw + ", memberName=" + memberName
-				+ ", memberPhone=" + memberPhone + ", memberClass=" + memberClass + "]";
+				+ ", memberPhone=" + memberPhone + ", memberClass=" + memberClass + ", allowDate=" + allowDate
+				+ ", dormancyStatus=" + dormancyStatus + "]";
 	}
-	
-	
-	
 }

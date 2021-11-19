@@ -79,9 +79,9 @@
 		
 		<interceptor>
 			<mapping path="/member/list" />
-			<mapping path="/member/readPage" />
-			<mapping path="/member/modifyPage" />
-			<mapping path="/member/removePage" />
+			<mapping path="/member/register" />
+			<mapping path="/member/read" />
+			<mapping path="/member/modify" />
 			
 			<mapping path="/join/list" />
 			<mapping path="/join/read" />

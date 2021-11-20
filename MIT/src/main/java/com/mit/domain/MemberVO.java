@@ -4,15 +4,6 @@ import java.util.Date;
 
 public class MemberVO {
 	
-	private int adminNo;
-	
-	public int getAdminNo() {
-		return adminNo;
-	}
-	public void setAdminNo(int adminNo) {
-		this.adminNo = adminNo;
-	}
-	
 	private int rnum;
 	
 	public int getRnum() {

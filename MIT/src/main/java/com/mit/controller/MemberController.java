@@ -112,13 +112,15 @@ public class MemberController {
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET) // 수정 화면으로 이동
 	public void modifyGET(@RequestParam("memberNo") int memberNo, Model model) throws Exception {
-		logger.info("member modify...");
+		logger.info("modify get...");
 		
 		model.addAttribute(service.read(memberNo));
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) // 실제 데이터베이스 수정
-	public String modifyPOST(MemberVO vo,RedirectAttributes rttr) throws Exception {
+	public String modifyPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
+		logger.info("modify post...");
+		
 		service.modify(vo);
 		
 		rttr.addFlashAttribute("msg", "MODIFY");

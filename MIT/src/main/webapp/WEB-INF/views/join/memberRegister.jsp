@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<meta name="description" content="MIT Website" />
-	<meta name="author" content="" />
+	<meta name="author" content="MIT" />
 	
 	<title>MIT</title>
 	
@@ -61,9 +61,9 @@
 								<div class="form-group">
 									<label class="form-control-label">가입자 유형</label>
 									<p>
-									<input type="radio" name="radio" id="memType1" value="memType">
+									<input type="radio" name="radio" id="joinClass" value="1">
 									<label class="form-control-label">재학생</label> &nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="radio" id="memType2" value="memType">
+									<input type="radio" name="radio" id="joinClass" value="2">
 									<label class="form-control-label">졸업생</label>
 									</p>
 								</div>	

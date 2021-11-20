@@ -18,12 +18,11 @@
 	
 	<insert id="create">
 		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS)
-		VALUES(#{memberNo}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberClass});
-		WHERE 12345678 = #{adminNo}
+		VALUES(#{memberNo}, #{memberPw}, #{memberName}, #{memberPhone}, #{memberClass})
 	</insert>
 	
 	<select id="read" resultType="com.mit.domain.MemberVO">
-		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE, DORMANCY_STATUS
+		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE, DORMANCY_STATUS
 		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
@@ -40,7 +39,7 @@
 	<select id="listSearch" resultType="com.mit.domain.MemberVO">
 		SELECT * FROM (
 		SELECT
-		ROWNUM RNUM, MEMBER_NO, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE, DORMANCY_STATUS
+		ROWNUM RNUM, MEMBER_NO, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, DORMANCY_STATUS
 		FROM MEMBER
 		WHERE ROWNUM >0
 		)

@@ -24,7 +24,7 @@
 	<delete id="delete">
 		DELETE FROM JOIN
 		WHERE MEMBER_NO = #{memberNo} AND JOIN_NO = #{joinNo}
-	</delete> <!-- 관리자 번호 12345678만 -->
+	</delete> <!-- .관리자 번호 12345678만 -->
 	
 	
 	<select id="listSearch" resultType="com.mit.domain.JoinVO">

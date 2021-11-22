@@ -8,5 +8,5 @@ public class CalendarController {
 	@RequestMapping("/calendar/*")
 	public String Calendar() {
 		return "/calendar/list";
-	}
+	}//gitÅ×½ºÆ®
 }

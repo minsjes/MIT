@@ -30,10 +30,10 @@
 	<select id="listSearch" resultType="com.mit.domain.JoinVO">
 		<![CDATA[
 			SELECT * FROM (
-				SELECT
-					ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_CLASS, JOIN_DATE, ALLOW_STATUS
-				from
-					JOIN WHERE ROWNUM >0)
+           		SELECT
+               		ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, ALLOW_STATUS, JOIN_DATE, ALLOW_DATE
+            	from
+              		JOIN WHERE ROWNUM >0 AND ALLOW_STATUS != '1')
 		]]>
 	</select>
 	

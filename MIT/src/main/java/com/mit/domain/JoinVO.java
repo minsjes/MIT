@@ -8,12 +8,11 @@ public class JoinVO {
 	private String joinPw;
 	private String joinName;
 	private String joinPhone;
+	private int joinClass;
 	private String joinText;
-	private String allowStatus;
 	private Date joinDate;
-	private Date allowDate;
+	private String allowStatus;
 	private int memberNo;
-	
 	public int getJoinNo() {
 		return joinNo;
 	}
@@ -38,17 +37,17 @@ public class JoinVO {
 	public void setJoinPhone(String joinPhone) {
 		this.joinPhone = joinPhone;
 	}
+	public int getJoinClass() {
+		return joinClass;
+	}
+	public void setJoinClass(int joinClass) {
+		this.joinClass = joinClass;
+	}
 	public String getJoinText() {
 		return joinText;
 	}
 	public void setJoinText(String joinText) {
 		this.joinText = joinText;
-	}
-	public String getAllowStatus() {
-		return allowStatus;
-	}
-	public void setAllowStatus(String allowStatus) {
-		this.allowStatus = allowStatus;
 	}
 	public Date getJoinDate() {
 		return joinDate;
@@ -56,11 +55,11 @@ public class JoinVO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	public Date getAllowDate() {
-		return allowDate;
+	public String getAllowStatus() {
+		return allowStatus;
 	}
-	public void setAllowDate(Date allowDate) {
-		this.allowDate = allowDate;
+	public void setAllowStatus(String allowStatus) {
+		this.allowStatus = allowStatus;
 	}
 	public int getMemberNo() {
 		return memberNo;
@@ -72,7 +71,11 @@ public class JoinVO {
 	@Override
 	public String toString() {
 		return "JoinVO [joinNo=" + joinNo + ", joinPw=" + joinPw + ", joinName=" + joinName + ", joinPhone=" + joinPhone
-				+ ", joinText=" + joinText + ", allowStatus=" + allowStatus + ", joinDate=" + joinDate + ", allowDate="
-				+ allowDate + ", memberNo=" + memberNo + "]";
+				+ ", joinClass=" + joinClass + ", joinText=" + joinText + ", joinDate=" + joinDate + ", allowStatus="
+				+ allowStatus + ", memberNo=" + memberNo + "]";
 	}
+	
+	
+	
+	
 }

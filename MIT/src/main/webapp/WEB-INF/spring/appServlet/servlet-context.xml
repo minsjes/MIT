@@ -54,6 +54,11 @@
 		</interceptor>
 
 		<interceptor>
+
+			<mapping path="/history/register" />
+			<mapping path="/history/modify" />
+			<mapping path="/history/remove" />
+
 			<mapping path="/notice/register" />
 			<mapping path="/notice/modify" />
 			<mapping path="/notice/remove" />
@@ -61,37 +66,37 @@
 			<mapping path="/qna/register" />
 			<mapping path="/qna/modify" />
 			<mapping path="/qna/remove" />
-			
+
 			<mapping path="/free/register" />
 			<mapping path="/free/modify" />
 			<mapping path="/free/remove" />
-			
+
 			<mapping path="/photo/register" />
 			<mapping path="/photo/modify" />
 			<mapping path="/photo/remove" />
-			
+
 			<mapping path="/info/register" />
 			<mapping path="/info/modify" />
 			<mapping path="/info/remove" />
 
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
-		
+
 		<interceptor>
 			<mapping path="/member/list" />
 			<mapping path="/member/register" />
 			<mapping path="/member/read" />
 			<mapping path="/member/modify" />
-			
+
 			<mapping path="/join/list" />
 			<mapping path="/join/read" />
 			<mapping path="/join/modifyA" />
 			<mapping path="/join/modifyB" />
 			<mapping path="/join/remove" />
-			
+
 			<beans:ref bean="adminInterceptor" />
 		</interceptor>
-		
+
 	</interceptors>
 
 </beans:beans>

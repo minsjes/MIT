@@ -121,7 +121,7 @@ public class MemberController {
 	public String modifyPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
 		logger.info("modify post...");
 		
-		service.modify(vo);
+		service.modifyAdmin(vo);
 		
 		rttr.addFlashAttribute("msg", "MODIFY");
 
@@ -137,7 +137,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/modifyMyPage", method = RequestMethod.POST) // 실제 데이터베이스 수정
 	public String modifyMyPagePOST(MemberVO vo,RedirectAttributes rttr) throws Exception {
-		service.modify(vo);
+		service.modifyUser(vo);
 		
 		rttr.addFlashAttribute("msg", "MODIFY");
 

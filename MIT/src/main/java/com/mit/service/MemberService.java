@@ -13,7 +13,9 @@ public interface MemberService {
 
 	public MemberVO read(int memberNo) throws Exception;
 	
-	public void modify(MemberVO vo) throws Exception;
+	public void modifyUser(MemberVO vo) throws Exception;
+	
+	public void modifyAdmin(MemberVO vo) throws Exception;
 	
 	public List<MemberVO> listSearch() throws Exception;
 	

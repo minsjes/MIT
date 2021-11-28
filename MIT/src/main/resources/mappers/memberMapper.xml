@@ -4,7 +4,7 @@
 <mapper namespace="com.mit.mapper.MemberMapper">
 
 	<select id="login" resultType="com.mit.domain.MemberVO">
-		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE
+		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, TO_CHAR(ALLOW_DATE, 'YYYY-MM-DD HH24:MI:SS')
 		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo} AND MEMBER_PW = #{memberPw}
 	</select>
@@ -22,16 +22,20 @@
 	</insert>
 	
 	<select id="read" resultType="com.mit.domain.MemberVO">
-		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, ALLOW_DATE, DORMANCY_STATUS
+		SELECT MEMBER_NO, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, TO_CHAR(ALLOW_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ALLOW_DATE, DORMANCY_STATUS
 		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<update id="update">
+	<update id="updateUser">
 		UPDATE MEMBER SET MEMBER_PW = #{memberPw},
 		MEMBER_NAME = #{memberName},
-		MEMBER_PHONE = #{memberPhone},
-		MEMBER_CLASS = #{memberClass},
+		MEMBER_PHONE = #{memberPhone}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateAdmin">
+		UPDATE MEMBER SET MEMBER_CLASS = #{memberClass},
 		DORMANCY_STATUS = #{dormancyStatus}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
@@ -42,7 +46,7 @@
 		ROWNUM RNUM, MEMBER_NO, MEMBER_NAME, MEMBER_PHONE, MEMBER_CLASS, DORMANCY_STATUS
 		FROM MEMBER
 		WHERE ROWNUM >0
-		)
+		) ORDER BY DORMANCY_STATUS, RNUM ASC
 	</select>
 	
 	<select id="idCheck" resultType="int">

@@ -39,8 +39,13 @@ import com.mit.dto.LoginDTO;
 	}
 
 	@Override
-	public void update(MemberVO vo) throws Exception {
-		session.update(namespace + ".update", vo);
+	public void updateUser(MemberVO vo) throws Exception {
+		session.update(namespace + ".updateUser", vo);
+	}
+	
+	@Override
+	public void updateAdmin(MemberVO vo) throws Exception {
+		session.update(namespace + ".updateAdmin", vo);
 	}
 
 	@Override

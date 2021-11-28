@@ -60,7 +60,7 @@
 										활성
 									</c:if>
 									<c:if test="${1 eq memberVO.dormancyStatus}">
-										휴면
+										<span style="color:red;">휴면</span>
 									</c:if>
 								</td>
 							</tr>

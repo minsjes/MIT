@@ -1,7 +1,5 @@
 package com.mit.domain;
 
-import java.util.Date;
-
 public class MemberVO {
 	
 	private int rnum;
@@ -18,7 +16,7 @@ public class MemberVO {
 	private String memberName;
 	private String memberPhone;
 	private String memberClass;
-	private Date allowDate;
+	private String allowDate;
 	private String dormancyStatus;
 	
 	public int getMemberNo() {
@@ -51,10 +49,10 @@ public class MemberVO {
 	public void setMemberClass(String memberClass) {
 		this.memberClass = memberClass;
 	}
-	public Date getAllowDate() {
+	public String getAllowDate() {
 		return allowDate;
 	}
-	public void setAllowDate(Date allowDate) {
+	public void setAllowDate(String allowDate) {
 		this.allowDate = allowDate;
 	}
 	public String getDormancyStatus() {

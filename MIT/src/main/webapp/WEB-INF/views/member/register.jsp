@@ -88,6 +88,14 @@
 </script>
 
 <script>
+	var result = '${msg}';
+	
+	if (result == 'FAIL') {
+		alert("사용할 수 없는 학번입니다.");
+	}
+</script>
+
+<script>
 	function sendIt() {
 		// 아이디 입력여부 검사
 		if (form.memberNo.value == "") {

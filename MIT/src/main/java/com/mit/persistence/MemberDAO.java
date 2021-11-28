@@ -15,7 +15,9 @@ public interface MemberDAO {
 	
 	public MemberVO read(int memberNo) throws Exception;
 	
-	public void update(MemberVO vo) throws Exception;
+	public void updateUser(MemberVO vo) throws Exception;
+	
+	public void updateAdmin(MemberVO vo) throws Exception;
 	
 	public List<MemberVO> listSearch() throws Exception;
 	

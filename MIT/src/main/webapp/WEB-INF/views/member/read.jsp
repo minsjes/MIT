@@ -63,7 +63,7 @@
 						<label for="exampleInputEmail1">가입 일자</label> 
 						<div class="input-group mb-3">
   							<span class="input-group-text" id="basic-addon1"><i class="bi bi-clock"></i></span>
-  							<input type="text" class="form-control" value="<fmt:formatDate value="${memberVO.allowDate}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="readonly">
+  							<input type="text" class="form-control" value="${memberVO.allowDate}" readonly="readonly">
 						</div>
 					</div>
 					<div class="form-group">
@@ -75,7 +75,7 @@
 							</c:if>
 							<c:if test="${1 eq memberVO.dormancyStatus}">
 								<span class="input-group-text" id="basic-addon1"><i class="bi bi-eye-slash-fill"></i></span>
-								<input type="text" class="form-control" value="휴면" readonly="readonly">
+								<input type="text" class="form-control" value="휴면" style="color: red;" readonly="readonly">
 							</c:if>
 						</div>
 					</div>

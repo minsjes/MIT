@@ -3,6 +3,11 @@ package com.mit.domain;
 import java.util.Date;
 
 public class JoinVO {
+	private int rnum;
+	
+	public int getRnum() {
+		return rnum;
+	}
 	
 	private int joinNo;
 	private String joinPw;

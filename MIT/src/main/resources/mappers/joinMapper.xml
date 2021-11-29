@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.mit.domain.JoinVO">
-		SELECT JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_CALSS, JOIN_TEXT, JOIN_DATE, ALLOW_STATUS
+		SELECT JOIN_NO, JOIN_NAME, JOIN_PHONE, JOIN_CLASS, JOIN_TEXT, JOIN_DATE, ALLOW_STATUS
 		FROM JOIN
 		WHERE JOIN_NO = #{joinNo}
 	</select>

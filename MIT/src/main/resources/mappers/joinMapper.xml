@@ -31,8 +31,8 @@
 		<![CDATA[
 			SELECT * FROM (
            		SELECT
-               		ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, ALLOW_STATUS, JOIN_DATE, ALLOW_DATE
-            	from
+               		ROWNUM RNUM, JOIN_NO, JOIN_NAME, JOIN_PHONE, ALLOW_STATUS, JOIN_DATE
+            	FROM
               		JOIN WHERE ROWNUM >0 AND ALLOW_STATUS != '1')
 		]]>
 	</select>

@@ -78,7 +78,7 @@
 						</c:if>
 						
 						<div class="sb-sidenav-menu-heading">MENU</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="/history/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-emoji-sunglasses"></i>
 							</div> 동아리 소개

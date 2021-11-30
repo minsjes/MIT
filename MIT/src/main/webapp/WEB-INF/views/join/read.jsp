@@ -30,20 +30,7 @@
 				<i class="fas fa-user fa-fw"></i> 가입 관리
 			</div>
 
-			<div class="card-body"
-				style="padding-right: 25%; padding-left: 25%;">
-				<div class="form-group">
-
-					<label for="exampleInputEmail">이름</label>
-					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1"><i
-							class="far fa-user"></i></span> <input type="text" name='joinName'
-							class="form-control" value="${joinVO.joinName}"
-							readonly="readonly">
-					</div>
-
-				</div>
-
+			<div class="card-body" style="padding-right: 25%; padding-left: 25%;">
 				<div class="form-group">
 
 					<label for="exampleInputEmail">학번</label>
@@ -58,7 +45,21 @@
 
 				<div class="form-group">
 
-					<label for="exampleInputEmail">전화번호</label>
+					<label for="exampleInputEmail">이름</label>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1"><i
+							class="far fa-user"></i></span> <input type="text" name='joinName'
+							class="form-control" value="${joinVO.joinName}"
+							readonly="readonly">
+					</div>
+
+				</div>
+
+
+
+				<div class="form-group">
+
+					<label for="exampleInputEmail">연락처</label>
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1"><i
 							class="fas fa-mobile-alt"></i></span> <input type="text"
@@ -67,6 +68,25 @@
 					</div>
 
 				</div>
+
+
+				<div class="form-group">
+					<label for="exampleInputEmail1">가입 유형</label>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1"><i
+							class="far fa-star"></i></span>
+						<c:if test="${1 eq joinVO.joinClass}">
+							<input type="text" class="form-control" value="재학생"
+								readonly="readonly">
+						</c:if>
+						<c:if test="${2 eq joinVO.joinClass}">
+							<input type="text" class="form-control" value="졸업생"
+								readonly="readonly">
+						</c:if>
+					</div>
+				</div>
+
+
 
 				<div class="form-group">
 
@@ -95,7 +115,7 @@
 
 				<div class="form-group">
 
-					<label for="exampleInputEmail">가입 상태</label>
+					<label for="exampleInputEmail">상태</label>
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1"><i
 							class="far fa-bell"></i></span>
@@ -109,7 +129,7 @@
 						</c:if>
 						<c:if test="${joinVO.allowStatus == '2'}">
 							<input type="text" name="allowStatus" class="form-control"
-								value="거절" readonly="readonly">
+								value="거절" style="color: red;" readonly="readonly">
 						</c:if>
 					</div>
 				</div>

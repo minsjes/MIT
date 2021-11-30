@@ -61,9 +61,9 @@
                         <div class="form-group">
                            <label class="form-control-label">가입자 유형</label>
                            <p>
-                           <input type="radio" name="radio" id="joinClass" value="1">
+                           <input type="radio" name="joinClass" id="joinClass" value="1">
                            <label class="form-control-label">재학생</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                           <input type="radio" name="radio" id="joinClass" value="2">
+                           <input type="radio" name="joinClass" id="joinClass" value="2">
                            <label class="form-control-label">졸업생</label>
                            </p>
                         </div>   

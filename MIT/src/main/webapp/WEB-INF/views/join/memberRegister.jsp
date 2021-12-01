@@ -103,7 +103,7 @@
 	<script>
 		function sendIt() {
 			// 아이디 입력여부 검사
-			if (form.joinNo.value == "") {
+			if (document.form.joinNo.value == "") {
 				alert("학번을 입력해주세요.");
 				form.joinNo.focus();
 				return false;
@@ -131,7 +131,7 @@
 			// 비밀번호 입력여부 체크
 			if(document.form.pw1.value == "") {
 				alert("비밀번호를 입력해주세요.");
-				form.pw1.focus();
+				document.form.pw1.focus();
 				return false;
 			}
 			
@@ -154,14 +154,14 @@
 			// 이름 입력여부 체크
 			if(document.form.joinName.value == "") {
 				alert("이름을 입력해주세요.");
-				form.joinName.focus();
+				document.form.joinName.focus();
 				return false;
 			}
 			
 			// 연락처 입력여부 체크
 			if(document.form.joinPhone.value == "") {
 				alert("연락처를 입력해주세요.");
-				form.joinPhone.focus();
+				document.form.joinPhone.focus();
 				return false;
 			}
 			
@@ -170,23 +170,23 @@
 			var phone = document.form.joinPhone.value;
 			if(!phoneRegExp.test(phone)) {
 				alert("전화번호가 올바르지 않습니다. ex) 010-1234-1234");
-				form.joinPhone.select();
-				form.joinPhone.focus();
+				document.form.joinPhone.select();
+				document.form.joinPhone.focus();
 				return false;
 			}
 			
 			// 가입자 유형 입력여부 체크
 			if(document.getElementById('joinClass').checked) {
-				return;
+				true;
 			}else{
 				alert("가입자 유형을 선택해 주세요.");
 				return false;
 			}
 			
 			// 사유 입력여부 체크
-			if(form.joinText.value.length == 0){
+			if(document.form.joinText.value.length == 0){
 				alert('사유를 반드시 써주세요.');
-				form.joinText.focus();
+				document.form.joinText.focus();
 				return false;
 			}
 		}

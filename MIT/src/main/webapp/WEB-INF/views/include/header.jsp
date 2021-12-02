@@ -21,6 +21,9 @@
 	
 	<!-- Bootstrap Icons -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	
+	<!-- CKEditor4 -->
+	<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head> 
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

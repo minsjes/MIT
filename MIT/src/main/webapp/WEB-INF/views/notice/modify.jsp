@@ -38,9 +38,19 @@
 				</div>
 				
 				<div class="form-group">
-					<div class="input-group-text" style="padding-right: 20px; padding-left: 20px">내용</div>
-					<textarea class="form-control" name="noticeContent" rows="15">${noticeVO.noticeContent}</textarea>
+					<div class="input-group-text">내용</div>
+					<textarea class="form-control" id="noticeContent" name="noticeContent">${noticeVO.noticeContent}</textarea>
 				</div>
+				
+				<script>
+    				$(document).ready(function() {
+        				CKEDITOR.replace("noticeContent", {
+            				/* filebrowserUploadUrl : "/common/ckUpload", */
+            				height: 400
+        				});
+    				});
+				</script>
+				
 
 				<div style="text-align: right; margin: 17px 0 17px 0;">
 					<button type="submit" class="btn btn-outline-primary">수정</button>

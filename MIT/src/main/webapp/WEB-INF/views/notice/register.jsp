@@ -24,6 +24,13 @@
 				<div class="form-group">
 					<div class="input-group-text">&nbsp;내용</div>
 					<textarea class="form-control" id="noticeContent" name="noticeContent" rows="15" placeholder="Enter content..."></textarea>
+					<script>
+            			$(document).ready(function() {
+                			CKEDITOR.replace("noticeContent", {
+                    			height: 400
+                			});
+            			});
+        			</script>
 				</div>
 
 			
@@ -39,7 +46,7 @@
 	// 등록 유효성 검사 
 	function validate() {
 		var noticeTitle = $("#noticeTitle").val();
-		var noticeContent = $("#noticeContent").val();
+		var noticeContent = CKEDITOR.instances.noticeContent.getData();
 
 		if (noticeTitle == "") {
 			alert("제목을 입력해주세요 .");
@@ -49,7 +56,6 @@
 
 		if (noticeContent == "") {
 			alert("내용을 입력해주세요 .");
-			document.getElementById("noticeContent").focus();
 			return false;
 		}
 

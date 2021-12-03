@@ -35,10 +35,18 @@
 				    </div>
 				 </div>
 				
-				<div class="input-group">
-					<div class="input-group-text" style="padding-right: 20px; padding-left: 20px">내용</div>
-					<textarea class="form-control" rows="15" readonly="readonly">${noticeVO.noticeContent}</textarea>
+				<div class="form-group">
+					<div class="input-group-text">내용</div>
+					<textarea class="form-control" id="noticeContent" readonly="readonly">${noticeVO.noticeContent}</textarea>
 				</div>
+				
+				<script>
+    				CKEDITOR.replace("noticeContent",{
+        				/* filebrowserUploadUrl: "${path}/imageUpload.do", */
+       					height: 400
+   					});
+				</script>
+				
 		
 				<div class="box-footer" style="float: right; margin: 5px auto 5px;">
 					<button type="button" class="btn btn-outline-primary">수정</button>

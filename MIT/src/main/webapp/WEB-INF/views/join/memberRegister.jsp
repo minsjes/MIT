@@ -60,9 +60,9 @@
 								</div>
 								<div class="form-group">
 									<label class="form-control-label">가입자 유형</label>
-									<p><input type="radio" name="joinClass" id="joinClass" value="1">
+									<p><input type="radio" name="joinClass" id="joinClass1" value="1" checked="checked">
 									<label class="form-control-label">재학생</label> &nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="joinClass" id="joinClass" value="2">
+									<input type="radio" name="joinClass" id="joinClass2" value="2">
 									<label class="form-control-label">졸업생</label></p>
 								</div>   
 								<div class="form-group">
@@ -176,8 +176,12 @@
 			}
 			
 			// 가입자 유형 입력여부 체크
-			if(document.getElementById('joinClass').checked) {
-				true;
+			if(document.getElementById('joinClass1').checked) {	
+			
+				
+			}else if(document.getElementById('joinClass2').checked) {	
+				
+			
 			}else{
 				alert("가입자 유형을 선택해 주세요.");
 				return false;
@@ -189,6 +193,9 @@
 				document.form.joinText.focus();
 				return false;
 			}
+			
+			return true;
+			
 		}
 	</script>
 </body>

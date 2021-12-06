@@ -70,7 +70,9 @@
 		console.log(formObj);
 
 		$("#btn_submit").on("click", function() {
-			formObj.submit();
+			if (validate()) {
+				formObj.submit();
+			}
 		});
 		
 		$('#btn_list').on("click", function(evt) {

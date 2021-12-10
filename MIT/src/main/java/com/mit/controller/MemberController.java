@@ -137,9 +137,14 @@ public class MemberController {
 
 	@RequestMapping(value = "/modifyMyPage", method = RequestMethod.POST) // 실제 데이터베이스 수정
 	public String modifyMyPagePOST(MemberVO vo,RedirectAttributes rttr) throws Exception {
-		service.modifyUser(vo);
 		
-		rttr.addFlashAttribute("msg", "MODIFY");
+		int memberNo = vo.getMemberNo();
+
+		service.modifyUser(vo);
+
+		rttr.addAttribute("memberNo", memberNo);
+		
+		rttr.addFlashAttribute("msg", "수정되었습니다.");
 
 		return "redirect:/member/readMyPage";
 	}

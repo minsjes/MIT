@@ -65,12 +65,26 @@
 	
 							<div class="form-group">
 	
-								<label for="exampleInputEmail1">회원등급</label>
+								<label for="exampleInputEmail1">회원유형</label>
 								<div class="input-group mb-3">
-									<span class="input-group-text" id="basic-addon1"><i
-										class="far fa-star"></i></span> <input type="text"
-										class="form-control" value="${memberVO.memberClass}"
-										readonly="readonly">
+									<span class="input-group-text" id="basic-addon1">
+										<i class="far fa-star"></i>
+									</span> 
+									<c:if test="${1 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="재학생" readonly="readonly">
+							</c:if>
+							<c:if test="${2 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="졸업생" readonly="readonly">
+							</c:if>
+							<c:if test="${3 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="교수" readonly="readonly">
+							</c:if>
+							<c:if test="${4 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="일반인" readonly="readonly">
+							</c:if>
+							<c:if test="${9 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="관리자" readonly="readonly">
+							</c:if>
 								</div>
 							</div>
 						</div>
@@ -103,7 +117,7 @@
 			console.log(formObj);
 
 			$(".btn-outline-primary").on("click", function() {
-				formObj.attr("action", "/member/myModifyPage");
+				formObj.attr("action", "/member/modifyMyPage");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});

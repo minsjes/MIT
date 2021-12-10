@@ -33,7 +33,7 @@
 						
 						<div class="input-group mb-3">
  							 <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
-  								<input type="text" name='memberNo' class="form-control" value="${memberVO.memberNo}" readonly="readonly">
+  								<input type="text" id="memberNo" name="memberNo" class="form-control" value="${memberVO.memberNo}" readonly="readonly">
 						</div>
 					</div>
 
@@ -41,7 +41,7 @@
 						<label for="exampleInputEmail1">비밀번호</label> 
 						<div class="input-group mb-3">
  							 <span class="input-group-text" id="basic-addon1"><i class="fas fa-unlock-alt"></i></span>
-  								<input type="password" name='memberPw' class="form-control" value="${memberVO.memberPw}">
+  								<input type="password" id="memberPw" name="memberPw" class="form-control" value="${memberVO.memberPw}">
 						</div>
 					</div>
 
@@ -49,7 +49,7 @@
 						<label for="exampleInputEmail1">회원명</label> 
 						<div class="input-group mb-3">
   							<span class="input-group-text" id="basic-addon1"><i class="far fa-smile"></i></span>
-  							<input type="text" name='memberName' class="form-control" value="${memberVO.memberName}">
+  							<input type="text" id="memberName" name="memberName" class="form-control" value="${memberVO.memberName}">
 						</div>
 					</div>
 
@@ -57,15 +57,29 @@
 						<label for="exampleInputEmail1">전화번호</label> 
 						<div class="input-group mb-3">
   							<span class="input-group-text" id="basic-addon1"><i class="fas fa-mobile-alt"></i></span>
-  							<input type="text" name="memberPhone" class="form-control" value="${memberVO.memberPhone}">
+  							<input type="text" id="memberPhone" name="memberPhone" class="form-control" value="${memberVO.memberPhone}">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">회원등급</label> 
+						<label for="exampleInputEmail1">회원유형</label> 
 						<div class="input-group mb-3">
   							<span class="input-group-text" id="basic-addon1"><i class="far fa-star"></i></span>
-  							<input type="text" name="memberClass" class="form-control" value="${memberVO.memberClass}" readonly="readonly">
+  							<c:if test="${1 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="재학생" readonly="readonly">
+							</c:if>
+							<c:if test="${2 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="졸업생" readonly="readonly">
+							</c:if>
+							<c:if test="${3 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="교수" readonly="readonly">
+							</c:if>
+							<c:if test="${4 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="일반인" readonly="readonly">
+							</c:if>
+							<c:if test="${9 eq memberVO.memberClass}">
+								<input type="text" class="form-control" value="관리자" readonly="readonly">
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -90,7 +104,7 @@
 										.on(
 												"click",
 												function() {
-													self.location = "/member/myreadPage?memberNo=${memberVO.memberNo}";
+													self.location = "/member/readMyPage?memberNo=${memberVO.memberNo}";
 												});
 
 								$(".btn-outline-primary").on("click",

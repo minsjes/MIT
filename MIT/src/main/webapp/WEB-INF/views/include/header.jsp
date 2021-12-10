@@ -52,7 +52,7 @@
 						<li><a class="dropdown-item" href="/member/login">로그인</a></li>
 					</c:if>
 					<c:if test="${null ne login.memberNo}">
-						<li><a class="dropdown-item" href="/member/myreadPage?memberNo=${login.memberNo}">내 정보</a></li>
+						<li><a class="dropdown-item" href="/member/readMyPage?memberNo=${login.memberNo}">내 정보</a></li>
 						<li><a class="dropdown-item" href="#">쪽지함</a></li>
 						<li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
 					</c:if>

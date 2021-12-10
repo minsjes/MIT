@@ -30,8 +30,8 @@ public class HistoryDAOImpl implements HistoryDAO {
 	}
 
 	@Override
-	public HistoryVO read(int HistoryNo) throws Exception {
-		return session.selectOne(namespace+".read", HistoryNo);
+	public HistoryVO read(int historyNo) throws Exception {
+		return session.selectOne(namespace+".read", historyNo);
 	}
 
 	@Override
@@ -41,8 +41,8 @@ public class HistoryDAOImpl implements HistoryDAO {
 	}
 
 	@Override
-	public void delete(int HistoryNo) throws Exception {
-		session.delete(namespace+".delete", HistoryNo);
+	public void delete(int historyNo) throws Exception {
+		session.delete(namespace+".delete", historyNo);
 		
 	}
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <%@include file="../include/header.jsp"%>
 
@@ -37,11 +37,11 @@
 					</colgroup>
 					<c:forEach items="${list}" var="historyVO" varStatus="status">
 						<tr>
-							<td>${historyVO.rnum}</td>
 							<td><a href='/history/read?historyNo=${historyVO.historyNo}'>${historyVO.historyContent}</a></td>
 							<td>${historyVO.memberName}</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-									value="${historyVO.historyDate}" /></td>
+							<td>${historyVO.historyDate}</td>
+							<!-- <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+									value="${historyVO.historyDate}" /></td> -->
 						</tr>
 					</c:forEach>
 				 </table>
@@ -50,7 +50,7 @@
 			</div>
 			</div>
 	</main>
-</div>
+
 
 <script>
 	var result = '${msg}';

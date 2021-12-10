@@ -25,7 +25,7 @@ public class HistoryServiceImpl implements HistoryService {
 	      vo.setHistoryContent(vo.getHistoryContent().replace("\\r\\n", "<br>"));
 	      
 	      // (2) �⺻ ��û ���� ��� (���� ��� x) -> ��ϵ� ��û������ PK ��������
-	      int HistoryNo = dao.create(vo);
+	      int historyNo = dao.create(vo);
 	     
 	 
 	         }

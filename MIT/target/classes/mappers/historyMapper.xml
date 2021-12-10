@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.HistoryMapper">
+
+	<insert id="create">
+		<selectKey keyProperty="historyNo" resultType="int" order="BEFORE">
+			SELECT SEQ_HISTORY.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO HISTORY (HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO)
+		VALUES (#{historyNo}, #{historyContent},  SYSDATE, #{memberNo})
+	</insert>
+
+	<select id="read" resultType="com.mit.domain.HistoryVO">
+		SELECT
+		HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO
+		FROM HISTORY
+		WHERE HISTORY_NO = #{historyNo}
+	</select>
+
+	<update id="update">
+		UPDATE HISTORY
+		SET
+		HISTORY_CONTENT = #{historyContent}
+		WHERE HISTORY_NO = #{historyNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM HISTORY
+		WHERE HISTORY_NO = #{historyNo}
+	</delete>
+
+	<select id="listSearch" resultType="com.mit.domain.HistoryVO">
+      <![CDATA[
+			SELECT * FROM (
+				SELECT
+				ROWNUM RNUM, HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO
+      			FROM (
+      				SELECT
+      				HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO
+      				FROM
+      				HISTORY
+      				WHERE MEMBER_NO > 0
+      				AND HISTORY_NO > 0
+		]]>
+		<![CDATA[
+			ORDER BY HISTORY_NO ASC))
+			WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd})
+			ORDER BY HISTORY_NO DESC, HISTORY_DATE DESC
+		]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+      <![CDATA[
+		SELECT COUNT(*)
+		FROM HISTORY
+		WHERE HISTORY_NO > 0
+      ]]>
+	</select>
+	
+	
+</mapper>

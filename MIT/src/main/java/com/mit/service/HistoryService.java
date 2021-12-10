@@ -10,16 +10,16 @@ public interface HistoryService {
 	
 	public void create(HistoryVO vo) throws Exception;
 
-	public HistoryVO read(int HistoryNo) throws Exception;
+	public HistoryVO read(int historyNo) throws Exception;
 
 	public void update(HistoryVO vo) throws Exception;
 
-	public void delete(int HistoryNo) throws Exception;
+	public void delete(int historyNo) throws Exception;
 
-	// ÆäÀÌÂ¡ + °Ë»öÀ» Ã³¸®ÇÏ¿© ¸®½ºÆ® °¡Á®¿À´Â ±â´É
+	// ï¿½ï¿½ï¿½ï¿½Â¡ + ï¿½Ë»ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<HistoryVO> listSearch(SearchCriteria cri) throws Exception;
 
-	// ÆäÀÌÂ¡ + °Ë»öÀ» À§ÇÑ ÀüÃ¼ °Ô½Ã±Û ¼ö °¡Á®¿À´Â ±â´É
+	// ï¿½ï¿½ï¿½ï¿½Â¡ + ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	
 

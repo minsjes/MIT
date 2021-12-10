@@ -1,11 +1,9 @@
 package com.mit.domain;
 
-import java.util.Date;
-
 public class HistoryVO {
 	private int rnum;
 	private int historyNo;
-	private Date historyDate;
+	private String historyDate;
 	private String historyContent;
 	private int memberNo;
 	private String memberName;
@@ -21,10 +19,10 @@ public class HistoryVO {
 	public void setHistoryNo(int historyNo) {
 		this.historyNo = historyNo;
 	}
-	public Date getHistoryDate() {
+	public String getHistoryDate() {
 		return historyDate;
 	}
-	public void setHistoryDate(Date historyDate) {
+	public void setHistoryDate(String historyDate) {
 		this.historyDate = historyDate;
 	}
 	public String getHistoryContent() {

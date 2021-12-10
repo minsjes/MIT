@@ -5,25 +5,29 @@
 <mapper namespace="com.mit.mapper.InfoMapper">
 
 	<insert id="create">
-		<selectKey keyProperty="infoNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="infoNo" resultType="int"
+			order="BEFORE">
 			SELECT SEQ_INFO.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO INFO (INFO_NO, INFO_TITLE, INFO_CONTENT, MEMBER_NO)
-		VALUES (#{infoNo}, #{infoTitle}, #{infoContent}, #{memberNo})
+		INSERT INTO INFO (INFO_NO, INFO_TITLE, INFO_CONTENT, INFO_CLASS,
+		MEMBER_NO)
+		VALUES (#{infoNo}, #{infoTitle}, #{infoContent},
+		#{infoClass}, #{memberNo})
 	</insert>
 
 	<select id="read" resultType="com.mit.domain.InfoVO">
 		SELECT
-		I.INFO_NO, I.INFO_TITLE, I.INFO_CONTENT, I.INFO_DATE, M.MEMBER_NAME, M.MEMBER_NO
-		FROM INFO I, MEMBER M
-		WHERE M.MEMBER_NO = I.MEMBER_NO
-		AND INFO_NO = #{infoNo}
+		I.INFO_NO, I.INFO_TITLE,
+		I.INFO_CONTENT, I.INFO_DATE, I.INFO_VIEW, M.MEMBER_NAME, M.MEMBER_NO
+		FROM
+		INFO I, MEMBER M WHERE M.MEMBER_NO = I.MEMBER_NO
+		AND INFO_NO =
+		#{infoNo}
 	</select>
 
 	<update id="update">
 		UPDATE INFO
-		SET
-		INFO_TITLE = #{infoTitle},
+		SET INFO_TITLE = #{infoTitle},
 		INFO_CONTENT = #{infoContent}
 		WHERE INFO_NO = #{infoNo}
 	</update>
@@ -37,10 +41,10 @@
       <![CDATA[
 			SELECT * FROM (
 				SELECT
-				ROWNUM RNUM, INFO_NO, INFO_TITLE, INFO_CONTENT, INFO_DATE, MEMBER_NO, MEMBER_NAME
+				ROWNUM RNUM, INFO_NO, INFO_TITLE, INFO_CLASS, INFO_CONTENT, INFO_DATE, INFO_VIEW, MEMBER_NO, MEMBER_NAME
       			FROM (
       				SELECT
-      				I.INFO_NO, I.INFO_TITLE, I.INFO_CONTENT, I.INFO_DATE, M.MEMBER_NO, M.MEMBER_NAME
+      				I.INFO_NO, I.INFO_TITLE, I.INFO_CLASS, I.INFO_CONTENT, I.INFO_DATE, I.INFO_VIEW, M.MEMBER_NO, M.MEMBER_NAME
       				FROM
       				INFO I, MEMBER M
       				WHERE M.MEMBER_NO = I.MEMBER_NO
@@ -60,7 +64,7 @@
 		WHERE INFO_NO > 0
       ]]>
 	</select>
-	
+
 	<insert id="insertFile">
 		INSERT INTO INFO_FILE (FILE_NO, FILE_NAME, INFO_NO)
 		VALUES(SEQ_INFO_FILE.NEXTVAL, #{fileName}, #{infoNo})
@@ -79,5 +83,13 @@
 		FROM INFO_FILE
 		WHERE INFO_NO = #{infoNo}
 	</select>
-	
+
+	<update id="updateViewCount">
+		update info set
+		info_view = info_view + 1
+		where info_no
+		=
+		#{infoNo}
+	</update>
+
 </mapper>

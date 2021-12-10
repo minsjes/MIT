@@ -1,3 +1,4 @@
+
 package com.mit.service;
 
 import java.util.List;
@@ -14,77 +15,76 @@ import com.mit.persistence.InfoDAO;
 
 @Service
 public class InfoServiceImpl implements InfoService {
-	
+
 	@Inject
 	private InfoDAO dao;
-	
+
 	@Inject
 	private InfoCommentDAO commDao;
 
 	@Override
 	public void create(InfoVO vo) throws Exception {
-		 // (1) 텍스트에어리어 줄바꿈 적용
-	      vo.setInfoContent(vo.getInfoContent().replace("\\r\\n", "<br>"));
-	      
-	      // (2) 기본 신청 내역 등록 (파일 등록 x) -> 등록된 신청내역의 PK 가져오기
-	      int infoNo = dao.create(vo);
-	     
-	      
-	      // (3) 추가 이미지 존재 여부 IF문
-	         if (vo.getFiles() != null) {
+		// (1) 텍스트에어리어 줄바꿈 적용
+		vo.setInfoContent(vo.getInfoContent().replace("\\r\\n", "<br>"));
 
-	            // (4) 추가 이미지 저장 FOR문
-	            for (int i = 0; i < vo.getFiles().length; i++) {
+		// (2) 기본 신청 내역 등록 (파일 등록 x) -> 등록된 신청내역의 PK 가져오기
+		int infoNo = dao.create(vo);
 
-	               // (4-1) 추가 이미지 저장
+		// (3) 추가 이미지 존재 여부 IF문
+		if (vo.getFiles() != null) {
 
-	               InfoFileVO fVo = new InfoFileVO();
-	               fVo.setInfoNo(infoNo);
-	               fVo.setFileName(vo.getFiles()[i]);
+			// (4) 추가 이미지 저장 FOR문
+			for (int i = 0; i < vo.getFiles().length; i++) {
 
-	            
-	               // (4-2) 추가 이미지 저장
-	               dao.insertFile(fVo);
-	            }
-	         }
+				// (4-1) 추가 이미지 저장
+
+				InfoFileVO fVo = new InfoFileVO();
+				fVo.setInfoNo(infoNo);
+				fVo.setFileName(vo.getFiles()[i]);
+
+				// (4-2) 추가 이미지 저장
+				dao.insertFile(fVo);
+			}
+		}
 
 	}
 
 	@Override
 	public InfoVO read(int infoNo) throws Exception {
+
+		dao.updateViewCount(infoNo);
 		return dao.read(infoNo);
+
 	}
 
 	@Override
 	public void update(InfoVO vo) throws Exception {
-		 // (1) 텍스트에어리어 줄바꿈 적용
-	      vo.setInfoContent(vo.getInfoContent().replace("\\r\\n", "<br>"));
-	      
-	      // (2) 프로그램 게시글 수정
-	      dao.update(vo);
+		// (1) 텍스트에어리어 줄바꿈 적용
+		vo.setInfoContent(vo.getInfoContent().replace("\\r\\n", "<br>"));
 
-	      // (3) 프로그램 소속된 첨부파일 삭제
-	      dao.deleteFile(vo.getInfoNo());
-	      
-	      // (4) 추가 이미지 존재 여부 IF문
-	         if (vo.getFiles() != null) {
+		// (2) 프로그램 게시글 수정
+		dao.update(vo);
 
-	            // (5) 추가 이미지 저장 FOR문
-	            for (int i = 0; i < vo.getFiles().length; i++) {
+		// (3) 프로그램 소속된 첨부파일 삭제
+		dao.deleteFile(vo.getInfoNo());
 
-	               // (5-1)추가 이미지 저장
+		// (4) 추가 이미지 존재 여부 IF문
+		if (vo.getFiles() != null) {
 
-	               InfoFileVO fVo = new InfoFileVO();
-	               fVo.setInfoNo(vo.getInfoNo());
-	               fVo.setFileName(vo.getFiles()[i]);
+			// (5) 추가 이미지 저장 FOR문
+			for (int i = 0; i < vo.getFiles().length; i++) {
 
-	              
+				// (5-1)추가 이미지 저장
 
-	               // (5-2)추가 이미지 저장
-	               dao.insertFile(fVo);
+				InfoFileVO fVo = new InfoFileVO();
+				fVo.setInfoNo(vo.getInfoNo());
+				fVo.setFileName(vo.getFiles()[i]);
 
-	            }
-	         }
+				// (5-2)추가 이미지 저장
+				dao.insertFile(fVo);
+
+			}
+		}
 
 	}
 
@@ -97,7 +97,7 @@ public class InfoServiceImpl implements InfoService {
 
 		// 2) 댓글 삭제
 		commDao.deleteAll(infoNo);
-		
+
 		// 3) 게시글 삭제
 		dao.delete(infoNo);
 
@@ -105,13 +105,13 @@ public class InfoServiceImpl implements InfoService {
 
 	@Override
 	public List<InfoVO> listSearch(SearchCriteria cri) throws Exception {
-		
+
 		return dao.listSearch(cri);
 	}
 
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
-		
+
 		return dao.listSearchCount(cri);
 	}
 
@@ -119,7 +119,5 @@ public class InfoServiceImpl implements InfoService {
 	public List<InfoFileVO> fileList(int infoNo) throws Exception {
 		return dao.fileList(infoNo);
 	}
-
-
 
 }

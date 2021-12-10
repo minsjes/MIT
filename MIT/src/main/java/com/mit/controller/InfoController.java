@@ -1,3 +1,4 @@
+
 package com.mit.controller;
 
 import javax.inject.Inject;
@@ -44,37 +45,35 @@ public class InfoController {
 	}
 
 	@RequestMapping(value = "read", method = RequestMethod.GET)
-	public void read(@RequestParam("infoNo") int infoNo, Model model)
-			throws Exception {
+	public void read(@RequestParam("infoNo") int infoNo, Model model) throws Exception {
 
 		logger.info("read.........");
 
-		// 프로그램 내용
+		// �봽濡쒓렇�옩 �궡�슜
 		model.addAttribute(service.read(infoNo));
 		model.addAttribute("infoFileVO", service.fileList(infoNo));
-		
 
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String modifyGET(int infoNo, HttpSession session,  Model model,
-			RedirectAttributes rttr) throws Exception {
+	public String modifyGET(int infoNo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
 
 		MemberVO member = (MemberVO) session.getAttribute("login");
 
 		InfoVO info = service.read(infoNo);
 
 		if (member.getMemberNo() == info.getMemberNo()) {
-			// �옉�꽦�옄�� 濡쒓렇�씤 �젙蹂� 媛숈쓬
+			// 占쎌삂占쎄쉐占쎌쁽占쏙옙 嚥≪뮄�젃占쎌뵥 占쎌젟癰귨옙 揶쏆늿�벉
 			model.addAttribute(info);
-			
+
 			model.addAttribute("infoFileVO", service.fileList(infoNo));
-			
+
 			return "/info/modify";
 		} else {
-			// 濡쒓렇�씤 �젙蹂댁� 寃뚯떆湲� �옉�꽦�옄媛� �씪移� �븯吏� �븡�� 寃쎌슦 -> 媛뺤젣�씠�룞
+			// 嚥≪뮄�젃占쎌뵥 占쎌젟癰귣똻占� 野껊슣�뻻疫뀐옙 占쎌삂占쎄쉐占쎌쁽揶쏉옙 占쎌뵬燁삼옙 占쎈릭筌욑옙 占쎈륫占쏙옙 野껋럩�뒭 ->
+			// 揶쏅벡�젫占쎌뵠占쎈짗
 			rttr.addAttribute("infoNo", infoNo);
-			
+
 			rttr.addFlashAttribute("msg", "CANNOT");
 
 			return "redirect:/info/list";
@@ -82,13 +81,11 @@ public class InfoController {
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(InfoVO vo, RedirectAttributes rttr)
-			throws Exception {
+	public String modifyPOST(InfoVO vo, RedirectAttributes rttr) throws Exception {
 
 		service.update(vo);
 
 		rttr.addFlashAttribute("msg", "MODIFY");
-		
 
 		return "redirect:/info/list";
 
@@ -113,31 +110,29 @@ public class InfoController {
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String remove(@RequestParam("infoNo") int infoNo, HttpSession session, @ModelAttribute("cri") SearchCriteria cri,
-			RedirectAttributes rttr) throws Exception {
-		
-	
-				MemberVO member = (MemberVO)session.getAttribute("login");
+	public String remove(@RequestParam("infoNo") int infoNo, HttpSession session,
+			@ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
-				InfoVO info = service.read(infoNo);
-				
-				if(member.getMemberNo() == info.getMemberNo()) {
-					
-					service.delete(infoNo);
-					
-					rttr.addFlashAttribute("msg", "REMOVE");
-					
-					return "redirect:/info/list";
-					
-				} else {
-	
-					rttr.addAttribute("infoNo", infoNo);
-					rttr.addFlashAttribute("msg", "CANTDELETE");
-					
-					return "redirect:/info/list";
-					
-				}
+		MemberVO member = (MemberVO) session.getAttribute("login");
+
+		InfoVO info = service.read(infoNo);
+
+		if (member.getMemberNo() == info.getMemberNo()) {
+
+			service.delete(infoNo);
+
+			rttr.addFlashAttribute("msg", "REMOVE");
+
+			return "redirect:/info/list";
+
+		} else {
+
+			rttr.addAttribute("infoNo", infoNo);
+			rttr.addFlashAttribute("msg", "CANTDELETE");
+
+			return "redirect:/info/list";
+
+		}
 	}
-
 
 }

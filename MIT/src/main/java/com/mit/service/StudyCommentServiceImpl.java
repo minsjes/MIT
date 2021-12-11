@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.mit.domain.StudyCommentVO;
 import com.mit.persistence.StudyCommentDAO;
 
+@Service
 public class StudyCommentServiceImpl implements StudyCommentService {
 	
 	@Inject

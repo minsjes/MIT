@@ -106,7 +106,7 @@
 								<i class="bi bi-question-diamond"></i>
 							</div> 질문 게시판
 						</a>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="/study/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-pencil"></i>
 							</div> 스터디 게시판

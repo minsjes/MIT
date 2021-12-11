@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.StudyMapper">
+	
+	<insert id="create">
+		INSERT INTO STUDY (STUDY_NO, STUDY_CLASS, STUDY_TITLE, STUDY_CONTENT, MEMBER_NO)
+		VALUES (SEQ_STUDY.NEXTVAL, #{studyClass}, #{studyTitle}, #{studyContent}, #{memberNo})
+	</insert>
+
+	<select id="read" resultType="com.mit.domain.StudyVO">
+		SELECT S.STUDY_NO, S.STUDY_CLASS, S.STUDY_TITLE, S.STUDY_CONTENT, TO_CHAR(S.STUDY_DATE, 'YYYY-MM-DD HH24:MI:SS') AS STUDY_DATE, S.STUDY_VIEW, M.MEMBER_NO, M.MEMBER_NAME
+		FROM STUDY S, MEMBER M
+		WHERE M.MEMBER_NO = S.MEMBER_NO
+		AND STUDY_NO = #{studyNo}
+	</select>
+	
+	<update id="update">
+		UPDATE STUDY SET
+		STUDY_CLASS = #{studyClass},
+		STUDY_TITLE = #{studyTitle},
+		STUDY_CONTENT = #{studyContent}
+		WHERE STUDY_NO = #{studyNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM STUDY
+		WHERE STUDY_NO = #{studyNo}
+	</delete>
+	
+	<select id="list" resultType="com.mit.domain.StudyVO">
+		<![CDATA[
+			SELECT * FROM (
+				SELECT ROWNUM RNUM, STUDY_NO, STUDY_CLASS, STUDY_TITLE, TO_CHAR(STUDY_DATE, 'YYYY-MM-DD HH24:MI:SS') AS STUDY_DATE, STUDY_VIEW, MEMBER_NO, MEMBER_NAME
+      			FROM (
+      				SELECT S.STUDY_NO, S.STUDY_CLASS, S.STUDY_TITLE, S.STUDY_DATE, S.STUDY_VIEW, M.MEMBER_NO, M.MEMBER_NAME
+      				FROM STUDY S, MEMBER M
+      				WHERE M.MEMBER_NO = S.MEMBER_NO
+      				AND S.STUDY_NO > 0
+		]]>
+		<![CDATA[
+			ORDER BY S.STUDY_NO ASC))
+			WHERE RNUM >= 1
+			ORDER BY STUDY_NO DESC, STUDY_DATE DESC
+		]]>
+	</select>
+	
+	<insert id="insertFile">
+		INSERT INTO STUDY_FILE(FILE_NO, FILE_NAME, STUDY_NO)
+		VALUES(SEQ_STUDY_FILE.NEXTVAL, #{fileName}, #{studyNo})
+	</insert>
+	
+	<insert id="deleteFile">
+		DELETE FROM STUDY_FILE WHERE STUDY_NO = #{studyNo}
+	</insert>
+	
+	<select id="fileList" resultType="com.mit.domain.StudyFileVO">
+		SELECT FILE_NO, SUBSTR(FILE_NAME, 50) AS FILE_NAME, FILE_NAME AS FILE_LOCATION, STUDY_NO
+		FROM STUDY_FILE
+		WHERE STUDY_NO = #{studyNo}
+	</select>
+	
+	<update id="updateViewCount">
+		UPDATE STUDY SET
+		STUDY_VIEW = STUDY_VIEW + 1
+		WHERE STUDY_NO = #{studyNo}
+	</update>
+
+</mapper>

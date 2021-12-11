@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.StudyCommentMapper">
+	
+	<select id="list" resultType="com.mit.domain.StudyCommentVO">
+		SELECT
+		C.COMMENT_NO, C.STUDY_NO, C.MEMBER_NO, M.MEMBER_NAME, C.COMMENT_TEXT, C.COMMENT_DATE
+		FROM STUDY_COMMENT C, STUDY S, MEMBER M
+		WHERE M.MEMBER_NO = C.MEMBER_NO
+		AND S.STUDY_NO = C.STUDY_NO
+		AND C.STUDY_NO = #{studyNo}
+		ORDER BY C.COMMENT_NO DESC
+	</select>
+	
+	<insert id="create">
+		INSERT INTO STUDY_COMMENT(COMMENT_NO, STUDY_NO, COMMENT_TEXT, MEMBER_NO)
+		VALUES (SEQ_STUDY_COMMENT.NEXTVAL, #{studyNo}, #{commentText}, #{memberNo})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM STUDY_COMMENT
+		WHERE COMMENT_NO = #{commentNo}
+	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM STUDY_COMMENT
+		WHERE STUDY_NO = #{studyNo}
+	</delete>
+	
+</mapper>

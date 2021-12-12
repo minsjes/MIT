@@ -1,39 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="../include/header.jsp"%>
 
 <style>
-.preview-list{
+.preview-list {
 	list-style: none;
-    padding: 0 10px 0 10px;
+	padding: 0 10px 0 10px;
 }
 </style>
 
 <div id="layoutSidenav_content">
 	<main>
-		<div class="container-fluid px-4">
-			<h2 class="mt-4" style="text-align: center; margin-bottom: 30px;">문의 게시판 등록하기</h2>
-			
-			<form role="form" method="post" name="frm">
-				<input type="hidden" value="${login.memberNo}" id="inlineFormInputGroupUsername" name="memberNo"> 
-				
-				<div class="input-group">
-					<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>
-					<input type="text" class="form-control" id="qnaTitle" name="qnaTitle" placeholder="Enter Title...">
-				</div>
-				
-				<div class="input-group">
-					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
-					<input type="text" class="form-control" name="memberName" value="${login.memberName}" readonly>
-				</div>
-				<div class="form-group">
-					<div class="input-group-text">내용</div>
-					<textarea class="form-control" id="qnaContent" name="qnaContent" rows="15" placeholder="Enter content..."></textarea>
-				</div>
+	<div class="container-fluid px-4">
+		<h2 class="mt-4" style="text-align: center; margin-bottom: 30px;">질문 게시판 등록하기</h2>
 
-				<div class="input-group">
+		<form role="form" method="post" name="frm">
+			<input type="hidden" value="${login.memberNo}"
+				id="inlineFormInputGroupUsername" name="memberNo">
+
+			<div class="input-group">
+				<div class="input-group-text">작성자</div>
+				<label class="form-control" >${login.memberName} </label>
+					
+					<div class="form-control"  align="right">
+					<input type="checkbox" name="hiddenStatus" value="1"/> 
+					<label for="hiddenStatus" style="font-size: 17px;">익명</label>
+					</div>
+			</div>
+			<div class="row g-0">
+					<div class="col-lg-2">
+						<div class="input-group">
+						  <div class="input-group-text" style="padding: 0 20px 0 20px;">유형</div>
+						  <select class="form-select" id="qnaClass" name="qnaClass">
+					<option value="" selected>선택</option>	  
+					<option value="1">동아리</option>
+					<option value="2">코딩오류</option>
+					<option value="3">전공과목</option>
+					<option value="4">학교생활</option>
+				</select>
+				</div>
+				</div>
+					<div class="col-lg-10">
+						<div class="input-group">
+							<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>
+							<input type="text" class="form-control" id="qnaTitle" name="qnaTitle" placeholder="Enter Title...">
+			</div>
+			</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group-text">내용</div>
+				<textarea class="form-control" id="qnaContent" name="qnaContent"
+					rows="15" placeholder="Enter content..."></textarea>
+				<script>
+					$(document).ready(function() {
+						CKEDITOR.replace("qnaContent", {
+							height : 400
+						});
+					});
+				</script>
+			</div>
+                <div class="input-group">
 					<input type="file" class="form-control" id="fileUpload" name="fileUpload" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 					<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" onclick="fileUpload.click()">
 						<i class="bi bi-plus-lg"></i>
@@ -43,18 +72,20 @@
 					<ul class="dropzone-previews clearfix uploadedList preview-list"></ul>
 				</div>
 
-				<div style="text-align: right; margin: 17px 0 17px 0;">
-					<button type="button" class="btn btn-outline-primary" id="btn_submit">등록</button>
-					<button type="button" class="btn btn-outline-dark" id="btn_list">취소</button>
-				</div>
-			</form>
-		</div>
+			<div style="text-align: right; margin: 17px 0 17px 0;">
+				<button type="button" class="btn btn-outline-primary" id="btn_submit">등록</button>
+				<button type="button" class="btn btn-outline-dark" id="btn_list">취소</button>
+			</div>
+		</form>
+	</div>
 	</main>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/upload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script id="template" type="text/x-handlebars-template">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/resources/upload.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script id="template" type="text/x-handlebars-template">
 <li class="dropzone-previews mt-3">
 <div class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
 <div class="p-2">
@@ -74,29 +105,28 @@
 </li>
 </script>
 
-<script>
-	// 등록 유효성 검사 
-	function validate() {
-		var qnaTitle = $("#qnaTitle").val();
-		var qnaContent = $("#qnaContent").val();
+	<script>
+		// 등록 유효성 검사 
+		function validate() {
+			var qnaTitle = $("#qnaTitle").val();
+			var qnaContent = CKEDITOR.instances.qnaContent.getData();
 
-		if (qnaTitle == "") {
-			alert("제목을 입력해주세요 .");
-			document.getElementById("qnaTitle").focus();
-			return false;
+			if (qnaTitle == "") {
+				alert("제목을 입력해주세요 .");
+				document.getElementById("qnaTitle").focus();
+				return false;
+			}
+
+			if (qnaContent == "") {
+				alert("내용을 입력해주세요 .");
+				return false;
+			}
+
+			return true;
 		}
+	</script>
 
-		if (qnaContent == "") {
-			alert("내용을 입력해주세요 .");
-			document.getElementById("qnaContent").focus();
-			return false;
-		}
-
-		return true;
-	}
-</script>
-
-<script>
+	<script>
 	$("input:text[numberOnly]").on("focus", function() {
 		var x = $(this).val();
 		x = removeCommas(x);
@@ -282,19 +312,19 @@
 	}
 </script>
 
-<script>
-	$(document).ready(function() {
-		var formObj = $("form[role='form']");
-		console.log(formObj);
+	<script>
+		$(document).ready(function() {
+			var formObj = $("form[role='form']");
+			console.log(formObj);
 
-		$("#btn_submit").on("click", function() {
-			formObj.submit();
-		});
-		
-		$('#btn_list').on("click", function(evt) {
-			self.location = "list";
-		});
-	});
-</script>
+			$("#btn_submit").on("click", function() {
+				formObj.submit();
+			});
 
-<%@include file="../include/footer.jsp"%>
+			$('#btn_list').on("click", function(evt) {
+				self.location = "list";
+			});
+		});
+	</script>
+
+	<%@include file="../include/footer.jsp"%>

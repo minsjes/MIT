@@ -20,6 +20,8 @@ public interface QnaDAO {
 	
 	public int listSearchCount() throws Exception;
 	
+	public void updateViewCount(int qnaNo) throws Exception;
+	
 	public void insertFile(QnaFileVO qVo) throws Exception;
 	
 	public void deleteFile(int qnaNo) throws Exception;

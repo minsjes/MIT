@@ -18,8 +18,8 @@ public class QnaCommentDAOImpl implements QnaCommentDAO{
 	private static final String namespace = "com.mit.mapper.QnaCommentMapper";
 
 	@Override
-	public void create(QnaCommentVO qcvo) throws Exception {
-		session.insert(namespace + ".create", qcvo);
+	public void create(QnaCommentVO cvo) throws Exception {
+		session.insert(namespace + ".create", cvo);
 		
 	}
 

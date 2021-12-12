@@ -14,14 +14,14 @@ public class QnaVO {
 	private String memberName;
 	private String[] files;
 	private ArrayList<QnaFileVO> filList;
+	private int qnaView;
+	private String qnaClass;
+	private String hiddenStatus;
 	private int commentNo;
 	private int rnum;
 	
 	public int getQnaNo() {
 		return qnaNo;
-	}
-	public void setQnaNo(int qnaNo) {
-		this.qnaNo = qnaNo;
 	}
 	public String getQnaTitle() {
 		return qnaTitle;
@@ -65,6 +65,18 @@ public class QnaVO {
 	public void setFilList(ArrayList<QnaFileVO> filList) {
 		this.filList = filList;
 	}
+	public int getQnaView() {
+		return qnaView;
+	}
+	public void setQnaView(int qnaView) {
+		this.qnaView = qnaView;
+	}
+	public String getQnaClass() {
+		return qnaClass;
+	}
+	public void setQnaClass(String qnaClass) {
+		this.qnaClass = qnaClass;
+	}
 	public int getCommentNo() {
 		return commentNo;
 	}
@@ -77,15 +89,24 @@ public class QnaVO {
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
+	public void setQnaNo(int qnaNo) {
+		this.qnaNo = qnaNo;
+	}
 	
+	public String getHiddenStatus() {
+		return hiddenStatus;
+	}
+	public void setHiddenStatus(String hiddenStatus) {
+		this.hiddenStatus = hiddenStatus;
+	}
 	@Override
 	public String toString() {
 		return "QnaVO [qnaNo=" + qnaNo + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaDate="
 				+ qnaDate + ", memberNo=" + memberNo + ", memberName=" + memberName + ", files="
-				+ Arrays.toString(files) + ", filList=" + filList + ", commentNo=" + commentNo + ", rnum=" + rnum + "]";
+				+ Arrays.toString(files) + ", filList=" + filList + ", qnaView=" + qnaView + ", qnaClass=" + qnaClass
+				+ ", hiddenStatus=" + hiddenStatus + ", commentNo=" + commentNo + ", rnum=" + rnum + "]";
 	}
+
 	
 	
 }
-	
-	

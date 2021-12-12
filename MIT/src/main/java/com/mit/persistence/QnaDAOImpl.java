@@ -70,4 +70,10 @@ public class QnaDAOImpl implements QnaDAO {
 		return session.selectList(namespace+".fileList", qnaNo);
 	}
 
+	@Override
+	public void updateViewCount(int qnaNo) throws Exception {
+		session.update(namespace + ".updateViewCount", qnaNo);
+		
+	}
+
 }

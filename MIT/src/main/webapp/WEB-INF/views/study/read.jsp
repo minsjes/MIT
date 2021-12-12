@@ -107,11 +107,20 @@
 															<c:when test="${token eq 'hwp'}">
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/hwp.png" alt="${fileName}" />
 															</c:when>
+															<c:when test="${token eq 'doc' || token eq 'docx' }">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/doc.png" alt="${fileName}" />
+															</c:when>
 															<c:when test="${token eq 'xls' || token eq 'xlsx' }">
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/excelIcon.png" />
 															</c:when>
 															<c:when test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-size" src="/displayFile?fileName=${studyFileVO.fileLocation}">
+															</c:when>
+															<c:when test="${token eq 'psd'}">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/psd.png" alt="${fileName}" />
+															</c:when>
+															<c:when test="${token eq 'ai'}">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/ai.png" alt="${fileName}" />
 															</c:when>
 															<c:when test="${token eq 'pdf'}">
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/pdf.png" alt="${fileName}" />
@@ -119,8 +128,17 @@
 															<c:when test="${token eq 'ppt' || token eq 'pptx'}">
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/ppt.png" alt="${fileName}" />
 															</c:when>
+															<c:when test="${token eq 'mp4' || token eq 'avi'}">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/avi.png" alt="${fileName}" />
+															</c:when>
+															<c:when test="${token eq 'mp3' || token eq 'flac' || token eq 'wav'}">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/mp3.png" alt="${fileName}" />
+															</c:when>
+															<c:when test="${token eq 'zip'}">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/zip.png" alt="${fileName}" />
+															</c:when>
 															<c:otherwise>
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/file.svg" alt="${fileName}" />
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/file.png" alt="${fileName}" />
 															</c:otherwise>
 														</c:choose>
 													</c:if>

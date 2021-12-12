@@ -43,7 +43,7 @@
 						  	<c:if test="${1 eq studyVO.studyClass}">
                         		<option value="">선택</option>
 							    <option value="1" selected>웹디자인</option>
-							    <option value="2">파이썬 기초</option>
+							    <option value="2">파이썬 기초</option> 요기까지 출력
                      		</c:if>
                      		<c:if test="${2 eq studyVO.studyClass}">
                      			<option value="">선택</option>
@@ -151,7 +151,7 @@
 				</div>
 
 				<div style="text-align: right; margin: 17px 0 17px 0;">
-					<button type="submit" class="btn btn-outline-primary">수정</button>
+					<button type="button" class="btn btn-outline-primary" onclick="validate()">수정</button>
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='/study/list'">목록</button>
 				</div>
 			</form>
@@ -204,8 +204,9 @@
 			alert("내용을 입력해주세요 .");
 			return false;
 		}
-
-		return true;
+		
+		var formObj = $("form[role='form']");
+		formObj.submit();
 	}
 	
 	function checkImageType(fileName) {

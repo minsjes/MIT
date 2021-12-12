@@ -30,7 +30,7 @@
 <div id="layoutSidenav_content">
 	<main>
 	<div class="container-fluid px-4">
-		<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>진로
+		 <h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>진로
 			정보 공유 게시판 게시물 수정하기</h2>
 
 		<form role="form" action="modify" method="post" name="frm">
@@ -45,21 +45,21 @@
 						<select class="form-select" id="infoClass" name="infoClass">
 							<c:if test="${1 eq infoVO.infoClass}">
 								<option value="none">선택</option>
-								<option value="1"selected>진로</option>
+								<option value="1" selected>진로</option>
 								<option value="2">취업</option>
 								<option value="9">기타</option>
 							</c:if>
 							<c:if test="${2 eq infoVO.infoClass}">
 								<option value="none">선택</option>
 								<option value="1">진로</option>
-								<option value="2"selected>취업</option>
+								<option value="2" selected>취업</option>
 								<option value="9">기타</option>
 							</c:if>
 							<c:if test="${9 eq infoVO.infoClass}">
 								<option value="none">선택</option>
 								<option value="1">진로</option>
 								<option value="2">취업</option>
-								<option value="9"selected>기타</option>
+								<option value="9" selected>기타</option>
 							</c:if>
 						</select>
 					</div>

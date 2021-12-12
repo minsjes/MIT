@@ -12,7 +12,7 @@
 		INSERT INTO INFO (INFO_NO, INFO_TITLE, INFO_CONTENT, INFO_CLASS,
 		MEMBER_NO)
 		VALUES (#{infoNo}, #{infoTitle}, #{infoContent},
-		#{infoClass}, #{memberNo})
+		#{infoClass},  #{memberNo})
 	</insert>
 
 	<select id="read" resultType="com.mit.domain.InfoVO">

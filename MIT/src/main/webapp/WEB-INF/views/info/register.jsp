@@ -31,7 +31,7 @@
 							<option value="1">진로</option>
 							<option value="2">취업</option>
 							<option value="9">기타</option>
-						</select>
+						 </select>
 					</div>
 				</div>
 

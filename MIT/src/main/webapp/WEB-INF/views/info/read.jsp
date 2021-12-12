@@ -38,7 +38,7 @@
       <h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>진로
          정보 공유 게시판</h1>
 
-      <form role="form" action="modify" method="post">
+       <form role="form" action="modify" method="post">
          <input type='hidden' id="infoNo" name="infoNo" value="${infoVO.infoNo}"> 
          <input type='hidden' id="memberNo" value="${infoVO.memberNo}">
 

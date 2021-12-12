@@ -163,7 +163,7 @@
 						<button type="button" class="btn btn-outline-primary btn-modify">수정</button>
 						<button type="button" class="btn btn-outline-danger">삭제</button>
 					</c:if>
-					<c:if test="${12345678 eq login.memberNo}">
+					<c:if test="${12345678 eq login.memberNo && 12345678 ne studyVO.memberNo}">
 						<button type="button" class="btn btn-outline-danger">삭제</button>
 					</c:if>
 					<button type="button" class="btn btn-outline-dark">목록</button>

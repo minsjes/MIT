@@ -8,8 +8,8 @@
 <div id="layoutSidenav_content">
 	<main>
 	<div class="container-fluid px-4">
-		<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>정보
-			공유 게시판</h1>
+		<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>진로
+			정보 공유 게시판</h1>
 
 		<div class="card mb-4">
 			<div class="card-header">
@@ -37,7 +37,7 @@
 						<c:forEach items="${list}" var="infoVO" varStatus="status">
 							<tr>
 								<td>${infoVO.rnum}</td>
-								
+
 								<c:if test="${infoVO.infoClass == '1' }">
 									<td>진로</td>
 								</c:if>
@@ -50,10 +50,10 @@
 								<td><a href='/info/read?infoNo=${infoVO.infoNo}'>
 										${infoVO.infoTitle} </a></td>
 								<td><a>${infoVO.memberName} </a></td>
-								
-							    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+
+								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${infoVO.infoDate}" /></td>
-										<td>${infoVO.infoView}</td>
+								<td>${infoVO.infoView}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

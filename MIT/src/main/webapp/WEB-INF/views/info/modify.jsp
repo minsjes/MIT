@@ -29,126 +29,150 @@
 
 <div id="layoutSidenav_content">
 	<main>
-		<div class="container-fluid px-4">
-			<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>정보 공유 게시판 게시물 수정하기</h2>
+	<div class="container-fluid px-4">
+		<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>진로
+			정보 공유 게시판 게시물 수정하기</h2>
 
-			<form role="form" action="modify" method="post" name="frm">
-				<input type='hidden' id="infoNo" name='infoNo'
-					value="${infoVO.infoNo}"> <input type='hidden'
-					id="memberNo" name='memberNo' value="${infoVO.memberNo}">
+		<form role="form" action="modify" method="post" name="frm">
+			<input type='hidden' id="infoNo" name='infoNo'
+				value="${infoVO.infoNo}"> <input type='hidden' id="memberNo"
+				name='memberNo' value="${infoVO.memberNo}">
 
-				<div class="row">
-					<div class="col" style="padding-right: 0;">
-						<div class="input-group">
-							<div class="input-group-text">작성자</div>
-							<input type="text" class="form-control" name="memberName"
-								value="${infoVO.memberName}" readonly="readonly">
-						</div>
+			<div class="row g-0">
+				<div class="col-lg-2">
+					<div class="input-group">
+						<label class="input-group-text" for="inputGroupSelect01">유형</label>
+						<select class="form-select" id="infoClass" name="infoClass">
+							<c:if test="${1 eq infoVO.infoClass}">
+								<option value="none">선택</option>
+								<option value="1"selected>진로</option>
+								<option value="2">취업</option>
+								<option value="9">기타</option>
+							</c:if>
+							<c:if test="${2 eq infoVO.infoClass}">
+								<option value="none">선택</option>
+								<option value="1">진로</option>
+								<option value="2"selected>취업</option>
+								<option value="9">기타</option>
+							</c:if>
+							<c:if test="${9 eq infoVO.infoClass}">
+								<option value="none">선택</option>
+								<option value="1">진로</option>
+								<option value="2">취업</option>
+								<option value="9"selected>기타</option>
+							</c:if>
+						</select>
 					</div>
-					<div class="col" style="padding-left: 0;">
-						<div class="input-group">
-							<div class="input-group-text">작성일</div>
-							<input type="text" class="form-control"
-								value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${infoVO.infoDate}"/>"
-								readonly="readonly">
-						</div>
+				</div>
+
+				<div class="col-lg-10">
+					<div class="input-group">
+						<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
+						<input type="text" class="form-control" id="infoTitle"
+							name='infoTitle' value="${infoVO.infoTitle}">
 					</div>
 				</div>
-				<div class="input-group">
-					<div class="input-group-text" style="padding: 0 20px 0 20px;">제목</div>
-					<input type="text" class="form-control" name='infoTitle'
-						value="${infoVO.infoTitle}">
-				</div>
-				<div class="form-group">
-					<div class="input-group-text" style="padding-left: 20px;">내용</div>
-					<textarea class="form-control" name="infoContent" rows="15">${infoVO.infoContent}</textarea>
-				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group-text" style="padding-left: 20px;">내용</div>
+				<textarea class="form-control" name="infoContent" rows="15">${infoVO.infoContent}</textarea>
+			</div>
 
-				<div class="input-group">
-					<input type="file" class="form-control" id="fileUpload"
-						name="fileUpload" aria-describedby="inputGroupFileAddon04"
-						aria-label="Upload">
-					<button class="btn btn-outline-secondary" type="button"
-						id="inputGroupFileAddon04" onclick="fileUpload.click()">
-						<i class="bi bi-plus-lg"></i>
-					</button>
-				</div>
+			<script>
+				$(document).ready(function() {
+					CKEDITOR.replace("infoContent", {
+						/* filebrowserUploadUrl : "/common/ckUpload", */
+						height : 400
+					});
+				});
+			</script>
 
-				<div class="card">
-					<ul class="dropzone-previews clearfix uploadedList preview-list">
-						<c:forEach items="${infoFileVO}" var="fVo" varStatus="status">
-							<c:set var="fileName" value="${fVo.fileName}" />
-							<c:set var="fileNo" value="${fn:toLowerCase(fileName)}" />
 
-							<li class="dropzone-previews mt-3">
-								<div
-									class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
-									<div class="p-2">
-										<div class="row align-items-center px-3">
-											<c:forTokens var="token" items="${fileNo}" delims="."
-												varStatus="status">
-												<c:if test="${status.last}">
-													<c:choose>
-														<c:when test="${token eq 'hwp'}">
-															<img data-dz-thumbnail=""
-																class="avatar-sm rounded bg-light preview-icon"
-																src="/resources/dist/img/hwp.png" alt="${fileName}" />
-														</c:when>
-														<c:when test="${token eq 'xls' || token eq 'xlsx' }">
-															<img data-dz-thumbnail=""
-																class="avatar-sm rounded bg-light preview-icon"
-																src="/resources/dist/img/excelIcon.png" />
-														</c:when>
-														<c:when
-															test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
-															<img data-dz-thumbnail=""
-																class="avatar-sm rounded bg-light preview-size"
-																src="/displayFile?fileName=${fVo.fileLocation}">
-														</c:when>
-														<c:when test="${token eq 'pdf'}">
-															<img data-dz-thumbnail=""
-																class="avatar-sm rounded bg-light preview-icon"
-																src="/resources/dist/img/pdf.png" alt="${fileName}" />
-														</c:when>
-														<c:when test="${token eq 'ppt' }">
-															<img data-dz-thumbnail=""
-																class="avatar-sm rounded bg-light preview-icon"
-																src="/resources/dist/img/ppt.png" alt="${fileName}" />
-														</c:when>
-														<c:otherwise>
-															<img data-dz-thumbnail=""
-																class="avatar-sm rounded bg-light preview-icon"
-																src="/resources/dist/img/file.svg" alt="${fileName}" />
-														</c:otherwise>
-													</c:choose>
-												</c:if>
-											</c:forTokens>
-											<div class="col pl-0">
-												<a href="/displayFile?fileName=${fVo.fileLocation}"
-													text-muted font-weight-bold data-dz-name="">
-													${fVo.fileName} </a>
-											</div>
-											<div class="col-auto">
-												<a href="${fVo.fileLocation}"
-													class="btn btn-default btn-xs pull-right delbtn"> <i
-													class="far fa-trash-alt"></i>
-												</a>
-											</div>
+			<div class="input-group">
+				<input type="file" class="form-control" id="fileUpload"
+					name="fileUpload" aria-describedby="inputGroupFileAddon04"
+					aria-label="Upload">
+				<button class="btn btn-outline-secondary" type="button"
+					id="inputGroupFileAddon04" onclick="fileUpload.click()">
+					<i class="bi bi-plus-lg"></i>
+				</button>
+			</div>
+
+			<div class="card">
+				<ul class="dropzone-previews clearfix uploadedList preview-list">
+					<c:forEach items="${infoFileVO}" var="fVo" varStatus="status">
+						<c:set var="fileName" value="${fVo.fileName}" />
+						<c:set var="fileNo" value="${fn:toLowerCase(fileName)}" />
+
+						<li class="dropzone-previews mt-3">
+							<div
+								class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
+								<div class="p-2">
+									<div class="row align-items-center px-3">
+										<c:forTokens var="token" items="${fileNo}" delims="."
+											varStatus="status">
+											<c:if test="${status.last}">
+												<c:choose>
+													<c:when test="${token eq 'hwp'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/hwp.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'xls' || token eq 'xlsx' }">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/excelIcon.png" />
+													</c:when>
+													<c:when
+														test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-size"
+															src="/displayFile?fileName=${fVo.fileLocation}">
+													</c:when>
+													<c:when test="${token eq 'pdf'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/pdf.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'ppt' }">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/ppt.png" alt="${fileName}" />
+													</c:when>
+													<c:otherwise>
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/file.svg" alt="${fileName}" />
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+										</c:forTokens>
+										<div class="col pl-0">
+											<a href="/displayFile?fileName=${fVo.fileLocation}"
+												text-muted font-weight-bold data-dz-name="">
+												${fVo.fileName} </a>
+										</div>
+										<div class="col-auto">
+											<a href="${fVo.fileLocation}"
+												class="btn btn-default btn-xs pull-right delbtn"> <i
+												class="far fa-trash-alt"></i>
+											</a>
 										</div>
 									</div>
 								</div>
-							</li>
-						</c:forEach>
-					</ul>
-				</div>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
 
-				<div style="text-align: right; margin: 17px 0 17px 0;">
-					<button type="submit" class="btn btn-outline-primary">수정</button>
-					<button type="button" class="btn btn-outline-dark"
-						onclick="location.href='/info/list'">목록</button>
-				</div>
-			</form>
-		</div>
+			<div style="text-align: right; margin: 17px 0 17px 0;">
+				<button type="submit" class="btn btn-outline-primary">수정</button>
+				<button type="button" class="btn btn-outline-dark"
+					onclick="location.href='/info/list'">목록</button>
+			</div>
+		</form>
+	</div>
 	</main>
 
 	<script
@@ -177,6 +201,33 @@
 </script>
 
 	<script>
+		// 등록 유효성 검사 
+		function validate() {
+			var infoTitle = $("#infoTitle").val();
+			var infoContent = CKEDITOR.instances.infoContent.getData();
+			var infoClass = $("#infoClass").val();
+
+			if (infoTitle == "") {
+				alert("제목을 입력해주세요 .");
+				document.getElememtById("infoTitle").focus();
+				return false;
+			}
+
+			if (infoContent == "") {
+				alert("내용을 입력해주세요 .");
+				document.getElementById("infoContent").focus();
+				return false;
+			}
+
+			if (infoClass == "none") {
+				alert("유형을 선택해주세요.");
+				document.getElementById("infoClass").focus();
+				return false;
+			}
+
+			return true;
+		}
+
 		function checkImageType(fileName) {
 			var pattern = /jpg|gif|png|jpeg/i;
 			return fileName.match(pattern);

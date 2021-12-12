@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,312 +8,375 @@
 
 <style>
 .preview-list {
-	list-style: none;
-	padding: 0 10px 0 10px;
+   list-style: none;
+   padding: 0 10px 0 10px;
 }
 
 .preview-size {
-	width: auto;
-	height: auto;
-	max-width: 200px;
-	max-height: 200px;
+   width: auto;
+   height: auto;
+   max-width: 200px;
+   max-height: 200px;
 }
 
 .preview-icon {
-	width: auto;
-	height: auto;
-	max-width: 50px;
-	max-height: 50px;
+   width: auto;
+   height: auto;
+   max-width: 50px;
+   max-height: 50px;
 }
 
 .comment-list {
-	margin-bottom: 20px;
+   margin-bottom: 20px;
 }
 </style>
 
 <div id="layoutSidenav_content">
-	<main>
-		<div class="container-fluid px-4">
-			<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>정보 공유 게시판</h2>
+   <main>
 
-			<form role="form" action="modify" method="post">
-				<input type='hidden' id="infoNo" name='infoNo' value="${infoVO.infoNo}">
-				<input type='hidden' id="memberNo" value="${infoVO.memberNo}">
+   <div class="container-fluid px-4">
+      <h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>진로
+         정보 공유 게시판</h1>
 
-				<div class="input-group">
-					<div class="input-group-text" style="padding: 0 20px 0 20px;">제목</div>
-					<input type="text" class="form-control" value="${infoVO.infoTitle}" readonly="readonly">
-				</div>
+      <form role="form" action="modify" method="post">
+         <input type='hidden' id="infoNo" name="infoNo" value="${infoVO.infoNo}"> 
+         <input type='hidden' id="memberNo" value="${infoVO.memberNo}">
 
-				<div class="row">
-					<div class="col" style="padding-right: 0;">
-						<div class="input-group">
-							<div class="input-group-text">작성자</div>
-							<input type="text" class="form-control" value="${infoVO.memberName}" readonly="readonly">
-						</div>
-					</div>
-					<div class="col" style="padding-left: 0;">
-						<div class="input-group">
-							<div class="input-group-text">작성일</div>
-							<input type="text" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${infoVO.infoDate}"/>" readonly="readonly">
-						</div>
-					</div>
-				</div>
+         <div class="row g-0">
+            <div class="col">
+               <div class="input-group">
+                  <div class="input-group-text">작성자</div>
+                  <input type="text" class="form-control"
+                     value="${infoVO.memberName}" readonly="readonly">
+               </div>
+            </div>
+            <div class="col">
+               <div class="input-group">
+                  <div class="input-group-text">작성일</div>
+                  <input type="text" class="form-control" value="${infoVO.infoDate}"
+                     readonly="readonly">
+               </div>
+            </div>
+            <div class="col">
+               <div class="input-group">
+                  <div class="input-group-text">조회수</div>
+                  <input type="text" class="form-control" value="${infoVO.infoView}"
+                     readonly="readonly">
+               </div>
+            </div>
+         </div>
 
-				<div class="input-group">
-					<div class="input-group-text" style="padding: 0 20px 0 20px;">내용</div>
-					<textarea class="form-control" rows="15" readonly="readonly">${infoVO.infoContent}</textarea>
-				</div>
+         <div class="row g-0">
+            <div class="col-lg-2">
+               <div class="input-group">
+                  <div class="input-group-text" style="padding: 0 20px 0 20px;">유형</div>
+                  <c:if test="${1 eq infoVO.infoClass}">
+                     <input type="text" class="form-control" value="진로"
+                        readonly="readonly">
+                  </c:if>
+                  <c:if test="${2 eq infoVO.infoClass}">
+                     <input type="text" class="form-control" value="취업"
+                        readonly="readonly">
+                  </c:if>
+                  <c:if test="${9 eq infoVO.infoClass}">
+                     <input type="text" class="form-control" value="기타"
+                        readonly="readonly">
+                  </c:if>
+               </div>
+            </div>
 
-				<c:if test="${!empty infoFileVO}">
-					<div class="input-group">
-						<div class="input-group-text" style="width: 100%;">첨부파일</div>
-					</div>
+            <div class="col-lg-10">
+               <div class="input-group">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                     style="padding: 0 20px 0 20px;">제목</span> <input type="text"
+                     class="form-control" value="${infoVO.infoTitle}"
+                     readonly="readonly">
+               </div>
+            </div>
+         </div>
 
-					<div class="card">
-						<ul class="dropzone-previews preview-list">
-							<c:forEach items="${infoFileVO}" var="infoFileVO" varStatus="status">
-								<c:set var="fileName" value="${infoFileVO.fileName}" />
-								<c:set var="fileNo" value="${fn:toLowerCase(fileName)}" />
+         <div class="form-group">
+            <div class="input-group-text">내용</div>
+            <textarea class="form-control" id="studyContent" readonly="readonly">${infoVO.infoContent}</textarea>
+            <script>
+               CKEDITOR.replace("studyContent", {
+                  height : 400
+               });
+            </script>
+         </div>
 
-								<li class="dropzone-previews mt-3">
-									<div class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
-										<div class="p-2">
-											<div class="row align-items-center px-3">
-												<c:forTokens var="token" items="${fileNo}" delims="." varStatus="status">
-													<c:if test="${status.last}">
-														<c:choose>
-															<c:when test="${token eq 'hwp'}">
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/hwp.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'xls' || token eq 'xlsx' }">
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/excelIcon.png" />
-															</c:when>
-															<c:when
-																test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-size" src="/displayFile?fileName=${infoFileVO.fileLocation}">
-															</c:when>
-															<c:when test="${token eq 'pdf'}">
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/pdf.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'ppt' || token eq 'pptx'}">
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/ppt.png" alt="${fileName}" />
-															</c:when>
-															<c:otherwise>
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/file.svg" alt="${fileName}" />
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</c:forTokens>
-												<div class="col pl-0">
-													<a href="/displayFile?fileName=${infoFileVO.fileLocation}" text-muted font-weight-bold data-dz-name="">
-														${infoFileVO.fileName}
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if>
-				<c:if test="${empty infoFileVO}"></c:if>
+         <c:if test="${!empty infoFileVO}">
+            <div class="input-group">
+               <div class="input-group-text" style="width: 100%;">첨부파일</div>
+            </div>
 
-				<div style="text-align: right; margin: 17px 0 17px 0;">
-					<c:if test="${login.memberNo eq infoVO.memberNo}">
-						<button type="button" class="btn btn-outline-primary btn-modify">수정</button>
-						<button type="button" class="btn btn-outline-danger">삭제</button>
-					</c:if>
-					<button type="button" class="btn btn-outline-dark">목록</button>
-				</div>
-			</form>
+            <div class="card">
+               <ul class="dropzone-previews preview-list">
+                  <c:forEach items="${infoFileVO}" var="infoFileVO"
+                     varStatus="status">
+                     <c:set var="fileName" value="${infoFileVO.fileName}" />
+                     <c:set var="fileNo" value="${fn:toLowerCase(fileName)}" />
 
-			<div class="card mb-5">
-				<div class="card-body">
-					<h5 class="mt-0">댓글 작성</h5>
-					<form>
-						<input type="hidden" value="${login.memberNo}" id="newUserNo">
-						<textarea class="form-control form-control-light mb-2" placeholder="Enter comment..." id="newReplyText" rows="3"></textarea>
-						<div class="text-right">
-							<div class="btn-group mb-2"></div>
-							<div class="btn-group mb-2 ml-2" style="float: right;">
-								<a class="btn btn-outline-primary btn-rounded comentAddBtn">댓글 등록</a>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="inbox-widget">
-								<h5 class="mt-0">댓글 목록</h5>
-								<div class="card">
-									<ul class="mb-0 preview-list" id="reply"></ul>
-								</div>
-								<div style="text-align: right;"></div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</main>
+                     <li class="dropzone-previews mt-3">
+                        <div
+                           class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
+                           <div class="p-2">
+                              <div class="row align-items-center px-3">
+                                 <c:forTokens var="token" items="${fileNo}" delims="."
+                                    varStatus="status">
+                                    <c:if test="${status.last}">
+                                       <c:choose>
+                                          <c:when test="${token eq 'hwp'}">
+                                             <img data-dz-thumbnail=""
+                                                class="avatar-sm rounded bg-light preview-icon"
+                                                src="/resources/dist/img/hwp.png" alt="${fileName}" />
+                                          </c:when>
+                                          <c:when test="${token eq 'xls' || token eq 'xlsx' }">
+                                             <img data-dz-thumbnail=""
+                                                class="avatar-sm rounded bg-light preview-icon"
+                                                src="/resources/dist/img/excelIcon.png" />
+                                          </c:when>
+                                          <c:when
+                                             test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
+                                             <img data-dz-thumbnail=""
+                                                class="avatar-sm rounded bg-light preview-size"
+                                                src="/displayFile?fileName=${infoFileVO.fileLocation}">
+                                          </c:when>
+                                          <c:when test="${token eq 'pdf'}">
+                                             <img data-dz-thumbnail=""
+                                                class="avatar-sm rounded bg-light preview-icon"
+                                                src="/resources/dist/img/pdf.png" alt="${fileName}" />
+                                          </c:when>
+                                          <c:when test="${token eq 'ppt' || token eq 'pptx'}">
+                                             <img data-dz-thumbnail=""
+                                                class="avatar-sm rounded bg-light preview-icon"
+                                                src="/resources/dist/img/ppt.png" alt="${fileName}" />
+                                          </c:when>
+                                          <c:otherwise>
+                                             <img data-dz-thumbnail=""
+                                                class="avatar-sm rounded bg-light preview-icon"
+                                                src="/resources/dist/img/file.svg" alt="${fileName}" />
+                                          </c:otherwise>
+                                       </c:choose>
+                                    </c:if>
+                                 </c:forTokens>
+                                 <div class="col pl-0">
+                                    <a href="/displayFile?fileName=${infoFileVO.fileLocation}"
+                                       text-muted font-weight-bold data-dz-name="">
+                                       ${infoFileVO.fileName} </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+                  </c:forEach>
+               </ul>
+            </div>
+         </c:if>
+         <c:if test="${empty infoFileVO}"></c:if>
 
-	<script>
-		$(document).ready(function() {
-			var formObj = $("form[role='form']");
+         <div style="text-align: right; margin: 17px 0 17px 0;">
+            <c:if test="${login.memberNo eq infoVO.memberNo}">
+               <button type="button" class="btn btn-outline-primary btn-modify">수정</button>
+               <button type="button" class="btn btn-outline-danger">삭제</button>
+            </c:if>
+            <button type="button" class="btn btn-outline-dark">목록</button>
+         </div>
+      </form>
 
-			console.log(formObj);
+      <div class="card mb-5">
+         <div class="card-body">
+            <h5 class="mt-0">댓글 작성</h5>
+            <form>
+               <input type="hidden" value="${login.memberNo}" id="newUserNo">
+               <textarea class="form-control form-control-light mb-2"
+                  placeholder="Enter comment..." id="newReplyText" rows="3"></textarea>
+               <div class="text-right">
+                  <div class="btn-group mb-2"></div>
+                  <div class="btn-group mb-2 ml-2" style="float: right;">
+                     <a class="btn btn-outline-primary btn-rounded comentAddBtn">댓글
+                        등록</a>
+                  </div>
+               </div>
+               <div class="col-lg-12">
+                  <div class="inbox-widget">
+                     <h5 class="mt-0">댓글 목록</h5>
+                     <div class="card">
+                        <ul class="mb-0 preview-list" id="reply"></ul>
+                     </div>
+                     <div style="text-align: right;"></div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   </main>
 
-			$(".btn-modify").on("click", function() {
-				formObj.attr("action", "/info/modify");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
+   <script>
+      $(document).ready(function() {
+         var formObj = $("form[role='form']");
 
-			$(".btn-outline-danger").on("click", function() {
-				formObj.attr("action", "/info/remove");
-				formObj.attr("method", "post");
-				formObj.submit();
-			});
+         console.log(formObj);
 
-			$(".btn-outline-dark").on("click", function() {
-				formObj.attr("action", "/info/list");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
-		});
-	</script>
+         $(".btn-modify").on("click", function() {
+            formObj.attr("action", "/info/modify");
+            formObj.attr("method", "get");
+            formObj.submit();
+         });
 
-	<script>
-		var infoNo = $("#infoNo").val(); // 게시글 번호
-		var loginNo = $("#newUserNo").val(); // 댓글 작성자 번호
-		var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 번호
+         $(".btn-outline-danger").on("click", function() {
+            formObj.attr("action", "/info/remove");
+            formObj.attr("method", "post");
+            formObj.submit();
+         });
 
-		$.getJSON("/icomment/all/" + infoNo, function(data) {
-			var str = "";
-			
-			$(data).each(function() {
-				var strbutton = "";
-				str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
-					+ "<div class='card'>"
-					+ "<span style='font-weight: bold;'>"
-					+ this.memberName
-					+ "</span>"
+         $(".btn-outline-dark").on("click", function() {
+            formObj.attr("action", "/info/list");
+            formObj.attr("method", "get");
+            formObj.submit();
+         });
+      });
+   </script>
 
-				if (loginNo == this.memberNo || loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
-					strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply(" 
-								+ this.commentNo
-								+ ")'></i></div>";
-				}
+   <script>
+      var infoNo = $("#infoNo").val(); // 게시글 번호
+      var loginNo = $("#newUserNo").val(); // 댓글 작성자 번호
+      var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 번호
 
-				str += strbutton;
-				str += "<br>"
-				str += this.commentText
-				str += "<hr>"
-				str += "</div></li>";
-			});
+      $
+            .getJSON(
+                  "/icomment/all/" + infoNo,
+                  function(data) {
+                     var str = "";
 
-			var strtext = "";
-			if (str == "") {
-				strtext += "<p style='text-align: center; margin-top: 10px'>등록된 댓글이 없습니다.</p>";
-			}
+                     $(data)
+                           .each(
+                                 function() {
+                                    var strbutton = "";
+                                    str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
+                                          + "<div class='card'>"
+                                          + "<span style='font-weight: bold;'>"
+                                          + this.memberName
+                                          + "</span>"
 
-			str += strtext;
+                                    if (loginNo == this.memberNo
+                                          || loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
+                                       strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+                                             + this.commentNo
+                                             + ")'></i></div>";
+                                    }
 
-			$("#reply").html(str);
-		});
+                                    str += strbutton;
+                                    str += "<br>"
+                                    str += this.commentText
+                                    str += "<hr>"
+                                    str += "</div></li>";
+                                 });
 
-		//댓글 저장 버튼 클릭 이벤트 submit [성공]
-		$(".comentAddBtn").on("click", function() {
-			// 입력 form 선택자
-			var loginNo = $("#newUserNo");
-			var replyTextObj = $("#newReplyText");
+                     var strtext = "";
+                     if (str == "") {
+                        strtext += "<p style='text-align: center; margin-top: 10px'>등록된 댓글이 없습니다.</p>";
+                     }
 
-			var memberNo = loginNo.val();
-			var commentText = replyTextObj.val();
+                     str += strtext;
 
-			if (memberNo == "") { //로그인 정보 없을 경우
-				alert("로그인 후 댓글 기능을 사용할 수 있습니다.");
-				replyTextObj.val("");
-				return;
-			}
+                     $("#reply").html(str);
+                  });
 
-			// 댓글 입력처리 수행
-			$.ajax({
-				type : "post",
-				url : "/icomment/",
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : "text",
-				data : JSON.stringify({
-					infoNo : infoNo,
-					memberNo : memberNo,
-					commentText : commentText
-				}),
-				success : function(result) {
-					if (result === "SUCCESS") {
-						alert("댓글이 등록되었습니다.");
-						$("#newReplyText").val(""); //댓글 입력창 공백처리
-						getReplies(); //댓글 목록 호출
-					}
-				}
-			});
-		});
+      //댓글 저장 버튼 클릭 이벤트 submit [성공]
+      $(".comentAddBtn").on("click", function() {
+         // 입력 form 선택자
+         var loginNo = $("#newUserNo");
+         var replyTextObj = $("#newReplyText");
 
-		function deleteReply(commentNo) {
-			$.ajax({
-				type : 'delete',
-				url : '/icomment/' + commentNo,
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "DELETE"
-				},
-				dataType : 'text',
-				success : function(result) {
-					console.log("result: " + result);
+         var memberNo = loginNo.val();
+         var commentText = replyTextObj.val();
 
-					if (result == 'SUCCESS') {
-						alert("삭제 되었습니다.");
-						getReplies();
-					}
-				}
-			});
-		}
+         if (memberNo == "") { //로그인 정보 없을 경우
+            alert("로그인 후 댓글 기능을 사용할 수 있습니다.");
+            replyTextObj.val("");
+            return;
+         }
 
-		function getReplies() {
-			$
-					.getJSON(
-							"/icomment/all/" + infoNo,
-							function(data) {
-								var str = "";
+         // 댓글 입력처리 수행
+         $.ajax({
+            type : "post",
+            url : "/icomment/",
+            headers : {
+               "Content-Type" : "application/json",
+               "X-HTTP-Method-Override" : "POST"
+            },
+            dataType : "text",
+            data : JSON.stringify({
+               infoNo : infoNo,
+               memberNo : memberNo,
+               commentText : commentText
+            }),
+            success : function(result) {
+               if (result === "SUCCESS") {
+                  alert("댓글이 등록되었습니다.");
+                  $("#newReplyText").val(""); //댓글 입력창 공백처리
+                  getReplies(); //댓글 목록 호출
+               }
+            }
+         });
+      });
 
-								$(data)
-										.each(
-												function() {
-													var strbutton = "";
-													str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
-															+ "<div class='card'>"
-															+ "<span style='font-weight: bold;'>"
-															+ this.memberName
-															+ "</span>"
+      function deleteReply(commentNo) {
+         $.ajax({
+            type : 'delete',
+            url : '/icomment/' + commentNo,
+            headers : {
+               "Content-Type" : "application/json",
+               "X-HTTP-Method-Override" : "DELETE"
+            },
+            dataType : 'text',
+            success : function(result) {
+               console.log("result: " + result);
 
-													if (loginNo == this.memberNo
-															|| loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
-														strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply(" 
-															+ this.commentNo
-															+ ")'></i></div>";
-													}
+               if (result == 'SUCCESS') {
+                  alert("삭제 되었습니다.");
+                  getReplies();
+               }
+            }
+         });
+      }
 
-													str += strbutton;
-													str += "<br>"
-													str += this.commentText
-													str += "<hr>"
-													str += "</div></li>";
-												});
+      function getReplies() {
+         $
+               .getJSON(
+                     "/icomment/all/" + infoNo,
+                     function(data) {
+                        var str = "";
 
-								$("#reply").html(str);
-							});
-		}
-	</script>
+                        $(data)
+                              .each(
+                                    function() {
+                                       var strbutton = "";
+                                       str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
+                                             + "<div class='card'>"
+                                             + "<span style='font-weight: bold;'>"
+                                             + this.memberName
+                                             + "</span>"
 
-	<%@include file="../include/footer.jsp"%>
+                                       if (loginNo == this.memberNo
+                                             || loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
+                                          strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+                                                + this.commentNo
+                                                + ")'></i></div>";
+                                       }
+
+                                       str += strbutton;
+                                       str += "<br>"
+                                       str += this.commentText
+                                       str += "<hr>"
+                                       str += "</div></li>";
+                                    });
+
+                        $("#reply").html(str);
+                     });
+      }
+   </script>
+
+   <%@include file="../include/footer.jsp"%>

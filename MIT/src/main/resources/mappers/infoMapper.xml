@@ -17,18 +17,18 @@
 
 	<select id="read" resultType="com.mit.domain.InfoVO">
 		SELECT
-		I.INFO_NO, I.INFO_TITLE,
+		I.INFO_NO, I.INFO_CLASS, I.INFO_TITLE,
 		I.INFO_CONTENT, I.INFO_DATE, I.INFO_VIEW, M.MEMBER_NAME, M.MEMBER_NO
 		FROM
 		INFO I, MEMBER M WHERE M.MEMBER_NO = I.MEMBER_NO
-		AND INFO_NO =
-		#{infoNo}
+		AND INFO_NO = #{infoNo}
 	</select>
 
 	<update id="update">
-		UPDATE INFO
-		SET INFO_TITLE = #{infoTitle},
-		INFO_CONTENT = #{infoContent}
+		UPDATE INFO SET 
+		INFO_TITLE = #{infoTitle},
+		INFO_CONTENT = #{infoContent},
+		INFO_CLASS = #{infoClass}
 		WHERE INFO_NO = #{infoNo}
 	</update>
 
@@ -52,7 +52,7 @@
 		]]>
 		<![CDATA[
 			ORDER BY I.INFO_NO ASC))
-			WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd})
+			WHERE RNUM >= 1
 			ORDER BY INFO_NO DESC, INFO_DATE DESC
 		]]>
 	</select>

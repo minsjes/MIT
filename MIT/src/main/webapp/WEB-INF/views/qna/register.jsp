@@ -108,8 +108,15 @@
 	<script>
 		// 등록 유효성 검사 
 		function validate() {
+			var qnaClass = $("#qnaClass").val();
 			var qnaTitle = $("#qnaTitle").val();
 			var qnaContent = CKEDITOR.instances.qnaContent.getData();
+			
+			if (qnaClass == "") {
+				alert("유형을 선택해주세요.");
+				document.getElementById("qnaClass").focus();
+				return false;
+			}
 
 			if (qnaTitle == "") {
 				alert("제목을 입력해주세요 .");

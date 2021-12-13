@@ -67,4 +67,11 @@ public class FreeDAOImpl implements FreeDAO {
 	public List<FreeFileVO> fileList(int freeNo) throws Exception {
 		return session.selectList(namespace+".fileList", freeNo);
 	}
+
+
+	@Override
+	public void updateViewCount(int freeNo) throws Exception {
+		session.update(namespace + ".updateViewCount", freeNo);
+		
+	}
 }

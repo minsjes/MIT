@@ -16,6 +16,8 @@ public interface FreeDAO {
 	   // 4. Free -  궘 젣
 	   public void delete(int freeNo) throws Exception;
 	   // 5. Free  궡 뿭 諛  寃  깋 由ъ뒪 듃
+		public void updateViewCount(int freeNo) throws Exception;
+	   
 	   public List<FreeVO> listSearch(SearchCriteria cri) throws Exception;
 	   
 	   public int listSearchCount(SearchCriteria cri) throws Exception;

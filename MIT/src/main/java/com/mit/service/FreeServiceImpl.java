@@ -48,7 +48,9 @@ public class FreeServiceImpl implements FreeService {
 
 	@Override
 	public FreeVO read(int freeNo) throws Exception {
+		dao.updateViewCount(freeNo);
 		return dao.read(freeNo);
+		
 	}
 
 	@Override
@@ -110,5 +112,6 @@ public class FreeServiceImpl implements FreeService {
 	public List<FreeFileVO> fileList(int freeNo) throws Exception {
 		return dao.fileList(freeNo);
 	}
+
 
 }

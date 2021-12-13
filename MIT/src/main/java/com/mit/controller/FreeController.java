@@ -83,7 +83,8 @@ public class FreeController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyPOST(FreeVO vo, RedirectAttributes rttr)
 			throws Exception {
-
+		 
+	System.out.println(vo);
 		service.update(vo);
 		
 		rttr.addFlashAttribute("msg", "MODIFY");
@@ -104,6 +105,7 @@ public class FreeController {
 
 	public String registerPOST(FreeVO vo, RedirectAttributes rttr) throws Exception {
 
+	 System.out.println(vo);
 		service.create(vo);
 		rttr.addFlashAttribute("msg", "REGISTER");
 

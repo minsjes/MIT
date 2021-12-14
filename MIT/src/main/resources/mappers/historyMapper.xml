@@ -9,20 +9,23 @@
 			SELECT SEQ_HISTORY.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO HISTORY (HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO)
-		VALUES (#{historyNo}, #{historyContent},  SYSDATE, #{memberNo})
+		VALUES (#{historyNo}, #{historyContent},  #{historyDate}, #{memberNo})
 	</insert>
 
+	<!-- 2) 동아리 소개 상세화면 -->
 	<select id="read" resultType="com.mit.domain.HistoryVO">
 		SELECT
-		HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO
+			HISTORY_NO, HISTORY_CONTENT, HISTORY_DATE, MEMBER_NO
 		FROM HISTORY
 		WHERE HISTORY_NO = #{historyNo}
 	</select>
 
+	<!-- 3) 동아리 소개 수정 -->
 	<update id="update">
 		UPDATE HISTORY
 		SET
-		HISTORY_CONTENT = #{historyContent}
+		HISTORY_CONTENT = #{historyContent},
+		HISTORY_DATE = #{historyDate}
 		WHERE HISTORY_NO = #{historyNo}
 	</update>
 

@@ -22,12 +22,18 @@
 				</div>
 
 				<div class="container-fluid px-4">
-					<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>연표</h1>
+					<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>
+					연표
 					<c:if test="${login.memberNo == 12345678}">
-						<button class="btn btn-outline-dark btn-sm" id="newBtn"
-							style="float: right; padding: 0 auto 0 auto;">동아리 소개 작성</button>
+						<button class="btn btn-outline-dark btn-sm" id="newBtn" style="float: right; padding: 0 auto 0 auto;">
+							동아리 소개 작성
+						</button>
 					</c:if>
+					</h1>
+
 					<div style="margin:auto;">
+					
+<%-- 					
 					<table>
 					<colgroup>
 					  <col width="20%" />
@@ -35,6 +41,7 @@
 					  <col width="15%" />
 					  <col width="15%" />
 					</colgroup>
+					
 					<c:forEach items="${list}" var="historyVO" varStatus="status">
 						<tr>
 							<td><a href='/history/read?historyNo=${historyVO.historyNo}'>${historyVO.historyContent}</a></td>
@@ -45,6 +52,31 @@
 						</tr>
 					</c:forEach>
 				 </table>
+ --%>				 
+ 				<form>
+					<table>
+						<thead>
+							<tr>
+								<th width="1200">소개</th>
+								<th>소개 일자</th>
+								<th></th>
+
+							</tr>
+						</thead>
+						
+						<tbody>
+							<c:forEach items="${list}" var="historyVO" varStatus="status">
+								<tr>
+									<td><a href='/history/read?historyNo=${historyVO.historyNo}'>${historyVO.historyContent}</a></td>
+									<td>${historyVO.historyDate}</td>
+									<td>
+									</td>
+									<!-- <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+											value="${historyVO.historyDate}" /></td> -->
+								</tr>
+							</c:forEach>
+					</table>
+				 </form>
 				   </div>
 				</div>
 			</div>
@@ -74,6 +106,25 @@
 	if (result == 'CANTDELETE') {
 		alert("로그인 정보가 일치하지 않아 삭제 불가능합니다.");
 	}
+</script>
+
+<script>
+	$(document).ready(function() {
+		var formObj = $("form[role='form']");
+
+		console.log(formObj);
+
+		$(".btn-modify").on("click", function() {
+			formObj.attr("action", "/history/modify");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
+
+		$(".btn-outline-danger").on("click", function() {
+			formObj.attr("action", "/history/remove");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});
 </script>
 
 <script>

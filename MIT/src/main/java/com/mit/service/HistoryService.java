@@ -10,18 +10,20 @@ public interface HistoryService {
 	
 	public void create(HistoryVO vo) throws Exception;
 
+	// 1) 동아리 소개 목록
+	public List<HistoryVO> listSearch(SearchCriteria cri) throws Exception;
+	// 1) 동아리 소개 목록
+	public int listSearchCount(SearchCriteria cri) throws Exception;
+	
+	// 2) 동아리 소개 상세화면
 	public HistoryVO read(int historyNo) throws Exception;
 
+	// 3) 동아리 소개 수정
 	public void update(HistoryVO vo) throws Exception;
 
 	public void delete(int historyNo) throws Exception;
 
-	// ����¡ + �˻��� ó���Ͽ� ����Ʈ �������� ���
-	public List<HistoryVO> listSearch(SearchCriteria cri) throws Exception;
 
-	// ����¡ + �˻��� ���� ��ü �Խñ� �� �������� ���
-	public int listSearchCount(SearchCriteria cri) throws Exception;
-	
 
 
 

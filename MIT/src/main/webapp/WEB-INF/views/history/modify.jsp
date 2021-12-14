@@ -26,43 +26,43 @@
 	max-height: 50px;
 }
 </style>
-<form role="form" action="modify" method="post" name="frm">
+
 <div id="layoutSidenav_content">
 	<main>
-		<div class="container-fluid px-4">
-			<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>동아리
-				소개 수정하기</h2>
+	<div class="container-fluid px-4">
+		<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>동아리
+			소개 수정하기</h2>
 			
-				<input type='hidden' id="historyNo" name='historyNo' value="${historyVO.historyNo}">
-				 <input type='hidden' id="memberNo" name='memberNo' value="${historyVO.memberNo}">
+		<form role="form" action="modify" method="post" name="frm">
+			<input type='hidden' id="historyNo" name='historyNo'
+				value="${historyVO.historyNo}"> <input type='hidden'
+				id="memberNo" name='memberNo' value="${historyVO.memberNo}">
+	</div>
+	<div class="col" style="padding-left: 0;">
+		<div class="input-group">
+			<div class="input-group-text">작성일</div>
+			<input type="text" class="form-control" name="historyDate"
+				value="${historyVO.historyDate}" />
 		</div>
-		<div class="col" style="padding-left: 0;">
-			<div class="input-group">
-				<div class="input-group-text">작성일</div>
-				<input type="text" class="form-control"
-					value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${historyVO.historyDate}"/>"
-					readonly="readonly">
-			</div>
-		</div>
+	</div>
 
-<div class="form-group">
-	<div class="input-group-text" style="padding-left: 20px;">내용</div>
-	<textarea class="form-control" name="historyContent" rows="15">${historyVO.historyContent}</textarea>
-</div>
-<div style="text-align: right; margin: 17px 0 17px 0;">
-	<button type="submit" class="btn btn-outline-primary">수정</button>
-	<button type="button" class="btn btn-outline-dark"
-		onclick="location.href='/history/list'">목록</button>
-</div>
-</main>
-</div>
-</form>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resources/upload.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script id="template" type="text/x-handlebars-template">
+	<div class="form-group">
+		<div class="input-group-text" style="padding-left: 20px;">내용</div>
+		<textarea class="form-control" name="historyContent" rows="15">${historyVO.historyContent}</textarea>
+	</div>
+	<div style="text-align: right; margin: 17px 0 17px 0;">
+		<button type="submit" class="btn btn-outline-primary">수정</button>
+		<button type="button" class="btn btn-outline-dark"
+			onclick="location.href='/history/list'">목록</button>
+	</div>
+	</main>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/resources/upload.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script id="template" type="text/x-handlebars-template">
 <li class="dropzone-previews mt-3">
 <div class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
 <div class="p-2">
@@ -82,4 +82,4 @@
 </li>
 </script>
 
-<%@include file="../include/footer.jsp"%>
+	<%@include file="../include/footer.jsp"%>

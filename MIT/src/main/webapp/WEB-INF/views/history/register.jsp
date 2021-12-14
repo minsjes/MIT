@@ -21,7 +21,9 @@
 				
 				<div class="input-group">
 					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
-					<input type="text" class="form-control" name="memberName" value="${login.memberName}" readonly>
+						<input type="text" class="form-control" name="memberName" value="${login.memberName}" readonly>
+					<span class="input-group-text" id="inputGroup-sizing-default">공지일자</span>
+						<input type="text" class="form-control" name="historyDate">
 				</div>
 				<div class="form-group">
 					<div class="input-group-text">내용</div>

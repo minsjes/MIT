@@ -24,40 +24,46 @@ import com.mit.service.HistoryService;
 public class HistoryController {
 
 	@Inject
-	HistoryService service;
+	HistoryService historyService;
 
 	private static final Logger logger = LoggerFactory.getLogger(HistoryController.class);
 
+	// 1) 동아리 소개 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	public void listGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-
-		pageMaker.setTotalCount(service.listSearchCount(cri));
-
+		pageMaker.setTotalCount(historyService.listSearchCount(cri));
 		model.addAttribute("pageMaker", pageMaker);
 
-		model.addAttribute("list", service.listSearch(cri));
+		model.addAttribute("list", historyService.listSearch(cri));
+		
 	}
 
-	@RequestMapping(value = "read", method = RequestMethod.GET)
-	public void read(@RequestParam("historyNo") int HistoryNo, Model model) throws Exception {
+	// 2) 동아리 소개 상세
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void readGET(@RequestParam("historyNo") int historyNo, Model model) throws Exception {
 
-		model.addAttribute(service.read(HistoryNo));
+		logger.info("동아리 소개 readGET 실행");
+		
+		model.addAttribute("historyVO", historyService.read(historyNo));
+		
+		logger.info("동아리 소개 readGET 실행 완료");
 
 	}
 
+	// 3) 동아리 소개 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyGET(int historyNo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
 
 		MemberVO member = (MemberVO) session.getAttribute("login");
 
-		HistoryVO History = service.read(historyNo);
+		HistoryVO history = historyService.read(historyNo);
 
-		if (member.getMemberNo() == History.getMemberNo()) {
+		if (member.getMemberNo() == history.getMemberNo()) {
 
-			model.addAttribute(History);
+			model.addAttribute(history);
 
 			return "/history/modify";
 		} else {
@@ -73,7 +79,7 @@ public class HistoryController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyPOST(HistoryVO vo, RedirectAttributes rttr) throws Exception {
 
-		service.update(vo);
+		historyService.update(vo);
 
 		rttr.addFlashAttribute("msg", "MODIFY");
 
@@ -91,7 +97,7 @@ public class HistoryController {
 
 	public String registerPOST(HistoryVO vo, RedirectAttributes rttr) throws Exception {
 
-		service.create(vo);
+		historyService.create(vo);
 		rttr.addFlashAttribute("msg", "REGISTER");
 
 		return "redirect:/history/list";
@@ -103,11 +109,11 @@ public class HistoryController {
 
 		MemberVO member = (MemberVO) session.getAttribute("login");
 
-		HistoryVO history = service.read(historyNo);
+		HistoryVO history = historyService.read(historyNo);
 
 		if (member.getMemberNo() == history.getMemberNo()) {
 
-			service.delete(historyNo);
+			historyService.delete(historyNo);
 
 			rttr.addFlashAttribute("msg", "REMOVE");
 

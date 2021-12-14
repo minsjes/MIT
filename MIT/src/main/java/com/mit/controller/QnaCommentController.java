@@ -18,7 +18,7 @@ import com.mit.domain.QnaCommentVO;
 import com.mit.service.QnaCommentService;
 
 @RestController
-@RequestMapping("/qnacomment")
+@RequestMapping("/qnaComment")
 public class QnaCommentController {
 	
 private static final Logger logger = LoggerFactory.getLogger(QnaCommentController.class);

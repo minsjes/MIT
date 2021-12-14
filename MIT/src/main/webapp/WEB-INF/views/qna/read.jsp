@@ -247,8 +247,7 @@
 		var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 번호
 
 		$
-				.getJSON(
-						"/qcomment/all/" + qnaNo,
+				.getJSON("/qnaComment/all/" + qnaNo,
 						function(data) {
 							var str = "";
 							$(data)
@@ -304,7 +303,7 @@
 			// 댓글 입력처리 수행
 			$.ajax({
 				type : "post",
-				url : "/qcomment/",
+				url : "/qnaComment/",
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST"
@@ -328,7 +327,7 @@
 		function deleteReply(commentNo) {
 			$.ajax({
 				type : 'delete',
-				url : '/qcomment/' + commentNo,
+				url : '/qnaComment/' + commentNo,
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "DELETE"
@@ -348,7 +347,7 @@
 		function getReplies() {
 			$
 					.getJSON(
-							"/qcomment/all/" + qnaNo,
+							"/qanComment/all/" + qnaNo,
 							function(data) {
 								var str = "";
 

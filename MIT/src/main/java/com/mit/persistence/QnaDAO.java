@@ -16,9 +16,7 @@ public interface QnaDAO {
 	
 	public void delete(int qnaNo) throws Exception;
 	
-	public List<QnaVO> listSearch() throws Exception;
-	
-	public int listSearchCount() throws Exception;
+	public List<QnaVO> list() throws Exception;
 	
 	public void updateViewCount(int qnaNo) throws Exception;
 	

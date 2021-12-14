@@ -44,14 +44,10 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaVO> listSearch() throws Exception {
-		return session.selectList(namespace + ".listSearch");
+	public List<QnaVO> list() throws Exception {
+		return session.selectList(namespace + ".list");
 	}
 
-	@Override
-	public int listSearchCount() throws Exception {
-		return session.selectOne(namespace + ".listSearchCount");
-	}	
 	
 	@Override
 	public void insertFile(QnaFileVO qVo) throws Exception {

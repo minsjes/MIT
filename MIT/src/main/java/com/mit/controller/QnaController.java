@@ -30,7 +30,7 @@ public class QnaController {
 
 		logger.info("qna list...");
 
-		model.addAttribute("list", service.listSearch());
+		model.addAttribute("list", service.list());
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
@@ -55,13 +55,13 @@ public class QnaController {
 		QnaVO qna = service.read(qnaNo);
 
 		if (member.getMemberNo() == qna.getMemberNo()) {
-			// 작성자와 로그인 정보 같음
+			
 			model.addAttribute(qna);
 			model.addAttribute("qnaFileVO", service.fileList(qnaNo));
-			// 수정 페이지로 이동
+			
 			return "/qna/modify";
 		} else {
-			// 로그인 정보와 게시글 작성자가 일치 하지 않은 경우 -> 강제이동
+			
 			rttr.addAttribute("qnaNo", qnaNo);
 
 			rttr.addFlashAttribute("msg", "CANNOT");
@@ -75,7 +75,7 @@ public class QnaController {
 	public String modifyPOST(QnaVO vo, RedirectAttributes rttr)
 			throws Exception {
 
-		service.update(vo);
+		service.modify(vo);
 
 		rttr.addFlashAttribute("msg", "MODIFY");
 
@@ -94,8 +94,9 @@ public class QnaController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 
 	public String registerPOST(QnaVO vo, RedirectAttributes rttr) throws Exception {
-
-		service.create(vo);
+		
+		System.out.println(vo);
+		service.register(vo);
 		rttr.addFlashAttribute("msg", "REGISTER");
 
 		return "redirect:/qna/list";
@@ -105,24 +106,23 @@ public class QnaController {
 	public String remove(@RequestParam("qnaNo") int qnaNo, HttpSession session,
 			RedirectAttributes rttr) throws Exception {
 		
-		// 1) 로그인 정보 가져오기
+		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
-		// 2) 게시글의 작성자 id와 로그인 정보 id를 비교
-		// 2-1) 게시글 정보 가져오기
+		
 		QnaVO qna = service.read(qnaNo);
 		
-		// 2-2) 게시글 작성자 id와 로그인 정보 id 비교
+		
 		if(member.getMemberNo() == qna.getMemberNo()) {
-			//작성자와 로그인 정보 같음-> 게시글 삭제
-			service.delete(qnaNo);
+			
+			service.remove(qnaNo);
 
 			rttr.addFlashAttribute("msg", "REMOVE");
 			
 			return "redirect:/qna/list";
 			
 		} else {
-			// 로그인 정보와 게시글 작성자가 일치 하지 않은 경우 -> 삭제 하지 않고 강제이동
+			
 			rttr.addAttribute("qnaNo", qnaNo);
 			rttr.addFlashAttribute("msg", "CANTDELETE");
 			

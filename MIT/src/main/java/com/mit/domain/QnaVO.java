@@ -10,15 +10,18 @@ public class QnaVO {
 	private String qnaTitle;
 	private String qnaContent;
 	private Date qnaDate;
-	private int memberNo;
-	private String memberName;
-	private String[] files;
-	private ArrayList<QnaFileVO> filList;
 	private int qnaView;
 	private String qnaClass;
 	private String hiddenStatus;
 	private int commentNo;
+	
 	private int rnum;
+	
+	private int memberNo;
+	private String memberName;
+	
+	private String[] files;
+	private ArrayList<QnaFileVO> filList;
 	
 	public int getQnaNo() {
 		return qnaNo;

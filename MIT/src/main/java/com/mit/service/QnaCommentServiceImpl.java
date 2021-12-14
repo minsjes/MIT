@@ -16,8 +16,8 @@ public class QnaCommentServiceImpl implements QnaCommentService{
 	private QnaCommentDAO dao;
 	
 	@Override
-	public void register(QnaCommentVO cvo) throws Exception {
-		dao.create(cvo);
+	public void register(QnaCommentVO qcvo) throws Exception {
+		dao.create(qcvo);
 	}
 
 	@Override

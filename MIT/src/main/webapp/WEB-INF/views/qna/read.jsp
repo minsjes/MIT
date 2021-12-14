@@ -186,7 +186,7 @@
 			</div>
 		</form>
 		
-            <div class="card mb-5">
+           <div class="card mb-5">
 				<div class="card-body">
 					<form>
 						<h5 class="mt-0">댓글 작성</h5>
@@ -247,7 +247,8 @@
 		var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 번호
 
 		$
-				.getJSON("/qnaComment/all/" + qnaNo,
+				.getJSON(
+						"/qcomment/all/" + qnaNo,
 						function(data) {
 							var str = "";
 							$(data)
@@ -262,9 +263,9 @@
 
 												if (loginNo == this.memberNo
 														|| loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
-													strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply(" 
-														+ this.commentNo
-														+ ")'></i></div>";
+													strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+															+ this.commentNo
+															+ ")'></i></div>";
 												}
 
 												str += strbutton;
@@ -282,7 +283,6 @@
 							str += strtext;
 
 							$("#reply").html(str);
-
 						});
 
 		//댓글 저장 버튼 클릭 이벤트 submit [성공]
@@ -303,7 +303,7 @@
 			// 댓글 입력처리 수행
 			$.ajax({
 				type : "post",
-				url : "/qnaComment/",
+				url : "/qcomment/",
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST"
@@ -327,7 +327,7 @@
 		function deleteReply(commentNo) {
 			$.ajax({
 				type : 'delete',
-				url : '/qnaComment/' + commentNo,
+				url : '/qcomment/' + commentNo,
 				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "DELETE"
@@ -347,7 +347,7 @@
 		function getReplies() {
 			$
 					.getJSON(
-							"/qanComment/all/" + qnaNo,
+							"/qcomment/all/" + qnaNo,
 							function(data) {
 								var str = "";
 
@@ -355,6 +355,7 @@
 										.each(
 												function() {
 													var strbutton = "";
+
 													str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
 															+ "<div class='card'>"
 															+ "<span style='font-weight: bold;'>"
@@ -363,9 +364,9 @@
 
 													if (loginNo == this.memberNo
 															|| loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
-														strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply(" 
-															+ this.commentNo
-															+ ")'></i></div>";
+														strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+																+ this.commentNo
+																+ ")'></i></div>";
 													}
 
 													str += strbutton;

@@ -10,7 +10,7 @@ public interface QnaCommentDAO {
 		
 		public void delete(int commentNo) throws Exception;
 		
-		public void deleteAll(int qnaNo) throws Exception;
+		public void deleteAll(int commentNo) throws Exception;
 		
 		public List<QnaCommentVO> list(int qnaNo) throws Exception;
 	}

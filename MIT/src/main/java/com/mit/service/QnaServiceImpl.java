@@ -43,22 +43,24 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void modify(QnaVO vo) throws Exception {
-		// 2)°Ô½Ã±Û ¼öÁ¤
+		
+		vo.setQnaContent(vo.getQnaContent().replace("\\r\\n", "<br>"));
+		// 2)ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 		dao.update(vo);
 
-		// 3)Ã·ºÎÆÄÀÏ »èÁ¦
+		// 3)Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		dao.deleteFile(vo.getQnaNo());
 
-		// 4)Ã·ºÎÆÄÀÏ Á¸Àç ¿©ºÎ IF¹®
+		// 4)Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ IFï¿½ï¿½
 		if (vo.getFiles() != null) {
-			// 5)Ã·ºÎÆÄÀÏ ÀúÀå FOR¹®
+			// 5)Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ FORï¿½ï¿½
 			for (int i=0; i<vo.getFiles().length; i++) {
-				// 5-1)Ã·ºÎÆÄÀÏ ÀúÀå
+				// 5-1)Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				QnaFileVO qVo = new QnaFileVO();
 				qVo.setQnaNo(vo.getQnaNo());
 				qVo.setFileName(vo.getFiles()[i]);
 				
-				// 5-2)Ã·ºÎÆÄÀÏ ÀúÀå
+				// 5-2)Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				dao.insertFile(qVo);
 			}
 		}
@@ -66,13 +68,13 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void remove(int qnaNo) throws Exception {
-		// 1)Ã·ºÎ ÆÄÀÏ »èÁ¦
+		// 1)Ã·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		dao.deleteFile(qnaNo);
 		
-		// 2) ´ñ±Û »èÁ¦
+		// 2) ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		commDao.deleteAll(qnaNo);
 		
-		// 3) °Ô½Ã±Û »èÁ¦
+		// 3) ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 		dao.delete(qnaNo);
 	}
 

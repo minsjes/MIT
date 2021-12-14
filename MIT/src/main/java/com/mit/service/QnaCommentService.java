@@ -7,7 +7,7 @@ import com.mit.domain.QnaCommentVO;
 public interface QnaCommentService {
 	
 	
-	public void register(QnaCommentVO cvo) throws Exception;
+	public void register(QnaCommentVO qcvo) throws Exception;
 	
 	public void remove(int commentNo) throws Exception;
 	

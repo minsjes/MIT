@@ -30,8 +30,8 @@ public class QnaCommentDAOImpl implements QnaCommentDAO{
 	}
 
 	@Override
-	public void deleteAll(int qnaNo) throws Exception {
-		session.delete(namespace + ".deleteAll", qnaNo);
+	public void deleteAll(int commentNo) throws Exception {
+		session.delete(namespace + ".deleteAll", commentNo);
 		
 	}
 

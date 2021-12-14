@@ -18,35 +18,36 @@ import com.mit.domain.QnaCommentVO;
 import com.mit.service.QnaCommentService;
 
 @RestController
-@RequestMapping("/qnaComment")
+@RequestMapping("/qcomment")
 public class QnaCommentController {
-	
-private static final Logger logger = LoggerFactory.getLogger(QnaCommentController.class);
-	
 	@Inject
 	private QnaCommentService service;
 	
+private static final Logger logger = LoggerFactory.getLogger(QnaCommentController.class);
+	
+//1.ï¿½ë™Žæ¹²ï¿½ ï¿½ê¹®ï¿½ê½¦
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<String> register(@RequestBody QnaCommentVO cvo) {
+	public ResponseEntity<String> register(@RequestBody QnaCommentVO qcvo) {
 		ResponseEntity<String> entity = null;
-		
+
 		try {
-			service.register(cvo);
+			System.out.println(qcvo);
+			service.register(qcvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			
-			logger.info("reply get...");
+
+			logger.info("reply get.,...........");
 		}
-		
 		return entity;
 	}
-	
-	@RequestMapping(value = "/{commentNo}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("commentNo") int commentNo) { // Á¶±Ý ´Ù¸£°Ô ÇÔ
+
+	// 2.ï¿½ë™Žæ¹²ï¿½ ï¿½ê¶˜ï¿½ì £
+	@RequestMapping(value = "/{qnaCommentNo}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> remove(@PathVariable("qnaCommentNo") int commentNo) {
+
 		ResponseEntity<String> entity = null;
-		
 		try {
 			service.remove(commentNo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -54,21 +55,19 @@ private static final Logger logger = LoggerFactory.getLogger(QnaCommentControlle
 			e.printStackTrace();
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
 		return entity;
 	}
-	
-	@RequestMapping(value = "/all/{qnaNo}", method = {RequestMethod.GET, RequestMethod.POST})
+
+	// 3.ï¿½ë™Žæ¹²ï¿½ ï¿½ìŸ¾ï§£ï¿½ è¹‚ë‹¿ë¦°
+	@RequestMapping(value = "/all/{qnaNo}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<List<QnaCommentVO>> list(@PathVariable("qnaNo") int qnaNo) {
 		ResponseEntity<List<QnaCommentVO>> entity = null;
-		
 		try {
 			entity = new ResponseEntity<>(service.list(qnaNo), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
 		return entity;
 	}
 }

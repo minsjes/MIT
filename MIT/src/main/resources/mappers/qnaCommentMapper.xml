@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="create">
 
-		INSERT INTO QNA_COMMENT(COMMENT_NO, QNA_NO, COMMENT_TEXT, MEMBER_NO,)
+		INSERT INTO QNA_COMMENT(COMMENT_NO, QNA_NO, COMMENT_TEXT, MEMBER_NO)
 		VALUES (SEQ_QNA_COMMENT.NEXTVAL, #{qnaNo}, #{commentText}, #{memberNo})
 
 

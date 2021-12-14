@@ -14,12 +14,9 @@ public class QnaVO {
 	private String qnaClass;
 	private String hiddenStatus;
 	private int commentNo;
-	
 	private int rnum;
-	
 	private int memberNo;
 	private String memberName;
-	
 	private String[] files;
 	private ArrayList<QnaFileVO> filList;
 	

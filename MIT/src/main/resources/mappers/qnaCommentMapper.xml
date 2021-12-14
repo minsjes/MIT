@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM QNA_COMMENT C, QNA Q, MEMBER M
 		WHERE M.MEMBER_NO = C.MEMBER_NO
 		AND Q.QNA_NO = C.QNA_NO
-		AND C.QNA_NO = #{QNANo}
+		AND C.QNA_NO = #{qnaNo}
 		ORDER BY C.COMMENT_NO DESC
 
 	</select>
@@ -21,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="create">
 
-		INSERT INTO QNA_COMMENT(COMMENT_NO, QNA_NO, COMMENT_TEXT, MEMBER_NO)
-		VALUES (SEQ_QNA_COMMENT.NEXTVAL, #{QNANo}, #{commentText}, #{memberNo})
+		INSERT INTO QNA_COMMENT(COMMENT_NO, QNA_NO, COMMENT_TEXT, MEMBER_NO,)
+		VALUES (SEQ_QNA_COMMENT.NEXTVAL, #{qnaNo}, #{commentText}, #{memberNo})
 
 
 	</insert>
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<delete id="deleteAll">
 		DELETE FROM QNA_COMMENT
-		WHERE QNA_NO = #{QNANo}
+		WHERE QNA_NO = #{qnaNo}
 	</delete>
 
 </mapper>

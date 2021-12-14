@@ -10,12 +10,8 @@ public class QnaCommentVO {
 	private String memberName;
 	private String commentText;
 	private Date commentDate;
-	
 	public int getCommentNo() {
 		return commentNo;
-	}
-	public void setCommentNo(int commentNo) {
-		this.commentNo = commentNo;
 	}
 	public int getQnaNo() {
 		return qnaNo;
@@ -47,11 +43,16 @@ public class QnaCommentVO {
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
-	
+	public void setCommentNo(int commentNo) {
+		this.commentNo = commentNo;
+	}
 	@Override
 	public String toString() {
 		return "QnaCommentVO [commentNo=" + commentNo + ", qnaNo=" + qnaNo + ", memberNo=" + memberNo + ", memberName="
 				+ memberName + ", commentText=" + commentText + ", commentDate=" + commentDate + "]";
 	}
+	
+	
+	
 }
 	

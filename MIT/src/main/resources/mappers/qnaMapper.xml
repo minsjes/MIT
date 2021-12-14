@@ -17,7 +17,7 @@
 		SELECT Q.QNA_NO, Q.QNA_CLASS, Q.QNA_TITLE, Q.QNA_CONTENT, Q.HIDDEN_STATUS, TO_CHAR(Q.QNA_DATE, 'YYYY-MM-DD HH24:MI:SS') AS QNA_DATE, Q.QNA_VIEW, M.MEMBER_NO, M.MEMBER_NAME
 		FROM QNA Q, MEMBER M
 		WHERE M.MEMBER_NO = Q.MEMBER_NO
-		AND QNA_NO = #{QNANo}
+		AND QNA_NO = #{qnaNo}
 	</select>
 
 	<update id="update">
@@ -56,7 +56,7 @@
 		
 	<insert id="insertFile">
 		INSERT INTO QNA_FILE(FILE_NO, FILE_NAME, QNA_NO)
-		VALUES(SEQ_QNA_FILE.NEXTVAL, #{fileName}, #{QNANo})
+		VALUES(SEQ_QNA_FILE.NEXTVAL, #{fileName}, #{qnaNo})
 	</insert>
 
 	<insert id="deleteFile">

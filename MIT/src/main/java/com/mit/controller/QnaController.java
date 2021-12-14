@@ -17,7 +17,7 @@ import com.mit.domain.QnaVO;
 import com.mit.service.QnaService;
 
 @Controller
-@RequestMapping("/qna/*")
+@RequestMapping("/qna")
 public class QnaController {
 
 	@Inject
@@ -26,16 +26,15 @@ public class QnaController {
 	private static final Logger logger = LoggerFactory.getLogger(QnaController.class);
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void listPage(Model model) throws Exception {
+	public void list(Model model) throws Exception {
 
-		logger.info("qna list...");
+		logger.info("list...");
 
 		model.addAttribute("list", service.list());
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("qnaNo") int qnaNo, Model model)
-			throws Exception {
+	public void read(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
 		logger.info("qna read........");
 
 		model.addAttribute(service.read(qnaNo));
@@ -45,42 +44,29 @@ public class QnaController {
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String modifyGET(int qnaNo, HttpSession session,
-			 Model model, RedirectAttributes rttr) throws Exception {
-		
-		logger.info("notice modify...");
-
+	public String modifyGET(@RequestParam("qnaNo") int qnaNo, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("login");
-
 		QnaVO qna = service.read(qnaNo);
 
 		if (member.getMemberNo() == qna.getMemberNo()) {
-			
 			model.addAttribute(qna);
 			model.addAttribute("qnaFileVO", service.fileList(qnaNo));
-			
+
 			return "/qna/modify";
 		} else {
-			
 			rttr.addAttribute("qnaNo", qnaNo);
-
 			rttr.addFlashAttribute("msg", "CANNOT");
 
 			return "redirect:/qna/list";
 		}
-
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(QnaVO vo, RedirectAttributes rttr)
-			throws Exception {
-
+	public String modifyPOST(QnaVO vo, RedirectAttributes rttr) throws Exception {
 		service.modify(vo);
-
 		rttr.addFlashAttribute("msg", "MODIFY");
 
 		return "redirect:/qna/list";
-
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -92,10 +78,9 @@ public class QnaController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-
 	public String registerPOST(QnaVO vo, RedirectAttributes rttr) throws Exception {
+		logger.info("register post...");
 		
-		System.out.println(vo);
 		service.register(vo);
 		rttr.addFlashAttribute("msg", "REGISTER");
 

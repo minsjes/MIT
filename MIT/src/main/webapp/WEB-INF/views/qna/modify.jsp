@@ -32,20 +32,19 @@
 	<div class="container-fluid px-4">
 		<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>질문
 			게시판 게시물 수정하기</h2>
-
-		<form role="form" action="modify" method="post" name="frm">
-			<input type='hidden' id="qnaNo" name='qnaNo' value="${qnaVO.qnaNo}">
-			<input type='hidden' id="memberNo" name='memberNo'
-				value="${qnaVO.memberNo}">
-				<div class="input-group">
-				<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
-				<label class="form-control" >${login.memberName}</label>
+			
+				<form role="form" method="post" name="frm">
+				<input type="hidden" value="${login.memberNo}" id="inlineFormInputGroupUsername" name="memberNo">
+					<input type="hidden" name="hiddenStatus" id="hiddenStatus">
 					
-					<div class="form-control"  align="right"> <input 
-					type="checkbox" name="hiddenStatus" value="1" /> <label 
-					for="hiddenStatus" style="font-size: 17px;">익명</label>
+				<div class="input-group">
+					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
+					<label class="form-control">${login.memberName}</label>
+					<div class="form-control" align="right">
+						<input type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus"  value="1" /> 
+						<label for="ckhiddenStatus" style="font-size: 17px;">익명</label>
 					</div>
-			</div>
+				</div>
 			<div class="row g-0">
 					<div class="col-lg-2">
 						<div class="input-group">
@@ -63,9 +62,9 @@
 						<div class="input-group">
 							<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>
 							<input type="text" class="form-control" id="qnaTitle" name="qnaTitle" placeholder="Enter Title...">
-			</div>
-			</div>
-			</div>
+		            	</div>
+			       </div>
+		  	</div>
 
 			<div class="form-group">
 				<div class="input-group-text">내용</div>
@@ -195,6 +194,8 @@
 		var qnaTitle = $("#qnaTitle").val();
 		var qnaContent = CKEDITOR.instances.qnaContent.getData();
 		
+		alert(hiddenStatus)
+		
 		if (qnaClass == "") {
 			alert("유형을 선택해주세요.");
 			document.getElementById("qnaClass").focus();
@@ -210,6 +211,19 @@
 		if (qnaContent == "") {
 			alert("내용을 입력해주세요 .");
 			return false;
+		}
+		
+		if (hiddenStatus) {
+			$("#hiddenStatus").val("1");
+			alert($("#hiddenStatus").val());
+			return true;
+			
+		}else{
+			alert('false')
+			$("#hiddenStatus").val("0");
+			alert($("#hiddenStatus").val());
+			return true;
+			
 		}
 
 		return true;

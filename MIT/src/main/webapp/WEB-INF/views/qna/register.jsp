@@ -18,18 +18,17 @@
 		<h2 class="mt-4" style="text-align: center; margin-bottom: 30px;">질문 게시판 등록하기</h2>
 
 		<form role="form" method="post" name="frm">
-			<input type="hidden" value="${login.memberNo}"
-				id="inlineFormInputGroupUsername" name="memberNo">
+				<input type="hidden" value="${login.memberNo}" id="inlineFormInputGroupUsername" name="memberNo">
+					<input type="hidden" name="hiddenStatus" id="hiddenStatus">
 
 			<div class="input-group">
-				<div class="input-group-text">작성자</div>
-				<label class="form-control" >${login.memberName} </label>
-					
-					<div class="form-control"  align="right">
-					<input type="checkbox" name="hiddenStatus" value="1"/> 
-					<label for="hiddenStatus" style="font-size: 17px;">익명</label>
+					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
+					<label class="form-control">${login.memberName}</label>
+					<div class="form-control" align="right">
+						<input type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus"  value="1" /> 
+						<label for="ckhiddenStatus" style="font-size: 17px;">익명</label>
 					</div>
-			</div>
+				</div>
 			<div class="row g-0">
 					<div class="col-lg-2">
 						<div class="input-group">
@@ -80,11 +79,9 @@
 	</div>
 	</main>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/resources/upload.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script id="template" type="text/x-handlebars-template">
 <li class="dropzone-previews mt-3">
 <div class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
@@ -111,6 +108,9 @@
 			var qnaClass = $("#qnaClass").val();
 			var qnaTitle = $("#qnaTitle").val();
 			var qnaContent = CKEDITOR.instances.qnaContent.getData();
+	        var hiddenStatus = $("#ckhiddenStatus").is(":checked");
+			
+			alert(hiddenStatus)
 			
 			if (qnaClass == "") {
 				alert("유형을 선택해주세요.");
@@ -127,9 +127,25 @@
 			if (qnaContent == "") {
 				alert("내용을 입력해주세요 .");
 				return false;
+				
+			}
+				
+				if (hiddenStatus) {
+					$("#hiddenStatus").val("1");
+					alert($("#hiddenStatus").val());
+					return true;
+					
+					
+				}else{
+					alert('false')
+					$("#hiddenStatus").val("0");
+					alert($("#hiddenStatus").val());
+					return true;
+				
 			}
 
 			return true;
+			
 		}
 	</script>
 
@@ -319,19 +335,19 @@
 	}
 </script>
 
-	<script>
-		$(document).ready(function() {
-			var formObj = $("form[role='form']");
-			console.log(formObj);
+<script>
+	$(document).ready(function() {
+		var formObj = $("form[role='form']");
+		console.log(formObj);
 
-			$("#btn_submit").on("click", function() {
-				formObj.submit();
-			});
-
-			$('#btn_list').on("click", function(evt) {
-				self.location = "list";
-			});
+		$("#btn_submit").on("click", function() {
+			formObj.submit();
 		});
-	</script>
+		
+		$('#btn_list').on("click", function(evt) {
+			self.location = "/qna/list";
+		});
+	});
+</script>
 
 	<%@include file="../include/footer.jsp"%>

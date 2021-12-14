@@ -10,7 +10,6 @@ public class FreeCommentVO {
 	private String memberName;
 	private String commentText;
 	private Date commentDate;
-	
 	public int getCommentNo() {
 		return commentNo;
 	}
@@ -47,10 +46,12 @@ public class FreeCommentVO {
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "FreeCommentVO [commentNo=" + commentNo + ", freeNo=" + freeNo + ", memberNo=" + memberNo
 				+ ", memberName=" + memberName + ", commentText=" + commentText + ", commentDate=" + commentDate + "]";
 	}
+		
+	
+	
 }

@@ -31,7 +31,8 @@ public class FreeCommentController {
 		ResponseEntity<String> entity = null;
 
 		try {
-			service.add(fcvo);
+			System.out.println(fcvo);
+			service.register(fcvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

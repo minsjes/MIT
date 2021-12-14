@@ -11,6 +11,7 @@ public interface FreeService {
 	
 	public FreeVO read(int freeNo) throws Exception;
 	
+	// 자유게시판 : 게시물 수정
 	public void update(FreeVO vo) throws Exception;
 	
 	public void delete(int freeNo) throws Exception;
@@ -19,5 +20,6 @@ public interface FreeService {
 	
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	
+	// 첨부파일 목록
 	public List<FreeFileVO> fileList(int freeNo) throws Exception;
 }

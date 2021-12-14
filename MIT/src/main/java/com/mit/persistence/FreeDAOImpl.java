@@ -29,9 +29,22 @@ public class FreeDAOImpl implements FreeDAO {
 		return session.selectOne(namespace + ".read", freeNo);
 	}
 
+	// 자유게시판 : 게시물 수정
 	@Override
 	public void update(FreeVO vo) throws Exception {
 		session.update(namespace + ".update", vo);
+	}
+	// 자유게시판 : 포함된 첨부파일 삭제   
+	@Override
+	public void deleteFile(int freeNo) throws Exception {
+		session.delete(namespace+".deleteFile", freeNo);
+		
+	}
+	// 자유게시판 : 추가된 첨부파일 저장
+	@Override
+	public void insertFile(FreeFileVO fVo) throws Exception {
+		session.insert(namespace+".insertFile", fVo);
+		
 	}
 
 	@Override
@@ -50,28 +63,15 @@ public class FreeDAOImpl implements FreeDAO {
 	}
 
 
-
-	@Override
-	public void insertFile(FreeFileVO fVo) throws Exception {
-		session.insert(namespace+".insertFile", fVo);
-		
-	}
-
-	@Override
-	public void deleteFile(int freeNo) throws Exception {
-		session.delete(namespace+".deleteFile", freeNo);
-		
-	}
-
-	@Override
-	public List<FreeFileVO> fileList(int freeNo) throws Exception {
-		return session.selectList(namespace+".fileList", freeNo);
-	}
-
-
 	@Override
 	public void updateViewCount(int freeNo) throws Exception {
 		session.update(namespace + ".updateViewCount", freeNo);
 		
+	}
+	
+	// 첨부파일 목록
+	@Override
+	public List<FreeFileVO> fileList(int freeNo) throws Exception {
+		return session.selectList(namespace+".fileList", freeNo);
 	}
 }

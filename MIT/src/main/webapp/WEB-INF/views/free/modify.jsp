@@ -240,10 +240,6 @@
 					var formObj = $("form[role='form']");
 					formObj.submit(function(event) {
 						event.preventDefault();
-						
-						//유효성 검사
-						var val = validate();
-				       if(val){}
 						var that = $(this);
 						var str = "";
 
@@ -256,7 +252,6 @@
 
 						that.append(str);
 						that.get(0).submit();
-					}
 					});
 				});
 

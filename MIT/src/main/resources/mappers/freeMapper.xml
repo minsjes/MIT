@@ -24,12 +24,24 @@
 		AND FREE_NO = #{freeNo}
 	</select>
 
+	<!-- 자유게시판 : 게시물 수정  -->
 	<update id="update">
 		UPDATE FREE
 		SET FREE_TITLE = #{freeTitle},
 		FREE_CONTENT = #{freeContent}
 		WHERE FREE_NO = #{freeNo}
 	</update>
+	
+	<!-- 자유게시판 : 포함된 첨부파일 삭제   -->
+	<insert id="deleteFile">
+		delete from free_file where Free_no = #{freeNo}
+	</insert>
+	
+	<!-- 자유게시판 : 추가된 첨부파일 저장 -->
+	<insert id="insertFile">
+		insert into Free_file(File_no, File_name, Free_no)
+		values(seq_free_file.nextval, #{fileName}, #{freeNo})
+	</insert>
 
 	<delete id="delete">
 		DELETE FROM FREE
@@ -64,15 +76,15 @@
 		]]>
 	</select>
 
-	<insert id="insertFile">
-		insert into Free_file(File_no, File_name, Free_no)
-		values(seq_free_file.nextval, #{fileName}, #{freeNo})
-	</insert>
-
-	<insert id="deleteFile">
-		delete from free_file where Free_no = #{freeNo}
-	</insert>
-
+<update id="updateViewCount">
+		UPDATE FREE SET
+		FREE_VIEW = FREE_VIEW + 1
+		WHERE FREE_NO
+		=
+		#{freeNo}
+	</update>
+	
+	<!-- 첨부파일 목록 -->
 	<select id="fileList" resultType="com.mit.domain.FreeFileVO">
 		select
 		File_no
@@ -84,13 +96,5 @@
 		where
 		Free_no = #{freeNo}
 	</select>
-
-<update id="updateViewCount">
-		UPDATE FREE SET
-		FREE_VIEW = FREE_VIEW + 1
-		WHERE FREE_NO
-		=
-		#{freeNo}
-	</update>
 
 </mapper>

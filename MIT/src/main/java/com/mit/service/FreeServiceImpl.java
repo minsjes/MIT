@@ -24,22 +24,22 @@ public class FreeServiceImpl implements FreeService {
 	public void create(FreeVO vo) throws Exception {
 		vo.setFreeContent(vo.getFreeContent().replace("\\r\\n", "<br>"));
 
-		// (2)  ⺻   û          (         x) ->   ϵ    û       PK         
+		// (2)  羞�   청          (         x) ->   溝    청       PK         
 		int freeNo = dao.create(vo);
 
-		// (3)  ߰   ̹              IF  
+		// (3)  煞   譴              IF  
 		if (vo.getFiles() != null) {
 
-			// (4)  ߰   ̹         FOR  
+			// (4)  煞   譴         FOR  
 			for (int i = 0; i < vo.getFiles().length; i++) {
 
-				// (4-1)  ߰   ̹        
+				// (4-1)  煞   譴        
 
 				FreeFileVO fVo = new FreeFileVO();
 				fVo.setFreeNo(freeNo);
 				fVo.setFileName(vo.getFiles()[i]);
 
-				// (4-2)  ߰   ̹        
+				// (4-2)  煞   譴        
 				dao.insertFile(fVo);
 			}
 		}
@@ -52,30 +52,34 @@ public class FreeServiceImpl implements FreeService {
 		return dao.read(freeNo);
 		
 	}
-
+	
+	// 자유게시판 : 게시물 수정
 	@Override
 	public void update(FreeVO vo) throws Exception {
+		
+		// 텍스트에어리어 줄바꿈 적용
 		vo.setFreeContent(vo.getFreeContent().replace("\\r\\n", "<br>"));
 
-		// (2)    α׷   Խñ      
+		// 자유게시판 : 게시글 수정
 		dao.update(vo);
 
-		// (3)    α׷   Ҽӵ  ÷           
+		// 자유게시판 : 포함된 첨부파일 삭제         
 		dao.deleteFile(vo.getFreeNo());
 
-		// (4)  ߰   ̹              IF  
+		//  추가할 파일 존재시 if문 수행
 		if (vo.getFiles() != null) {
 
-			// (5)  ߰   ̹         FOR  
+			System.out.println("(if)추가파일 : " + vo.getFiles());
+			
+			// 추가 파일 저장 for문 수행
 			for (int i = 0; i < vo.getFiles().length; i++) {
 
-				// (5-1) ߰   ̹        
-
 				FreeFileVO fVo = new FreeFileVO();
+				
 				fVo.setFreeNo(vo.getFreeNo());
 				fVo.setFileName(vo.getFiles()[i]);
 
-				// (5-2) ߰   ̹        
+				// 추가 파일 저장    
 				dao.insertFile(fVo);
 
 			}
@@ -85,15 +89,15 @@ public class FreeServiceImpl implements FreeService {
 
 	@Override
 	public void delete(int freeNo) throws Exception {
-		// ÷     ϰ ,        ִ     Ǳ   
+		// 첨     構 ,        獵     풉   
 
-		// 1) ÷            
+		// 1) 첨            
 		dao.deleteFile(freeNo);
 
 		// 2)         
 		commDao.deleteAll(freeNo);
 		
-		// 3)  Խñ      
+		// 3)  督챰      
 		dao.delete(freeNo);
 
 	}
@@ -108,6 +112,7 @@ public class FreeServiceImpl implements FreeService {
 		return dao.listSearchCount(cri);
 	}
 
+	// 첨부파일 목록
 	@Override
 	public List<FreeFileVO> fileList(int freeNo) throws Exception {
 		return dao.fileList(freeNo);

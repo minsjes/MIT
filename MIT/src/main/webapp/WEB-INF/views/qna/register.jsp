@@ -110,8 +110,6 @@
 			var qnaContent = CKEDITOR.instances.qnaContent.getData();
 	        var hiddenStatus = $("#ckhiddenStatus").is(":checked");
 			
-			alert(hiddenStatus)
-			
 			if (qnaClass == "") {
 				alert("유형을 선택해주세요.");
 				document.getElementById("qnaClass").focus();
@@ -130,22 +128,15 @@
 				
 			}
 				
-				if (hiddenStatus) {
-					$("#hiddenStatus").val("1");
-					alert($("#hiddenStatus").val());
-					return true;
-					
-					
-				}else{
-					alert('false')
-					$("#hiddenStatus").val("0");
-					alert($("#hiddenStatus").val());
-					return true;
-				
+			if (hiddenStatus) {
+				$("#hiddenStatus").val("1");
+				return true;
+			}else{
+				$("#hiddenStatus").val("0");
+				return true;	
 			}
 
 			return true;
-			
 		}
 	</script>
 

@@ -194,8 +194,6 @@
 			var freeContent = CKEDITOR.instances.freeContent.getData();
 			var hiddenStatus = $("#ckhiddenStatus").is(":checked");
 			
-			alert(hiddenStatus)
-
 			if (freeTitle == "") {
 				alert("제목을 입력해주세요 .");
 				document.getElementById("freeTitle").focus();
@@ -209,15 +207,10 @@
 
 			if (hiddenStatus) {
 				$("#hiddenStatus").val("1");
-				alert($("#hiddenStatus").val());
 				return true;
-				
 			}else{
-				alert('false')
 				$("#hiddenStatus").val("0");
-				alert($("#hiddenStatus").val());
 				return true;
-				
 			}
 
 			return true;

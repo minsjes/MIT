@@ -203,10 +203,16 @@
 	<script>
 		// 등록 유효성 검사 
 		function validate() {
+			var infoClass = $("#infoClass").val();
 			var infoTitle = $("#infoTitle").val();
 			var infoContent = CKEDITOR.instances.infoContent.getData();
-			var infoClass = $("#infoClass").val();
 
+			if (infoClass == "none") {
+				alert("유형을 선택해주세요.");
+				document.getElementById("infoClass").focus();
+				return false;
+			}
+			
 			if (infoTitle == "") {
 				alert("제목을 입력해주세요 .");
 				document.getElememtById("infoTitle").focus();
@@ -216,12 +222,6 @@
 			if (infoContent == "") {
 				alert("내용을 입력해주세요 .");
 				document.getElementById("infoContent").focus();
-				return false;
-			}
-
-			if (infoClass == "none") {
-				alert("유형을 선택해주세요.");
-				document.getElementById("infoClass").focus();
 				return false;
 			}
 

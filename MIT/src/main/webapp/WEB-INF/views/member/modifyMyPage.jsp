@@ -140,7 +140,7 @@
 			return false;
 		}
 
-		// 연락처 입력여부 체크
+		// 연락처 입력여부 체크.
 		if (document.form.memberPhone.value == "") {
 			alert("연락처를 입력해주세요.");
 			form.memberPhone.focus();

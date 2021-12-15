@@ -35,21 +35,7 @@
 
 		<form role="form" action="modify" method="post" name="frm">
 			<input type='hidden' id="qnaNo" name='qnaNo' value="${qnaVO.qnaNo}"> 
-			<input type='hidden' id="memberNo" name='memberNo' value="${login.memberNo}"> 
-
-			<div class="row g-0">
-					<div class="col">
-						<div class="input-group">
-							<div class="input-group-text">작성자</div>
-						<label class="form-control">${login.memberName}</label>
-						<div class="form-control" align="right">
-							<input type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus"
-								value="1" /> <label for="ckhiddenStatus"
-								style="font-size: 17px;">익명</label>
-						</div>
-					</div>
-					</div>
-					</div>
+			<input type='hidden' id="memberNo" name='memberNo' value="${login.memberNo}">
 					
 					<div class="row g-0">
 					<div class="col-lg-2">
@@ -232,6 +218,7 @@
 			var qnaClass = $("#qnaClass").val();
 			var qnaTitle = $("#qnaTitle").val();
 			var qnaContent = CKEDITOR.instances.qnaContent.getData();
+			var hiddenStatus = $("#ckhiddenStatus").is(":checked");
 
 			alert(hiddenStatus)
 
@@ -256,17 +243,20 @@
 				$("#hiddenStatus").val("1");
 				alert($("#hiddenStatus").val());
 				return true;
-
-			} else {
+				
+				
+			}else{
 				alert('false')
 				$("#hiddenStatus").val("0");
 				alert($("#hiddenStatus").val());
 				return true;
-
-			}
-
-			return true;
+			
 		}
+
+		return true;
+		
+	}
+
 
 		function checkImageType(fileName) {
 			var pattern = /jpg|gif|png|jpeg/i;

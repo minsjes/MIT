@@ -182,6 +182,9 @@
 					<button type="button" class="btn btn-outline-primary btn-modify">수정</button>
 					<button type="button" class="btn btn-outline-danger">삭제</button>
 				</c:if>
+				<c:if test="${12345678 eq login.memberNo && 12345678 ne qnaVO.memberNo}">
+						<button type="button" class="btn btn-outline-danger">삭제</button>
+					</c:if>
 				<button type="button" class="btn btn-outline-dark">목록</button>
 			</div>
 		</form>
@@ -243,47 +246,52 @@
 
 	<script>
 		var qnaNo = $("#qnaNo").val(); // 게시글 번호
-		var loginNo = $("#newUserNo").val(); // 댓글 작성자 번호
-		var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 번호
+		var loginNo = $("#newUserNo").val(); // 댓글 작성자 학번
+		var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 학번
 
-		$
-				.getJSON(
-						"/qcomment/all/" + qnaNo,
-						function(data) {
-							var str = "";
-							$(data)
-									.each(
-											function() {
-												var strbutton = "";
-												str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
-														+ "<div class='card'>"
-														+ "<span style='font-weight: bold;'>"
-														+ this.memberName
-														+ "</span>"
-
-												if (loginNo == this.memberNo
-														|| loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
-													strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
-															+ this.commentNo
-															+ ")'></i></div>";
-												}
-
-												str += strbutton;
-												str += "<br>"
-												str += this.commentText
-												str += "<hr>"
-												str += "</div></li>";
-											});
-
-							var strtext = "";
-							if (str == "") {
-								strtext += "<p style='text-align: center; margin-top: 10px'>등록된 댓글이 없습니다.</p>";
-							}
-
-							str += strtext;
-
-							$("#reply").html(str);
-						});
+		$.getJSON("/qcomment/all/" + qnaNo, function(data) {
+			var str = "";
+			$(data).each(function() {
+				var strbutton = "";
+				
+				str += "<li class='p-0 comment-list list-group-item' data-commentNo='" + this.commentNo + ">"
+					+ "<div class='card border-dark'>"
+					+ "<div class='card-header'>"
+					+ "<span style='font-weight: bold;'>"
+					+ this.memberName
+					+ "</span>"
+					+ " · "
+					+ "<font size=2>"
+					+ this.commentDate
+					+ "</font>"
+				
+				if (loginNo == this.memberNo || loginNo == writeUser || loginNo == 12345678) {//댓글 작성자인 경우 OR 게시글 작성자인 경우 OR 관리자인 경우, 댓글 삭제 가능
+					strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+						+ this.commentNo
+						+ ")'></i>";
+				}
+				
+				str += strbutton;
+				str += "</div>"
+				str += "<div class='card-body text-dark'>"
+				str += "<p class='card-text'>"
+				str += this.commentText
+				str += "</p>"
+				str += "</div>"
+				str += "</div>"
+				str += "</li>";
+			});
+			
+			var strtext = "";
+			
+			if (str == "") {
+				strtext += "<p style='text-align: center; margin-top: 10px'>등록된 댓글이 없습니다.</p>";
+			}
+			
+			str += strtext;
+			
+			$("#reply").html(str);
+		});
 
 		//댓글 저장 버튼 클릭 이벤트 submit [성공]
 		$(".comentAddBtn").on("click", function() {
@@ -337,7 +345,7 @@
 					console.log("result: " + result);
 
 					if (result == 'SUCCESS') {
-						alert("삭제 되었습니다.");
+						alert("댓글이 삭제되었습니다.");
 						getReplies();
 					}
 				}
@@ -345,40 +353,43 @@
 		}
 
 		function getReplies() {
-			$
-					.getJSON(
-							"/qcomment/all/" + qnaNo,
-							function(data) {
-								var str = "";
+			$.getJSON("/qcomment/all/" + qnaNo, function(data) {
+				var str = "";
 
-								$(data)
-										.each(
-												function() {
-													var strbutton = "";
+				$(data).each(function() {
+					var strbutton = "";
+					
+					str += "<li class='p-0 comment-list list-group-item' data-commentNo='" + this.commentNo + ">"
+						+ "<div class='card border-dark'>"
+						+ "<div class='card-header'>"
+						+ "<span style='font-weight: bold;'>"
+						+ this.memberName
+						+ "</span>"
+						+ " · "
+						+ "<font size=2>"
+						+ this.commentDate
+						+ "</font>"
+					
+					if (loginNo == this.memberNo || loginNo == writeUser || loginNo == 12345678) {//댓글 작성자인 경우 OR 게시글 작성자인 경우 OR 관리자인 경우, 댓글 삭제 가능
+						strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+							+ this.commentNo
+							+ ")'></i>";
+					}
+					
+					str += strbutton;
+					str += "</div>"
+					str += "<div class='card-body text-dark'>"
+					str += "<p class='card-text'>"
+					str += this.commentText
+					str += "</p>"
+					str += "</div>"
+					str += "</div>"
+					str += "</li>";
+				});
 
-													str += "<li class='comment-list' data-commentNo='" + this.commentNo + ">"
-															+ "<div class='card'>"
-															+ "<span style='font-weight: bold;'>"
-															+ this.memberName
-															+ "</span>"
-
-													if (loginNo == this.memberNo
-															|| loginNo == writeUser) {//댓글 정보와 로그인 정보 같을 경우 OR 게시글의 주인 인 경우 댓글 삭제 가능
-														strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
-																+ this.commentNo
-																+ ")'></i></div>";
-													}
-
-													str += strbutton;
-													str += "<br>"
-													str += this.commentText
-													str += "<hr>"
-													str += "</div></li>";
-												});
-
-								$("#reply").html(str);
-							});
-		}
-	</script>
+				$("#reply").html(str);
+		});
+	}
+		</script>
 
 	<%@include file="../include/footer.jsp"%>

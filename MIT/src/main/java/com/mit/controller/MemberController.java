@@ -1,5 +1,9 @@
 package com.mit.controller;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mit.domain.MemberVO;
+import com.mit.domain.SearchCriteria;
 import com.mit.dto.LoginDTO;
 import com.mit.service.MemberService;
 
@@ -107,6 +112,7 @@ public class MemberController {
 	public void readMyPageGET(@RequestParam("memberNo") int memberNo, Model model) throws Exception {
 		logger.info("member readMyPage...");
 		
+		
 		model.addAttribute(service.read(memberNo));
 	}
 
@@ -144,8 +150,10 @@ public class MemberController {
 
 		rttr.addAttribute("memberNo", memberNo);
 		
-		rttr.addFlashAttribute("msg", "수정되었습니다.");
+		rttr.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
 
-		return "redirect:/member/readMyPage";
+		return "redirect:/member/logout";
+		
 	}
+	
 }

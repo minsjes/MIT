@@ -34,156 +34,181 @@
 			게시판 게시물 수정하기</h2>
 
 		<form role="form" action="modify" method="post" name="frm">
-			<input type='hidden' id="qnaNo" name='qnaNo' value="${qnaVO.qnaNo}"> 
-			<input type='hidden' id="memberNo" name='memberNo' value="${login.memberNo}">
-					
-					<div class="row g-0">
-					<div class="col-lg-2">
-						<div class="input-group">
-							<div class="input-group-text" style="padding: 0 20px 0 20px;">유형</div>
-								<select class="form-select" id="qnaClass" name="qnaClass">
-									<option value="" selected>선택</option>
-									<option value="1">동아리</option>
-									<option value="2">코딩오류</option>
-									<option value="3">전공과목</option>
-									<option value="4">학교생활</option>
-								</select>
-							</div>
-						</div>
-					<div class="col-lg-10">
-						<div class="input-group">
-							<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>
-						<input type="text" class="form-control" id="qnaTitle" name="qnaTitle"
+			<input type='hidden' id="qnaNo" name='qnaNo' value="${qnaVO.qnaNo}">
+			<input type='hidden' id="memberNo" name='memberNo'
+				value="${login.memberNo}">
+
+			<div class="row g-0">
+				<div class="col-lg-2">
+					<div class="input-group">
+						<label class="input-group-text" for="inputGroupSelect01">유형</label>
+						<select class="form-select" id="qnaClass" name="qnaClass">
+							<c:if test="${1 eq qnaVO.qnaClass}">
+								<option value="">선택</option>
+								<option value="1" selected>동아리</option>
+								<option value="2">코딩오류</option>
+								<option value="3">전공과목</option>
+								<option value="4">학교생활</option>
+							</c:if>
+							<c:if test="${2 eq qnaVO.qnaClass}">
+								<option value="">선택</option>
+								<option value="1">동아리</option>
+								<option value="2" selected>코딩오류</option>
+								<option value="3">전공과목</option>
+								<option value="4">학교생활</option>
+							</c:if>
+							<c:if test="${3 eq qnaVO.qnaClass}">
+								<option value="">선택</option>
+								<option value="1">동아리</option>
+								<option value="2">코딩오류</option>
+								<option value="3" selected>전공과목</option>
+								<option value="4">학교생활</option>
+							</c:if>
+							<c:if test="${4 eq qnaVO.qnaClass}">
+								<option value="">선택</option>
+								<option value="1">동아리</option>
+								<option value="2">코딩오류</option>
+								<option value="3">전공과목</option>
+								<option value="4" selected>학교생활</option>
+							</c:if>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-10">
+					<div class="input-group">
+						<span class="input-group-text" id="inputGroup-sizing-default"
+							style="padding: 0 20px 0 20px;">제목</span> <input type="text"
+							class="form-control" id="qnaTitle" name="qnaTitle"
 							value="${qnaVO.qnaTitle}">
 					</div>
-					</div>
-					</div>
+				</div>
+			</div>
 
-					<div class="form-group">
-						<div class="input-group-text">내용</div>
-						<textarea class="form-control" id="qnaContent" name="qnaContent">${qnaVO.qnaContent}</textarea>
-						<script>
-							$(document).ready(function() {
-								CKEDITOR.replace("qnaContent", {
-									height : 400
-								});
-							});
-						</script>
-					</div>
+			<div class="form-group">
+				<div class="input-group-text">내용</div>
+				<textarea class="form-control" id="qnaContent" name="qnaContent">${qnaVO.qnaContent}</textarea>
+				<script>
+					$(document).ready(function() {
+						CKEDITOR.replace("qnaContent", {
+							height : 400
+						});
+					});
+				</script>
+			</div>
 
-					<div class="input-group">
-						<input type="file" class="form-control" id="fileUpload"
-							name="fileUpload" aria-describedby="inputGroupFileAddon04"
-							aria-label="Upload">
-						<button class="btn btn-outline-secondary" type="button"
-							id="inputGroupFileAddon04" onclick="fileUpload.click()">
-							<i class="bi bi-plus-lg"></i>
-						</button>
-					</div>
-					<div class="card">
-						<ul class="dropzone-previews clearfix uploadedList preview-list">
-							<c:forEach items="${qnaFileVO}" var="fVo" varStatus="status">
-								<c:set var="fileName" value="${fVo.fileName}" />
-								<c:set var="fileNo" value="${fn:toLowerCase(fileName)}" />
+			<div class="input-group">
+				<input type="file" class="form-control" id="fileUpload"
+					name="fileUpload" aria-describedby="inputGroupFileAddon04"
+					aria-label="Upload">
+				<button class="btn btn-outline-secondary" type="button"
+					id="inputGroupFileAddon04" onclick="fileUpload.click()">
+					<i class="bi bi-plus-lg"></i>
+				</button>
+			</div>
+			<div class="card">
+				<ul class="dropzone-previews clearfix uploadedList preview-list">
+					<c:forEach items="${qnaFileVO}" var="fVo" varStatus="status">
+						<c:set var="fileName" value="${fVo.fileName}" />
+						<c:set var="fileNo" value="${fn:toLowerCase(fileName)}" />
 
-								<li class="dropzone-previews mt-3">
-									<div
-										class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
-										<div class="p-2">
-											<div class="row align-items-center px-3">
-												<c:forTokens var="token" items="${fileNo}" delims="."
-													varStatus="status">
-													<c:if test="${status.last}">
-														<c:choose>
-															<c:when test="${token eq 'hwp'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/hwp.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'doc' || token eq 'docx' }">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/doc.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'xls' || token eq 'xlsx' }">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/excelIcon.png" />
-															</c:when>
-															<c:when
-																test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-size"
-																	src="/displayFile?fileName=${qnaFileVO.fileLocation}">
-															</c:when>
-															<c:when test="${token eq 'psd'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/psd.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'ai'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/ai.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'pdf'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/pdf.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'ppt' || token eq 'pptx'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/ppt.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'mp4' || token eq 'avi'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/avi.png" alt="${fileName}" />
-															</c:when>
-															<c:when
-																test="${token eq 'mp3' || token eq 'flac' || token eq 'wav'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/mp3.png" alt="${fileName}" />
-															</c:when>
-															<c:when test="${token eq 'zip'}">
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/zip.png" alt="${fileName}" />
-															</c:when>
-															<c:otherwise>
-																<img data-dz-thumbnail=""
-																	class="avatar-sm rounded bg-light preview-icon"
-																	src="/resources/dist/img/file.png" alt="${fileName}" />
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-												</c:forTokens>
-												<div class="col pl-0">
-													<a href="/displayFile?fileName=${fVo.fileLocation}"
-														text-muted font-weight-bold data-dz-name="">
-														${fVo.fileName} </a>
-												</div>
-												<div class="col-auto">
-													<a href="${fVo.fileLocation}"
-														class="btn btn-default btn-xs pull-right delbtn"> <i
-														class="far fa-trash-alt"></i>
-													</a>
-												</div>
-											</div>
+						<li class="dropzone-previews mt-3">
+							<div
+								class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
+								<div class="p-2">
+									<div class="row align-items-center px-3">
+										<c:forTokens var="token" items="${fileNo}" delims="."
+											varStatus="status">
+											<c:if test="${status.last}">
+												<c:choose>
+													<c:when test="${token eq 'hwp'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/hwp.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'doc' || token eq 'docx' }">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/doc.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'xls' || token eq 'xlsx' }">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/excelIcon.png" />
+													</c:when>
+													<c:when
+														test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-size"
+															src="/displayFile?fileName=${qnaFileVO.fileLocation}">
+													</c:when>
+													<c:when test="${token eq 'psd'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/psd.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'ai'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/ai.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'pdf'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/pdf.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'ppt' || token eq 'pptx'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/ppt.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'mp4' || token eq 'avi'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/avi.png" alt="${fileName}" />
+													</c:when>
+													<c:when
+														test="${token eq 'mp3' || token eq 'flac' || token eq 'wav'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/mp3.png" alt="${fileName}" />
+													</c:when>
+													<c:when test="${token eq 'zip'}">
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/zip.png" alt="${fileName}" />
+													</c:when>
+													<c:otherwise>
+														<img data-dz-thumbnail=""
+															class="avatar-sm rounded bg-light preview-icon"
+															src="/resources/dist/img/file.png" alt="${fileName}" />
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+										</c:forTokens>
+										<div class="col pl-0">
+											<a href="/displayFile?fileName=${fVo.fileLocation}"
+												text-muted font-weight-bold data-dz-name="">
+												${fVo.fileName} </a>
+										</div>
+										<div class="col-auto">
+											<a href="${fVo.fileLocation}"
+												class="btn btn-default btn-xs pull-right delbtn"> <i
+												class="far fa-trash-alt"></i>
+											</a>
 										</div>
 									</div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
+								</div>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
 
-					<div style="text-align: right; margin: 17px 0 17px 0;">
-						<button type="submit" class="btn btn-outline-primary">수정</button>
-						<button type="button" class="btn btn-outline-dark"
-							onclick="location.href='/qna/list'">목록</button>
-					</div>
+			<div style="text-align: right; margin: 17px 0 17px 0;">
+				<button type="submit" class="btn btn-outline-primary">수정</button>
+				<button type="button" class="btn btn-outline-dark"
+					onclick="location.href='/qna/list'">목록</button>
+			</div>
 		</form>
 	</div>
 	</main>
@@ -243,20 +268,18 @@
 				$("#hiddenStatus").val("1");
 				alert($("#hiddenStatus").val());
 				return true;
-				
-				
-			}else{
+
+			} else {
 				alert('false')
 				$("#hiddenStatus").val("0");
 				alert($("#hiddenStatus").val());
 				return true;
-			
+
+			}
+
+			return true;
+
 		}
-
-		return true;
-		
-	}
-
 
 		function checkImageType(fileName) {
 			var pattern = /jpg|gif|png|jpeg/i;

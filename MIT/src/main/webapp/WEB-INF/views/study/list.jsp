@@ -8,6 +8,10 @@
 	<main>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>스터디 게시판</h1>
+			<div id="img" style="text-align: center;">
+			<a href = "https://www.gather.town/download">
+			<img class="fit-picture" src="/resources/dist/img/wgt.PNG"
+					style="height: 140px; width: auto;"></a> </div>
 			<div class="card mb-4">
 				<div class="card-header">
 					<span style="vertical-align: middle;">

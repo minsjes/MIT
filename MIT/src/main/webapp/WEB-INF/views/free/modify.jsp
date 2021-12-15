@@ -44,10 +44,6 @@
 						<div class="input-group">
 							<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
 							<label class="form-control">${login.memberName}</label>
-							<div class="form-control" align="right">
-								<input type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus"
-									value="1" /> <label for="ckhiddenStatus"
-									style="font-size: 17px;">익명</label>
 							</div>
 						</div>
 						<div class="col" style="padding-left: 0;">

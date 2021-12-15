@@ -14,61 +14,62 @@
 
 <div id="layoutSidenav_content">
 	<main>
-		<div class="container-fluid px-4">
-			<h2 class="mt-4" style="text-align: center; margin-bottom: 30px;">자유
-				게시판 게시물 등록하기</h2>
+	<div class="container-fluid px-4">
+		<h2 class="mt-4" style="text-align: center; margin-bottom: 30px;">자유
+			게시판 게시물 등록하기</h2>
 
-			<form role="form" method="post" name="frm">
-				<input type="hidden" value="${login.memberNo}"
-					id="inlineFormInputGroupUsername" name="memberNo">
-					<input type="hidden" name="hiddenStatus" id="hiddenStatus">
+		<form role="form" method="post" name="frm">
+			<input type="hidden" value="${login.memberNo}"
+				id="inlineFormInputGroupUsername" name="memberNo"> <input
+				type="hidden" name="hiddenStatus" id="hiddenStatus">
 
-				<div class="input-group">
-					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
-					<label class="form-control">${login.memberName}</label>
-					<div class="form-control" align="right">
-						<input type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus"  value="1" /> <label
-							for="ckhiddenStatus" style="font-size: 17px;">익명</label>
-					</div>
+			<div class="input-group">
+				<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
+				<label class="form-control">${login.memberName}</label>
+				<div class="form-control" align="right">
+					<input type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus"
+						value="1" /> <label for="ckhiddenStatus" style="font-size: 17px;">익명</label>
 				</div>
-				<div class="input-group">
-					<span class="input-group-text" id="inputGroup-sizing-default"
-						style="padding: 0 20px 0 20px;">제목</span> <input type="text"
-						class="form-control" id="freeTitle" name="freeTitle"
-						placeholder="Enter Title...">
-				</div>
-				<div class="form-group">
-					<div class="input-group-text">내용</div>
-					<textarea class="form-control" id="freeContent" name="freeContent"
-						rows="15" placeholder="Enter content..."></textarea>
-					<script>
-						$(document).ready(function() {
-							CKEDITOR.replace("freeContent", {
-								height : 400
-							});
+			</div>
+			<div class="input-group">
+				<span class="input-group-text" id="inputGroup-sizing-default"
+					style="padding: 0 20px 0 20px;">제목</span> <input type="text"
+					class="form-control" id="freeTitle" name="freeTitle"
+					placeholder="Enter Title...">
+			</div>
+			<div class="form-group">
+				<div class="input-group-text">내용</div>
+				<textarea class="form-control" id="freeContent" name="freeContent"
+					rows="15" placeholder="Enter content..."></textarea>
+				<script>
+					$(document).ready(function() {
+						CKEDITOR.replace("freeContent", {
+							height : 400
 						});
-					</script>
-				</div>
-		</div>
+					});
+				</script>
+			</div>
 
-		<div class="input-group">
-			<input type="file" class="form-control" id="fileUpload"
-				name="fileUpload" aria-describedby="inputGroupFileAddon04"
-				aria-label="Upload">
-			<button class="btn btn-outline-secondary" type="button"
-				id="inputGroupFileAddon04" onclick="fileUpload.click()">
-				<i class="bi bi-plus-lg"></i>
-			</button>
-		</div>
-		<div class="card">
-			<ul class="dropzone-previews clearfix uploadedList preview-list"></ul>
-		</div>
 
-		<div style="text-align: right; margin: 17px 0 17px 0;">
-			<button type="button" class="btn btn-outline-primary" id="btn_submit">등록</button>
-			<button type="button" class="btn btn-outline-dark" id="btn_list">취소</button>
-		</div>
-		</form>
+			<div class="input-group">
+				<input type="file" class="form-control" id="fileUpload"
+					name="fileUpload" aria-describedby="inputGroupFileAddon04"
+					aria-label="Upload">
+				<button class="btn btn-outline-secondary" type="button"
+					id="inputGroupFileAddon04" onclick="fileUpload.click()">
+					<i class="bi bi-plus-lg"></i>
+				</button>
+			</div>
+			<div class="card">
+				<ul class="dropzone-previews clearfix uploadedList preview-list"></ul>
+			</div>
+
+			<div style="text-align: right; margin: 17px 0 17px 0;">
+				<button type="button" class="btn btn-outline-primary"
+					id="btn_submit">등록</button>
+				<button type="button" class="btn btn-outline-dark" id="btn_list">취소</button>
+			</div>
+	</div>
 	</main>
 
 
@@ -103,7 +104,7 @@
 			var freeTitle = $("#freeTitle").val();
 			var freeContent = CKEDITOR.instances.freeContent.getData();
 			var hiddenStatus = $("#ckhiddenStatus").is(":checked");
-			
+
 			alert(hiddenStatus)
 
 			if (freeTitle == "") {
@@ -121,13 +122,13 @@
 				$("#hiddenStatus").val("1");
 				alert($("#hiddenStatus").val());
 				return true;
-				
-			}else{
-				alert('false')
+
+			} else {
+				alert{'false'}
 				$("#hiddenStatus").val("0");
 				alert($("#hiddenStatus").val());
 				return true;
-				
+
 			}
 
 			return true;

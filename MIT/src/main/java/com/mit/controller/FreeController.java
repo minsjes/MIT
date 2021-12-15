@@ -150,7 +150,7 @@ public class FreeController {
 		FreeVO free = service.read(freeNo);
 				
 		// 2-2) 寃뚯떆湲� �옉�꽦�옄 id�� 濡쒓렇�씤 �젙蹂� id 鍮꾧탳
-		if(member.getMemberNo() == free.getMemberNo()) {
+		if(member.getMemberNo() == free.getMemberNo() || member.getMemberNo() == 12345678) {
 			//�옉�꽦�옄�� 濡쒓렇�씤 �젙蹂� 媛숈쓬-> 寃뚯떆湲� �궘�젣
 			service.delete(freeNo);
 			

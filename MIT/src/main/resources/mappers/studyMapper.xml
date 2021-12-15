@@ -4,8 +4,11 @@
 <mapper namespace="com.mit.mapper.StudyMapper">
 	
 	<insert id="create">
+		<selectKey keyProperty="studyNo" resultType="int" order="BEFORE">
+			SELECT SEQ_STUDY.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO STUDY (STUDY_NO, STUDY_CLASS, STUDY_TITLE, STUDY_CONTENT, MEMBER_NO)
-		VALUES (SEQ_STUDY.NEXTVAL, #{studyClass}, #{studyTitle}, #{studyContent}, #{memberNo})
+		VALUES (#{studyNo}, #{studyClass}, #{studyTitle}, #{studyContent}, #{memberNo})
 	</insert>
 
 	<select id="read" resultType="com.mit.domain.StudyVO">

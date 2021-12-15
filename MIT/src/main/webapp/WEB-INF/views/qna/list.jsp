@@ -13,8 +13,7 @@
 
 		<div class="card mb-4">
 			<div class="card-header">
-				<span style="vertical-align: middle;"> <i
-					class="bi bi-chat-square-text"></i> 질문 게시판 목록 </span>
+				<span style="vertical-align: middle;"> <i class="bi bi-question-diamond"></i> 질문 게시판 목록 </span>
 				<c:if test="${null ne login.memberNo}">
 					<button class="btn btn-outline-dark btn-sm" id="newBtn"
 						style="float: right; padding: 0 auto 0 auto;">새 게시글 작성</button>

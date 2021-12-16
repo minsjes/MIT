@@ -12,6 +12,7 @@
 			<a href = "https://www.gather.town/download">
 			<img class="fit-picture" src="/resources/dist/img/wgt.PNG"
 					style="height: 140px; width: auto;"></a> </div>
+			
 			<div class="card mb-4">
 				<div class="card-header">
 					<span style="vertical-align: middle;">
@@ -67,6 +68,10 @@
 
 	if (result == 'REGISTER') {
 		alert("등록되었습니다.");
+	}
+
+	if (result == 'MODIFY') {
+		alert("수정되었습니다.");
 	}
 	
 	if (result == 'REMOVE') {

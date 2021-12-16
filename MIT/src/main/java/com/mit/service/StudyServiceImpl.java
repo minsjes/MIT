@@ -66,13 +66,13 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public void remove(int studyNo) throws Exception {
-		// 1)첨부 파일 삭제
+		// 1)첨부파일 삭제
 		dao.deleteFile(studyNo);
 		
-		// 2) 댓글 삭제
+		// 2)댓글 삭제
 		commDao.deleteAll(studyNo);
 		
-		// 3) 게시글 삭제
+		// 3)게시글 삭제
 		dao.delete(studyNo);
 	}
 

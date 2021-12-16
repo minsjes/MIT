@@ -11,12 +11,13 @@ import com.mit.persistence.FreeCommentDAO;
 
 @Service
 public class FreeCommentServiceImpl implements FreeCommentService {
+	
 	@Inject
 	private FreeCommentDAO dao;
 
 	@Override
-	public void register(FreeCommentVO fcvo) throws Exception {
-		dao.create(fcvo);
+	public void register(FreeCommentVO cvo) throws Exception {
+		dao.create(cvo);
 	}
 
 	@Override
@@ -33,6 +34,4 @@ public class FreeCommentServiceImpl implements FreeCommentService {
 	public List<FreeCommentVO> list(int freeNo) throws Exception {
 		return dao.list(freeNo);
 	}
-
-	
 }

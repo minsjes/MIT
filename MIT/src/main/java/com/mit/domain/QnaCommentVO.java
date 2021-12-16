@@ -5,6 +5,7 @@ public class QnaCommentVO {
 	private int commentNo;
 	private String commentText;
 	private String commentDate;
+	private String hiddenStatus;
 	private int qnaNo;
 	private int memberNo;
 	private String memberName;
@@ -26,6 +27,12 @@ public class QnaCommentVO {
 	}
 	public void setCommentDate(String commentDate) {
 		this.commentDate = commentDate;
+	}
+	public String getHiddenStatus() {
+		return hiddenStatus;
+	}
+	public void setHiddenStatus(String hiddenStatus) {
+		this.hiddenStatus = hiddenStatus;
 	}
 	public int getQnaNo() {
 		return qnaNo;
@@ -49,6 +56,7 @@ public class QnaCommentVO {
 	@Override
 	public String toString() {
 		return "QnaCommentVO [commentNo=" + commentNo + ", commentText=" + commentText + ", commentDate=" + commentDate
-				+ ", qnaNo=" + qnaNo + ", memberNo=" + memberNo + ", memberName=" + memberName + "]";
+				+ ", hiddenStatus=" + hiddenStatus + ", qnaNo=" + qnaNo + ", memberNo=" + memberNo + ", memberName="
+				+ memberName + "]";
 	}
 }

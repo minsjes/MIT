@@ -187,13 +187,15 @@
 						<h5 class="mt-0">댓글 작성</h5>
 						<input type="hidden" value="${login.memberNo}" id="newUserNo">
 						<textarea class="form-control form-control-light mb-2" placeholder="Enter comment..." id="newReplyText" rows="3"></textarea>
-						<div class="text-right">
-							<div class="btn-group mb-2"></div>
-							<div class="btn-group" style="float: right;">
-								<a class="btn btn-outline-primary btn-rounded comentAddBtn">댓글 등록</a>
+						<div class="input-group mb-4">
+							<div class="input-group-text">
+								익명&nbsp;<input class="form-check-input" type="checkbox" id="ckhiddenStatus">
+								<input type="hidden" id="hiddenStatus0" value="0">
+								<input type="hidden" id="hiddenStatus1" value="1">
 							</div>
+							<a class="btn btn-outline-primary btn-rounded comentAddBtn">댓글 등록</a>
 						</div>
-						<br><hr>
+						<hr>
 						<div class="col-lg-12">
 							<div class="inbox-widget">
 								<h5 class="mt-0">댓글 목록</h5>
@@ -244,13 +246,21 @@
 		var str = "";
 		$(data).each(function() {
 			var strbutton = "";
+			var strname = "";
 			
 			str += "<li class='p-0 comment-list list-group-item' data-commentNo='" + this.commentNo + ">"
 				+ "<div class='card border-dark'>"
 				+ "<div class='card-header'>"
 				+ "<span style='font-weight: bold;'>"
-				+ this.memberName
-				+ "</span>"
+			
+			if (this.hiddenStatus == "0") {
+				strname += this.memberName;
+			} else {
+				strname += "익명";
+			}
+			
+			str += strname;
+			str += "</span>"
 				+ " · "
 				+ "<font size=2>"
 				+ this.commentDate
@@ -292,6 +302,7 @@
 		
 		var memberNo = loginNo.val();
 		var commentText = replyTextObj.val();
+		var ckHidden = $("#ckhiddenStatus").is(":checked");
 		
 		if (memberNo == "") { //로그인 정보 없을 경우
 			alert("로그인 후 댓글 기능을 사용할 수 있습니다.");
@@ -299,28 +310,60 @@
 			return;
 		}
 		
-		// 댓글 입력처리 수행
-		$.ajax({
-			type : "post",
-			url : "/qcomment/",
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "POST"
-			},
-			dataType : "text",
-			data : JSON.stringify({
-				qnaNo : qnaNo,
-				memberNo : memberNo,
-				commentText : commentText
-			}),
-			success : function(result) {
-				if (result === "SUCCESS") {
-					alert("댓글이 등록되었습니다.");
-					$("#newReplyText").val(""); //댓글 입력창 공백처리
-					getReplies(); //댓글 목록 호출
+		if (ckHidden) {
+			var hiddenStatus = $("#hiddenStatus1").val();
+			
+			// 댓글 입력처리 수행
+			$.ajax({
+				type : "post",
+				url : "/qcomment/",
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : "text",
+				data : JSON.stringify({
+					qnaNo : qnaNo,
+					memberNo : memberNo,
+					commentText : commentText,
+					hiddenStatus : hiddenStatus
+				}),
+				success : function(result) {
+					if (result === "SUCCESS") {
+						alert("댓글이 등록되었습니다.");
+						$("#newReplyText").val(""); //댓글 입력창 공백처리
+						getReplies(); //댓글 목록 호출
+					}
 				}
-			}
-		});
+			});
+			
+		} else {
+			var hiddenStatus = $("#hiddenStatus0").val();
+			
+			// 댓글 입력처리 수행
+			$.ajax({
+				type : "post",
+				url : "/qcomment/",
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : "text",
+				data : JSON.stringify({
+					qnaNo : qnaNo,
+					memberNo : memberNo,
+					commentText : commentText,
+					hiddenStatus : hiddenStatus
+				}),
+				success : function(result) {
+					if (result === "SUCCESS") {
+						alert("댓글이 등록되었습니다.");
+						$("#newReplyText").val(""); //댓글 입력창 공백처리
+						getReplies(); //댓글 목록 호출
+					}
+				}
+			});
+		}
 	});
 	
 	function deleteReply(commentNo) {
@@ -349,13 +392,21 @@
 			
 			$(data).each(function() {
 				var strbutton = "";
-					
+				var strname = "";
+				
 				str += "<li class='p-0 comment-list list-group-item' data-commentNo='" + this.commentNo + ">"
 					+ "<div class='card border-dark'>"
 					+ "<div class='card-header'>"
 					+ "<span style='font-weight: bold;'>"
-					+ this.memberName
-					+ "</span>"
+				
+				if (this.hiddenStatus == "0") {
+					strname += this.memberName;
+				} else {
+					strname += "익명";
+				}
+				
+				str += strname;
+				str += "</span>"
 					+ " · "
 					+ "<font size=2>"
 					+ this.commentDate

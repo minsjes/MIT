@@ -5,6 +5,7 @@ public class FreeCommentVO {
 	private int commentNo;
 	private String commentText;
 	private String commentDate;
+	private String hiddenStatus;
 	private int freeNo;
 	private int memberNo;
 	private String memberName;
@@ -27,6 +28,12 @@ public class FreeCommentVO {
 	public void setCommentDate(String commentDate) {
 		this.commentDate = commentDate;
 	}
+	public String getHiddenStatus() {
+		return hiddenStatus;
+	}
+	public void setHiddenStatus(String hiddenStatus) {
+		this.hiddenStatus = hiddenStatus;
+	}
 	public int getFreeNo() {
 		return freeNo;
 	}
@@ -44,5 +51,12 @@ public class FreeCommentVO {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	
+	@Override
+	public String toString() {
+		return "FreeCommentVO [commentNo=" + commentNo + ", commentText=" + commentText + ", commentDate=" + commentDate
+				+ ", hiddenStatus=" + hiddenStatus + ", freeNo=" + freeNo + ", memberNo=" + memberNo + ", memberName="
+				+ memberName + "]";
 	}
 }

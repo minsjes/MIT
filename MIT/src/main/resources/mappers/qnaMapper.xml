@@ -24,7 +24,8 @@
 		UPDATE QNA SET
 		QNA_CLASS = #{qnaClass},
 		QNA_TITLE = #{qnaTitle},
-		QNA_CONTENT = #{qnaContent}
+		QNA_CONTENT = #{qnaContent},
+		HIDDEN_STATUS = #{hiddenStatus}
 		WHERE QNA_NO = #{qnaNo}
 	</update>
 

@@ -25,17 +25,12 @@
 	max-width: 50px;
 	max-height: 50px;
 }
-
-.comment-list {
-	margin-bottom: 20px;
-}
 </style>
 
 <div id="layoutSidenav_content">
 	<main>
 	<div class="container-fluid px-4">
-		<h2 class="mt-4" style='text-align: center; margin-bottom: 30px;'>자유
-			게시판</h2>
+		<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>자유 게시판</h1>
 
 		<form role="form" action="modify" method="post">
 			<input type='hidden' id="freeNo" name="freeNo"
@@ -80,7 +75,7 @@
 			</div>
 
 			<div class="form-group">
-				<div class="input-group-text">내용</div>
+				<div class="input-group-text">&nbsp;내용</div>
 				<textarea class="form-control" id="freeContent" readonly="readonly">${freeVO.freeContent}</textarea>
 			</div>
 

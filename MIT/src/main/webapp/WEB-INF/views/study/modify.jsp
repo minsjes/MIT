@@ -33,7 +33,7 @@
 			
 			<form role="form" action="modify" method="post" name="frm">
 				<input type='hidden' id="studyNo" name='studyNo' value="${studyVO.studyNo}">
-				<input type="hidden" id="memberNo" name="memberNo" value="${login.memberNo}">
+				<input type="hidden" id="memberNo" name="memberNo" value="${studyVO.memberNo}">
 				
 				<div class="row g-0">
 					<div class="col-lg-2">

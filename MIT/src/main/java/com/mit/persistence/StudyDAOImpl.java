@@ -37,7 +37,6 @@ public class StudyDAOImpl implements StudyDAO {
 	@Override
 	public void delete(int studyNo) throws Exception {
 		session.delete(namespace + ".delete", studyNo);
-
 	}
 
 	@Override

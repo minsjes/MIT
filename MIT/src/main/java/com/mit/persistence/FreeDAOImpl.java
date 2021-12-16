@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.mit.domain.FreeFileVO;
 import com.mit.domain.FreeVO;
-import com.mit.domain.SearchCriteria;
 
 @Repository
 public class FreeDAOImpl implements FreeDAO {
+	
 	@Inject
 	private SqlSession session;
 	
@@ -53,15 +53,9 @@ public class FreeDAOImpl implements FreeDAO {
 	}
 
 	@Override
-	public List<FreeVO> listSearch(SearchCriteria cri) throws Exception {
-		return session.selectList(namespace + ".listSearch", cri);
+	public List<FreeVO> list() throws Exception {
+		return session.selectList(namespace + ".list");
 	}
-
-	@Override
-	public int listSearchCount(SearchCriteria cri) throws Exception {
-		return session.selectOne(namespace + ".listSearchCount", cri);
-	}
-
 
 	@Override
 	public void updateViewCount(int freeNo) throws Exception {

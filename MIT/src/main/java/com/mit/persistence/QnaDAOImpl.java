@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mit.domain.QnaFileVO;
 import com.mit.domain.QnaVO;
-import com.mit.domain.SearchCriteria;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO {
@@ -22,8 +21,7 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public int create(QnaVO vo) throws Exception {
 		session.insert(namespace + ".create", vo);
-		return vo.getQnaNo();
-		
+		return vo.getQnaNo();	
 	}
 
 	@Override
@@ -34,13 +32,11 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public void update(QnaVO vo) throws Exception {
 		session.update(namespace + ".update", vo);
-		
 	}
 
 	@Override
 	public void delete(int qnaNo) throws Exception {
 		session.delete(namespace + ".delete", qnaNo);
-		
 	}
 
 	@Override
@@ -48,17 +44,14 @@ public class QnaDAOImpl implements QnaDAO {
 		return session.selectList(namespace + ".list");
 	}
 
-	
 	@Override
 	public void insertFile(QnaFileVO qVo) throws Exception {
-		session.insert(namespace+".insertFile", qVo);
-		
+		session.insert(namespace+".insertFile", qVo);	
 	}
 
 	@Override
 	public void deleteFile(int qnaNo) throws Exception {
 		session.delete(namespace+".deleteFile", qnaNo);
-		
 	}
 
 	@Override
@@ -69,7 +62,5 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public void updateViewCount(int qnaNo) throws Exception {
 		session.update(namespace + ".updateViewCount", qnaNo);
-		
 	}
-
 }

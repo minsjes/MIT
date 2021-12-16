@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mit.domain.QnaFileVO;
 import com.mit.domain.QnaVO;
-import com.mit.domain.SearchCriteria;
 
 public interface QnaDAO {
 	

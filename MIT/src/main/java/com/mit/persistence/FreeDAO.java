@@ -4,32 +4,27 @@ import java.util.List;
 
 import com.mit.domain.FreeFileVO;
 import com.mit.domain.FreeVO;
-import com.mit.domain.SearchCriteria;
 
 public interface FreeDAO {
-	   // 1. Free -  踰묉에 
+	   // 1. Free -  甕곕쵇�뿉 
 	   public int create(FreeVO vo) throws Exception;
-	   // 2. Free - 鈺곌퀬�돳
+	   // 2. Free - �댖怨뚰�э옙�뤂
 	   public FreeVO read(int freeNo) throws Exception;
 	   
-	   // 자유게시판 : 게시물 수정
+	   // �옄�쑀寃뚯떆�뙋 : 寃뚯떆臾� �닔�젙
 	   public void update(FreeVO vo) throws Exception;
-	   // 자유게시판 : 포함된 첨부파일 삭제   
+	   // �옄�쑀寃뚯떆�뙋 : �룷�븿�맂 泥⑤��뙆�씪 �궘�젣   
 	   public void deleteFile(int freeNo) throws Exception;
-	   // 자유게시판 : 추가된 첨부파일 저장
+	   // �옄�쑀寃뚯떆�뙋 : 異붽��맂 泥⑤��뙆�씪 ���옣
 	   public void insertFile(FreeFileVO fVo) throws Exception;
 	   
-	   // 4. Free -  沅� �젫
+	   // 4. Free -  亦낉옙 占쎌젷
 	   public void delete(int freeNo) throws Exception;
-	   // 5. Free  沅� 肉� 獄�  野�  源� �뵳�딅뮞 �뱜
-		public void updateViewCount(int freeNo) throws Exception;
+	   // 5. Free  亦낉옙 �굢占� �뛾占�  �뇦占�  繹먲옙 占쎈뎨占쎈봾裕� 占쎈콦
+	   public void updateViewCount(int freeNo) throws Exception;
 	   
-	   public List<FreeVO> listSearch(SearchCriteria cri) throws Exception;
+	   public List<FreeVO> list() throws Exception;
 	   
-	   public int listSearchCount(SearchCriteria cri) throws Exception;
-
-	   
-	   // 첨부파일 목록
+	   // 泥⑤��뙆�씪 紐⑸줉
 	   public List<FreeFileVO> fileList(int freeNo) throws Exception;
-
 }

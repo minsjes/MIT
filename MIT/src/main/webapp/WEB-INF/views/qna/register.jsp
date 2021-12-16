@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -17,9 +16,9 @@
 		<div class="container-fluid px-4">
 			<h1 class="mt-4" style="text-align: center; margin-bottom: 30px;">질문 게시판 게시물 등록하기</h1>
 
-			<form role="form" method="post" name="frm">
-				<input type="hidden" value="${login.memberNo}" id="memberNo" name="memberNo">
-				<input type="hidden" name="hiddenStatus" id="hiddenStatus">
+			<form role="form" action="register" method="post" name="frm">
+				<input type="hidden" id="memberNo" name="memberNo" value="${login.memberNo}">
+				<input type="hidden" id="hiddenStatus" name="hiddenStatus">
 
 				<div class="input-group">
 					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>

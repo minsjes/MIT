@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -17,9 +16,9 @@
 		<div class="container-fluid px-4">
 			<h1 class="mt-4" style="text-align: center; margin-bottom: 30px;">자유 게시판 게시물 등록하기</h1>
 	
-			<form role="form" method="post" name="frm">
-				<input type="hidden" value="${login.memberNo}" id="memberNo" name="memberNo">
-				<input type="hidden" name="hiddenStatus" id="hiddenStatus">
+			<form role="form" action="register" method="post" name="frm">
+				<input type="hidden" id="memberNo" name="memberNo" value="${login.memberNo}">
+				<input type="hidden" id="hiddenStatus" name="hiddenStatus">
 	
 				<div class="input-group">
 					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
@@ -31,15 +30,13 @@
 				</div>
 				
 				<div class="input-group">
-					<span class="input-group-text" id="inputGroup-sizing-default"
-						style="padding: 0 20px 0 20px;">제목</span> <input type="text"
-						class="form-control" id="freeTitle" name="freeTitle"
-						placeholder="Enter Title...">
+					<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>
+					<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="Enter Title...">
 				</div>
+				
 				<div class="form-group">
 					<div class="input-group-text">&nbsp;내용</div>
-					<textarea class="form-control" id="freeContent" name="freeContent"
-						rows="15" placeholder="Enter content..."></textarea>
+					<textarea class="form-control" id="freeContent" name="freeContent"></textarea>
 					<script>
 						$(document).ready(function() {
 							CKEDITOR.replace("freeContent", {
@@ -48,14 +45,10 @@
 						});
 					</script>
 				</div>
-	
-	
+				
 				<div class="input-group">
-					<input type="file" class="form-control" id="fileUpload"
-						name="fileUpload" aria-describedby="inputGroupFileAddon04"
-						aria-label="Upload">
-					<button class="btn btn-outline-secondary" type="button"
-						id="inputGroupFileAddon04" onclick="fileUpload.click()">
+					<input type="file" class="form-control" id="fileUpload" name="fileUpload" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+					<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" onclick="fileUpload.click()">
 						<i class="bi bi-plus-lg"></i>
 					</button>
 				</div>
@@ -64,13 +57,12 @@
 				</div>
 	
 				<div style="text-align: right; margin: 17px 0 17px 0;">
-					<button type="button" class="btn btn-outline-primary"
-						id="btn_submit">등록</button>
+					<button type="button" class="btn btn-outline-primary" id="btn_submit">등록</button>
 					<button type="button" class="btn btn-outline-dark" id="btn_list">취소</button>
 				</div>
+			</form>
 		</div>
 	</main>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/upload.js"></script>

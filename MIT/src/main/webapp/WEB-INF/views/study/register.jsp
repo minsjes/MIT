@@ -9,20 +9,6 @@
 	list-style: none;
     padding: 0 10px 0 10px;
 }
-
-.preview-size {
-	width: auto;
-	height: auto;
-	max-width: 200px;
-	max-height: 200px;
-}
-
-.preview-icon {
-	width: auto;
-	height: auto;
-	max-width: 50px;
-	max-height: 50px;
-}
 </style>
 
 <div id="layoutSidenav_content">
@@ -36,7 +22,7 @@
 				<div class="row g-0">
 					<div class="col-lg-2">
 						<div class="input-group">
-						  <label class="input-group-text" for="inputGroupSelect01">유형</label>
+						  <label class="input-group-text" style="padding: 0 20px 0 20px;">유형</label>
 						  <select class="form-select" id="studyClass" name="studyClass">
 						  	<option value="" selected>선택</option>
 						  	<option value="1">웹디자인</option>
@@ -47,14 +33,14 @@
 					
 					<div class="col-lg-10">
 						<div class="input-group">
-							<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
+							<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>
 							<input type="text" class="form-control" id="studyTitle" name="studyTitle" placeholder="Enter Title...">
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<div class="input-group-text">내용</div>
+					<div class="input-group-text">&nbsp;내용</div>
 					<textarea class="form-control" id="studyContent" name="studyContent"></textarea>
 					<script>
 						$(document).ready(function() {

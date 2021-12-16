@@ -48,10 +48,9 @@
 								</c:if>
 								<td><a href='/info/read?infoNo=${infoVO.infoNo}'>
 										${infoVO.infoTitle} </a></td>
-								<td><a>${infoVO.memberName} </a></td>
+								<td>${infoVO.memberName}</td>
 
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${infoVO.infoDate}" /></td>
+								<td>${infoVO.infoDate}</td>
 								<td>${infoVO.infoView}</td>
 							</tr>
 						</c:forEach>

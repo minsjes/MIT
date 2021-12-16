@@ -81,7 +81,6 @@
 			<script>
 				$(document).ready(function() {
 					CKEDITOR.replace("infoContent", {
-						/* filebrowserUploadUrl : "/common/ckUpload", */
 						height : 400
 					});
 				});

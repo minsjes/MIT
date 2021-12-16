@@ -31,7 +31,7 @@
 						<div class="input-group">
 							<div class="input-group-text">작성일</div>
 							<input type="text" class="form-control"
-								value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeVO.noticeDate}"/>"
+								value="${noticeVO.noticeDate}"
 								readonly="readonly">
 						</div>
 					</div>

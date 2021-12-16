@@ -32,7 +32,7 @@
 									${joinVO.joinName}
 								</a></td>
 								<td>${joinVO.joinPhone}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${joinVO.joinDate}" /></td>
+								<td>${joinVO.joinDate}</td>
 								<c:if test="${joinVO.allowStatus == '0'}">
 									<td>대기</td>
 								</c:if>

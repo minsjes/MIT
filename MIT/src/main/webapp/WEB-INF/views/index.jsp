@@ -43,7 +43,7 @@
 											<td>${noticeVO.rnum}</td>
 											<td><a href='/notice/read?noticeNo=${noticeVO.noticeNo}'>${noticeVO.noticeTitle}</a></td>
 											<td>${noticeVO.memberName}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeVO.noticeDate}" /></td>
+											<td>${noticeVO.noticeDate}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

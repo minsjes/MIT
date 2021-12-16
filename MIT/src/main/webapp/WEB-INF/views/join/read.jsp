@@ -107,7 +107,7 @@
 						<span class="input-group-text" id="basic-addon1"><i
 							class="far fa-calendar-alt"></i></span> <input type="text"
 							class="form-control" name="joinDate"
-							value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${joinVO.joinDate}"/>"
+							value="${joinVO.joinDate}"
 							readonly="readonly">
 					</div>
 

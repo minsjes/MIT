@@ -7,24 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.mit.mapper.QnaCommentMapper">
 
 	<select id="list" resultType="com.mit.domain.QnaCommentVO">
-
-		SELECT
-		C.COMMENT_NO, C.QNA_NO, C.MEMBER_NO, M.MEMBER_NAME, C.COMMENT_TEXT, C.COMMENT_DATE
+		SELECT C.COMMENT_NO, C.QNA_NO, C.MEMBER_NO, M.MEMBER_NAME, C.COMMENT_TEXT, C.COMMENT_DATE
 		FROM QNA_COMMENT C, QNA Q, MEMBER M
 		WHERE M.MEMBER_NO = C.MEMBER_NO
 		AND Q.QNA_NO = C.QNA_NO
 		AND C.QNA_NO = #{qnaNo}
 		ORDER BY C.COMMENT_NO DESC
-
 	</select>
 
-
 	<insert id="create">
-
-		INSERT INTO QNA_COMMENT(COMMENT_NO, QNA_NO, COMMENT_TEXT, MEMBER_NO)
-		VALUES (SEQ_QNA_COMMENT.NEXTVAL, #{qnaNo}, #{commentText}, #{memberNo})
-
-
+		INSERT INTO QNA_COMMENT(COMMENT_NO, QNA_NO, COMMENT_TEXT, MEMBER_NO, HIDDEN_STATUS)
+		VALUES (SEQ_QNA_COMMENT.NEXTVAL, #{qnaNo}, #{commentText}, #{memberNo}, '0')
 	</insert>
 
 	<delete id="delete">

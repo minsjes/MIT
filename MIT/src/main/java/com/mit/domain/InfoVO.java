@@ -3,23 +3,24 @@ package com.mit.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class InfoVO {
-
 	private int infoNo;
 	private int infoClass;
 	private String infoTitle;
 	private String infoContent;
-	private Date infoDate;
+	private String infoDate;
 	private int infoView;
+	
 	private int memberNo;
 	private String memberName;
-
+	
+	private int rnum;
+	
 	private String[] files;
 	private ArrayList<InfoFileVO> filList;
+	
 	private int commentNo;
-	private int rnum;
 
 	public int getInfoNo() {
 		return infoNo;
@@ -53,11 +54,11 @@ public class InfoVO {
 		this.infoContent = infoContent;
 	}
 
-	public Date getInfoDate() {
+	public String getInfoDate() {
 		return infoDate;
 	}
 
-	public void setInfoDate(Date infoDate) {
+	public void setInfoDate(String infoDate) {
 		this.infoDate = infoDate;
 	}
 
@@ -85,6 +86,14 @@ public class InfoVO {
 		this.memberName = memberName;
 	}
 
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	public String[] getFiles() {
 		return files;
 	}
@@ -109,20 +118,11 @@ public class InfoVO {
 		this.commentNo = commentNo;
 	}
 
-	public int getRnum() {
-		return rnum;
-	}
-
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
-
 	@Override
 	public String toString() {
 		return "InfoVO [infoNo=" + infoNo + ", infoClass=" + infoClass + ", infoTitle=" + infoTitle + ", infoContent="
 				+ infoContent + ", infoDate=" + infoDate + ", infoView=" + infoView + ", memberNo=" + memberNo
-				+ ", memberName=" + memberName + ", files=" + Arrays.toString(files) + ", filList=" + filList
-				+ ", commentNo=" + commentNo + ", rnum=" + rnum + "]";
+				+ ", memberName=" + memberName + ", rnum=" + rnum + ", files=" + Arrays.toString(files) + ", filList="
+				+ filList + ", commentNo=" + commentNo + "]";
 	}
-
 }

@@ -1,13 +1,10 @@
 package com.mit.domain;
 
-import java.util.Date;
-
 public class NoticeVO {
-	
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
-	private Date noticeDate;
+	private String noticeDate;
 	private int memberNo;
 	private String memberName;
 	private int rnum;
@@ -30,10 +27,10 @@ public class NoticeVO {
 	public void setNoticeContent(String noticeContent) {
 		this.noticeContent = noticeContent;
 	}
-	public Date getNoticeDate() {
+	public String getNoticeDate() {
 		return noticeDate;
 	}
-	public void setNoticeDate(Date noticeDate) {
+	public void setNoticeDate(String noticeDate) {
 		this.noticeDate = noticeDate;
 	}
 	public int getMemberNo() {

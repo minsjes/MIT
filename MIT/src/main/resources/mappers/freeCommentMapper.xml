@@ -5,7 +5,7 @@
 
 	<select id="list" resultType="com.mit.domain.FreeCommentVO">
 		SELECT
-		C.COMMENT_NO, C.FREE_NO, M.MEMBER_NO, M.MEMBER_NAME, C.COMMENT_TEXT, C.COMMENT_DATE
+		C.COMMENT_NO, C.FREE_NO, M.MEMBER_NO, M.MEMBER_NAME, C.COMMENT_TEXT, TO_CHAR(C.COMMENT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS COMMENT_DATE, C.HIDDEN_STATUS
 		FROM FREE_COMMENT C, FREE F, MEMBER M
 		WHERE M.MEMBER_NO = C.MEMBER_NO
 		AND F.FREE_NO = C.FREE_NO
@@ -15,7 +15,7 @@
 
 	<insert id="create">
 		INSERT INTO FREE_COMMENT(COMMENT_NO, FREE_NO, COMMENT_TEXT, MEMBER_NO, HIDDEN_STATUS)
-		VALUES (SEQ_FREE_COMMENT.NEXTVAL, #{freeNo}, #{commentText}, #{memberNo}, '0')
+		VALUES (SEQ_FREE_COMMENT.NEXTVAL, #{freeNo}, #{commentText}, #{memberNo}, #{hiddenStatus})
 	</insert>
 
 	<delete id="delete">

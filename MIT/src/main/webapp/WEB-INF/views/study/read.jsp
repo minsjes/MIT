@@ -238,6 +238,7 @@
 				+ "<div class='card border-dark'>"
 				+ "<div class='card-header'>"
 				+ "<span style='font-weight: bold;'>"
+				+ this.memberName
 				+ "</span>"
 				+ " · "
 				+ "<font size=2>"

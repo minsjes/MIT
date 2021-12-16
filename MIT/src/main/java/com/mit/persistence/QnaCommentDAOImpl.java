@@ -20,26 +20,20 @@ public class QnaCommentDAOImpl implements QnaCommentDAO{
 	@Override
 	public void create(QnaCommentVO cvo) throws Exception {
 		session.insert(namespace + ".create", cvo);
-		
 	}
 
 	@Override
 	public void delete(int commentNo) throws Exception {
 		session.delete(namespace + ".delete", commentNo);
-		
 	}
 
 	@Override
-	public void deleteAll(int commentNo) throws Exception {
-		session.delete(namespace + ".deleteAll", commentNo);
-		
+	public void deleteAll(int qnaNo) throws Exception {
+		session.delete(namespace + ".deleteAll", qnaNo);
 	}
 
 	@Override
 	public List<QnaCommentVO> list(int qnaNo) throws Exception {
 		return session.selectList(namespace + ".list", qnaNo);
 	}
-	
-	
-
 }

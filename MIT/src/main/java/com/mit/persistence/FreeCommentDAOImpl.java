@@ -11,14 +11,15 @@ import com.mit.domain.FreeCommentVO;
 
 @Repository
 public class FreeCommentDAOImpl implements FreeCommentDAO {
+	
 	@Inject
 	private SqlSession session;
 	
 	private static final String namespace = "com.mit.mapper.FreeCommentMapper";
 	
 	@Override
-	public void create(FreeCommentVO fcvo) throws Exception {
-		session.insert(namespace + ".create", fcvo);
+	public void create(FreeCommentVO cvo) throws Exception {
+		session.insert(namespace + ".create", cvo);
 	}
 
 	@Override
@@ -27,8 +28,8 @@ public class FreeCommentDAOImpl implements FreeCommentDAO {
 	}
 
 	@Override
-	public void deleteAll(int commentNo) throws Exception {
-		session.delete(namespace + ".deleteAll", commentNo);
+	public void deleteAll(int freeNo) throws Exception {
+		session.delete(namespace + ".deleteAll", freeNo);
 	}
 
 	@Override

@@ -33,7 +33,7 @@
 
 			<form role="form" action="modify" method="post">
 				<input type='hidden' id="studyNo" name="studyNo" value="${studyVO.studyNo}">
-				<input type='hidden' id="memberNo" value="${studyVO.memberNo}">
+				<input type='hidden' id="memberNo" name="memberNo" value="${studyVO.memberNo}">
 				
 				<div class="row g-0">
 					<div class="col">
@@ -78,7 +78,7 @@
 				</div>
 
 				<div class="form-group">
-					<div class="input-group-text">내용</div>
+					<div class="input-group-text">&nbsp;내용</div>
 					<textarea class="form-control" id="studyContent" readonly="readonly">${studyVO.studyContent}</textarea>
 					<script>
 						CKEDITOR.replace("studyContent", {
@@ -177,8 +177,7 @@
 						<input type="hidden" value="${login.memberNo}" id="newUserNo">
 						<textarea class="form-control form-control-light mb-2" placeholder="Enter comment..." id="newReplyText" rows="3"></textarea>
 						<div class="text-right">
-							<div class="btn-group mb-2">
-							</div>
+							<div class="btn-group mb-2"></div>
 							<div class="btn-group" style="float: right;">
 								<a class="btn btn-outline-primary btn-rounded comentAddBtn">댓글 등록</a>
 							</div>
@@ -199,39 +198,143 @@
 		</div>
 	</main>
 
-	<script>
-		$(document).ready(function() {
-			var formObj = $("form[role='form']");
-
-			console.log(formObj);
-
-			$(".btn-modify").on("click", function() {
-				formObj.attr("action", "/study/modify");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
-
-			$(".btn-outline-danger").on("click", function() {
-				formObj.attr("action", "/study/remove");
-				formObj.attr("method", "post");
-				formObj.submit();
-			});
-
-			$(".btn-outline-dark").on("click", function() {
-				formObj.attr("action", "/study/list");
-				formObj.attr("method", "get");
-				formObj.submit();
-			});
+<script>
+	$(document).ready(function() {
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		$(".btn-modify").on("click", function() {
+			formObj.attr("action", "/study/modify");
+			formObj.attr("method", "get");
+			formObj.submit();
 		});
-	</script>
+		
+		$(".btn-outline-danger").on("click", function() {
+			formObj.attr("action", "/study/remove");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});
+		
+		$(".btn-outline-dark").on("click", function() {
+			formObj.attr("action", "/study/list");
+			formObj.attr("method", "get");
+			formObj.submit();
+		);
+	});
+</script>
 
-	<script>
-		var studyNo = $("#studyNo").val(); // 게시글 번호
-		var loginNo = $("#newUserNo").val(); // 댓글 작성자 학번
-		var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 학번
+<script>
+	var studyNo = $("#studyNo").val(); // 게시글 번호
+	var loginNo = $("#newUserNo").val(); // 댓글 작성자 학번
+	var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 학번
+	
+	$.getJSON("/studyComment/all/" + studyNo, function(data) {
+		var str = "";
+		$(data).each(function() {
+			var strbutton = "";
+				
+			str += "<li class='p-0 comment-list list-group-item' data-commentNo='" + this.commentNo + ">"
+				+ "<div class='card border-dark'>"
+				+ "<div class='card-header'>"
+				+ "<span style='font-weight: bold;'>"
+				+ "</span>"
+				+ " · "
+				+ "<font size=2>"
+				+ this.commentDate
+				+ "</font>"
+			
+			if (loginNo == this.memberNo || loginNo == writeUser || loginNo == 12345678) {//댓글 작성자인 경우 OR 게시글 작성자인 경우 OR 관리자인 경우, 댓글 삭제 가능
+				strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
+					+ this.commentNo
+					+ ")'></i>";
+			}
+				
+			str += strbutton;
+			str += "</div>"
+			str += "<div class='card-body text-dark'>"
+			str += "<p class='card-text'>"
+			str += this.commentText
+			str += "</p>"
+			str += "</div>"
+			str += "</div>"
+			str += "</li>";
+		});
+			
+		var strtext = "";
+			
+		if (str == "") {
+			strtext += "<p style='text-align: center; margin-top: 10px'>등록된 댓글이 없습니다.</p>";
+		}
+			
+		str += strtext;
+			
+		$("#reply").html(str);
+	});
 
+	//댓글 저장 버튼 클릭 이벤트 submit [성공]
+	$(".comentAddBtn").on("click", function() {
+		// 입력 form 선택자
+		var loginNo = $("#newUserNo");
+		var replyTextObj = $("#newReplyText");
+		
+		var memberNo = loginNo.val();
+		var commentText = replyTextObj.val();
+		
+		if (memberNo == "") { //로그인 정보 없을 경우
+			alert("로그인 후 댓글 기능을 사용할 수 있습니다.");
+			replyTextObj.val("");
+			return;
+		}
+
+		// 댓글 입력처리 수행
+		$.ajax({
+			type : "post",
+			url : "/studyComment/",
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			dataType : "text",
+			data : JSON.stringify({
+				studyNo : studyNo,
+				memberNo : memberNo,
+				commentText : commentText
+			}),
+			success : function(result) {
+				if (result === "SUCCESS") {
+					alert("댓글이 등록되었습니다.");
+					$("#newReplyText").val(""); //댓글 입력창 공백처리
+					getReplies(); //댓글 목록 호출
+				}
+			}
+		});
+	});
+	
+	function deleteReply(commentNo) {
+		$.ajax({
+			type : 'delete',
+			url : '/studyComment/' + commentNo,
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "DELETE"
+			},
+			dataType : 'text',
+			success : function(result) {
+				console.log("result: " + result);
+				
+				if (result == 'SUCCESS') {
+					alert("댓글이 삭제되었습니다.");
+					getReplies();
+				}
+			}
+		});
+	}
+	
+	function getReplies() {
 		$.getJSON("/studyComment/all/" + studyNo, function(data) {
 			var str = "";
+			
 			$(data).each(function() {
 				var strbutton = "";
 				
@@ -263,112 +366,7 @@
 				str += "</li>";
 			});
 			
-			var strtext = "";
-			
-			if (str == "") {
-				strtext += "<p style='text-align: center; margin-top: 10px'>등록된 댓글이 없습니다.</p>";
-			}
-			
-			str += strtext;
-			
 			$("#reply").html(str);
-		});
-
-		//댓글 저장 버튼 클릭 이벤트 submit [성공]
-		$(".comentAddBtn").on("click", function() {
-			// 입력 form 선택자
-			var loginNo = $("#newUserNo");
-			var replyTextObj = $("#newReplyText");
-
-			var memberNo = loginNo.val();
-			var commentText = replyTextObj.val();
-
-			if (memberNo == "") { //로그인 정보 없을 경우
-				alert("로그인 후 댓글 기능을 사용할 수 있습니다.");
-				replyTextObj.val("");
-				return;
-			}
-
-			// 댓글 입력처리 수행
-			$.ajax({
-				type : "post",
-				url : "/studyComment/",
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : "text",
-				data : JSON.stringify({
-					studyNo : studyNo,
-					memberNo : memberNo,
-					commentText : commentText
-				}),
-				success : function(result) {
-					if (result === "SUCCESS") {
-						alert("댓글이 등록되었습니다.");
-						$("#newReplyText").val(""); //댓글 입력창 공백처리
-						getReplies(); //댓글 목록 호출
-					}
-				}
-			});
-		});
-
-		function deleteReply(commentNo) {
-			$.ajax({
-				type : 'delete',
-				url : '/studyComment/' + commentNo,
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "DELETE"
-				},
-				dataType : 'text',
-				success : function(result) {
-					console.log("result: " + result);
-
-					if (result == 'SUCCESS') {
-						alert("댓글이 삭제되었습니다.");
-						getReplies();
-					}
-				}
-			});
-		}
-
-		function getReplies() {
-			$.getJSON("/studyComment/all/" + studyNo, function(data) {
-				var str = "";
-
-				$(data).each(function() {
-					var strbutton = "";
-					
-					str += "<li class='p-0 comment-list list-group-item' data-commentNo='" + this.commentNo + ">"
-						+ "<div class='card border-dark'>"
-						+ "<div class='card-header'>"
-						+ "<span style='font-weight: bold;'>"
-						+ this.memberName
-						+ "</span>"
-						+ " · "
-						+ "<font size=2>"
-						+ this.commentDate
-						+ "</font>"
-					
-					if (loginNo == this.memberNo || loginNo == writeUser || loginNo == 12345678) {//댓글 작성자인 경우 OR 게시글 작성자인 경우 OR 관리자인 경우, 댓글 삭제 가능
-						strbutton += "<i class='bi bi-x-square-fill' style='float: right; color: red;' onclick='deleteReply("
-							+ this.commentNo
-							+ ")'></i>";
-					}
-					
-					str += strbutton;
-					str += "</div>"
-					str += "<div class='card-body text-dark'>"
-					str += "<p class='card-text'>"
-					str += this.commentText
-					str += "</p>"
-					str += "</div>"
-					str += "</div>"
-					str += "</li>";
-				});
-
-				$("#reply").html(str);
 		});
 	}
 </script>

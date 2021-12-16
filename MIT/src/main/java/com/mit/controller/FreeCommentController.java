@@ -20,34 +20,32 @@ import com.mit.service.FreeCommentService;
 @RestController
 @RequestMapping("/fcomment")
 public class FreeCommentController {
+	private static final Logger logger = LoggerFactory.getLogger(FreeCommentController.class);
+	
 	@Inject
 	private FreeCommentService service;
 
-	private static final Logger logger = LoggerFactory.getLogger(FreeCommentController.class);
-
-	// 1.댓글 생성
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody FreeCommentVO fcvo) {
 		ResponseEntity<String> entity = null;
 
 		try {
-			System.out.println(fcvo);
 			service.register(fcvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
-			logger.info("reply get.,...........");
+			logger.info("reply get...");
 		}
+		
 		return entity;
 	}
 
-	// 2.댓글 삭제
 	@RequestMapping(value = "/{freeCommentNo}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> remove(@PathVariable("freeCommentNo") int commentNo) {
-
 		ResponseEntity<String> entity = null;
+		
 		try {
 			service.remove(commentNo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -55,10 +53,10 @@ public class FreeCommentController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		
 		return entity;
 	}
 
-	// 3.댓글 전체 보기
 	@RequestMapping(value = "/all/{freeNo}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<List<FreeCommentVO>> list(@PathVariable("freeNo") int freeNo) {
 		ResponseEntity<List<FreeCommentVO>> entity = null;
@@ -68,6 +66,7 @@ public class FreeCommentController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		
 		return entity;
 	}
 }

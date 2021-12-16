@@ -20,34 +20,33 @@ import com.mit.service.QnaCommentService;
 @RestController
 @RequestMapping("/qcomment")
 public class QnaCommentController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(QnaCommentController.class);
+	
 	@Inject
 	private QnaCommentService service;
 	
-private static final Logger logger = LoggerFactory.getLogger(QnaCommentController.class);
-	
-//1.�뙎湲� �깮�꽦
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody QnaCommentVO qcvo) {
 		ResponseEntity<String> entity = null;
 
 		try {
-			System.out.println(qcvo);
 			service.register(qcvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
-			logger.info("reply get.,...........");
+			logger.info("reply get...");
 		}
+		
 		return entity;
 	}
 
-	// 2.�뙎湲� �궘�젣
 	@RequestMapping(value = "/{qnaCommentNo}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> remove(@PathVariable("qnaCommentNo") int commentNo) {
-
 		ResponseEntity<String> entity = null;
+		
 		try {
 			service.remove(commentNo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -58,16 +57,17 @@ private static final Logger logger = LoggerFactory.getLogger(QnaCommentControlle
 		return entity;
 	}
 
-	// 3.�뙎湲� �쟾泥� 蹂닿린
 	@RequestMapping(value = "/all/{qnaNo}", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<List<QnaCommentVO>> list(@PathVariable("qnaNo") int qnaNo) {
 		ResponseEntity<List<QnaCommentVO>> entity = null;
+		
 		try {
 			entity = new ResponseEntity<>(service.list(qnaNo), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		
 		return entity;
 	}
 }

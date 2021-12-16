@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mit.mapper.QnaMapper">
 
@@ -8,13 +7,12 @@
 		<selectKey keyProperty="qnaNo" resultType="int" order="BEFORE">
 			SELECT SEQ_QNA.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO QNA (QNA_NO, QNA_TITLE, QNA_CONTENT, QNA_CLASS, MEMBER_NO, HIDDEN_STATUS)
-		VALUES 
-		(#{qnaNo}, #{qnaTitle}, #{qnaContent}, #{qnaClass}, #{memberNo}, #{hiddenStatus})
+		INSERT INTO QNA (QNA_NO, QNA_CLASS, QNA_TITLE, QNA_CONTENT, MEMBER_NO, HIDDEN_STATUS)
+		VALUES (#{qnaNo}, #{qnaClass}, #{qnaTitle}, #{qnaContent}, #{memberNo}, #{hiddenStatus})
 	</insert>
 
 	<select id="read" resultType="com.mit.domain.QnaVO">
-		SELECT Q.QNA_NO, Q.QNA_CLASS, Q.QNA_TITLE, Q.QNA_CONTENT, Q.HIDDEN_STATUS, TO_CHAR(Q.QNA_DATE, 'YYYY-MM-DD HH24:MI:SS') AS QNA_DATE, Q.QNA_VIEW, M.MEMBER_NO, M.MEMBER_NAME
+		SELECT Q.QNA_NO, Q.QNA_CLASS, Q.QNA_TITLE, Q.QNA_CONTENT, TO_CHAR(Q.QNA_DATE, 'YYYY-MM-DD HH24:MI:SS') AS QNA_DATE, Q.QNA_VIEW, Q.HIDDEN_STATUS, M.MEMBER_NO, M.MEMBER_NAME
 		FROM QNA Q, MEMBER M
 		WHERE M.MEMBER_NO = Q.MEMBER_NO
 		AND QNA_NO = #{qnaNo}
@@ -38,17 +36,13 @@
 	<select id="list" resultType="com.mit.domain.QnaVO">
 		<![CDATA[
 			SELECT * FROM (
-				SELECT
-				ROWNUM RNUM, QNA_NO, QNA_TITLE, QNA_CONTENT, QNA_DATE, QNA_CLASS, MEMBER_NO, MEMBER_NAME, HIDDEN_STATUS, QNA_VIEW
+				SELECT ROWNUM RNUM, QNA_NO, QNA_CLASS, QNA_TITLE, TO_CHAR(QNA_DATE, 'YYYY-MM-DD HH24:MI:SS') AS QNA_DATE, QNA_VIEW, HIDDEN_STATUS, MEMBER_NO, MEMBER_NAME
       			FROM ( 
-      				SELECT
-      				Q.QNA_NO, Q.QNA_TITLE, Q.QNA_CONTENT, Q.QNA_DATE, Q.QNA_CLASS, M.MEMBER_NO, M.MEMBER_NAME, Q.HIDDEN_STATUS, Q.QNA_VIEW
-      				FROM
-      				QNA Q, MEMBER M
+      				SELECT Q.QNA_NO, Q.QNA_CLASS, Q.QNA_TITLE, Q.QNA_DATE, Q.QNA_VIEW, Q.HIDDEN_STATUS, M.MEMBER_NO, M.MEMBER_NAME
+      				FROM QNA Q, MEMBER M
       				WHERE M.MEMBER_NO = Q.MEMBER_NO
       				AND Q.QNA_NO > 0
 		]]>
-
 		<![CDATA[
 			ORDER BY Q.QNA_NO ASC))
 			WHERE RNUM >= 1
@@ -73,9 +67,8 @@
 	
    <update id="updateViewCount">
     	UPDATE QNA SET
-    	QNA_VIEW = QNA_VIEW+1
+    	QNA_VIEW = QNA_VIEW + 1
     	WHERE QNA_NO = #{qnaNo}
     </update>
-	
 
 </mapper>

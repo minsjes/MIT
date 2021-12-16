@@ -2,7 +2,6 @@ package com.mit.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class QnaVO {
 	
@@ -10,7 +9,7 @@ public class QnaVO {
 	private String qnaClass;
 	private String qnaTitle;
 	private String qnaContent;
-	private Date qnaDate;
+	private String qnaDate;
 	private int qnaView;
 	private String hiddenStatus;
 	
@@ -56,11 +55,11 @@ public class QnaVO {
 		this.qnaContent = qnaContent;
 	}
 
-	public Date getQnaDate() {
+	public String getQnaDate() {
 		return qnaDate;
 	}
 
-	public void setQnaDate(Date qnaDate) {
+	public void setQnaDate(String qnaDate) {
 		this.qnaDate = qnaDate;
 	}
 

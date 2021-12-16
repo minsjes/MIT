@@ -43,24 +43,22 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void modify(QnaVO vo) throws Exception {
-		
-		vo.setQnaContent(vo.getQnaContent().replace("\\r\\n", "<br>"));
-		// 2)�Խñ� ����
+		// 2)게시글 수정
 		dao.update(vo);
 
-		// 3)÷������ ����
+		// 3)첨부파일 삭제
 		dao.deleteFile(vo.getQnaNo());
 
-		// 4)÷������ ���� ���� IF��
+		// 4)첨부파일 존재 여부 IF문
 		if (vo.getFiles() != null) {
-			// 5)÷������ ���� FOR��
+			// 5)첨부파일 저장 FOR문
 			for (int i=0; i<vo.getFiles().length; i++) {
-				// 5-1)÷������ ����
+				// 5-1)첨부파일 저장
 				QnaFileVO qVo = new QnaFileVO();
 				qVo.setQnaNo(vo.getQnaNo());
 				qVo.setFileName(vo.getFiles()[i]);
 				
-				// 5-2)÷������ ����
+				// 5-2)첨부파일 저장
 				dao.insertFile(qVo);
 			}
 		}
@@ -68,13 +66,13 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void remove(int qnaNo) throws Exception {
-		// 1)÷�� ���� ����
+		// 1)첨占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
 		dao.deleteFile(qnaNo);
 		
-		// 2) ��� ����
+		// 2) 占쏙옙占� 占쏙옙占쏙옙
 		commDao.deleteAll(qnaNo);
 		
-		// 3) �Խñ� ����
+		// 3) 占쌉시깍옙 占쏙옙占쏙옙
 		dao.delete(qnaNo);
 	}
 

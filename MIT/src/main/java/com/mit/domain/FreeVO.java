@@ -2,13 +2,12 @@ package com.mit.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class FreeVO {
 	private int freeNo;
 	private String freeTitle;
 	private String freeContent;
-	private Date freeDate;
+	private String freeDate;
 	private int freeView;
 	private String hiddenStatus;
 	
@@ -46,11 +45,11 @@ public class FreeVO {
 		this.freeContent = freeContent;
 	}
 
-	public Date getFreeDate() {
+	public String getFreeDate() {
 		return freeDate;
 	}
 
-	public void setFreeDate(Date freeDate) {
+	public void setFreeDate(String freeDate) {
 		this.freeDate = freeDate;
 	}
 

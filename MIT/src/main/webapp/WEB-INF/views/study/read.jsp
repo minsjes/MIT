@@ -220,7 +220,7 @@
 			formObj.attr("action", "/study/list");
 			formObj.attr("method", "get");
 			formObj.submit();
-		);
+		});
 	});
 </script>
 

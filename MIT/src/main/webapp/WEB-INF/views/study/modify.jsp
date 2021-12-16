@@ -32,7 +32,7 @@
 			<h1 class="mt-4" style="text-align: center; margin-bottom: 30px;">스터디 게시판 게시물 수정하기</h1>
 			
 			<form role="form" action="modify" method="post" name="frm">
-				<input type='hidden' id="studyNo" name='studyNo' value="${studyVO.studyNo}">
+				<input type="hidden" id="studyNo" name="studyNo" value="${studyVO.studyNo}">
 				<input type="hidden" id="memberNo" name="memberNo" value="${studyVO.memberNo}">
 				
 				<div class="row g-0">

@@ -32,16 +32,21 @@
 			<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>자유 게시판 게시물 수정하기</h1>
 
 			<form role="form" action="modify" method="post" name="frm">
-				<input type='hidden' id="freeNo" name='freeNo' value="${freeVO.freeNo}">
-				<input type='hidden' id="memberNo" name='memberNo' value="${freeVO.memberNo}">
-				<input type="hidden" name="hiddenStatus" id="hiddenStatus" value="${qnaVO.hiddenStatus}">
-
+				<input type="hidden" id="freeNo" name="freeNo" value="${freeVO.freeNo}">
+				<input type="hidden" id="memberNo" name="memberNo" value="${freeVO.memberNo}">
+				<input type="hidden" id="hiddenStatus" name="hiddenStatus">
+				
 				<div class="input-group">
 					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
 					<input type="text" class="form-control" name="memberName" value="${login.memberName}" readonly>
 					<div class="input-group-text">
 						익명&nbsp;
-			    		<input class="form-check-input mt-0" type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus" value="1">
+						<c:if test="${0 eq freeVO.hiddenStatus}">
+			    			<input class="form-check-input mt-0" type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus" value="1">
+			    		</c:if>
+			    		<c:if test="${1 eq freeVO.hiddenStatus}">
+			    			<input class="form-check-input mt-0" type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus" value="1" checked>
+			    		</c:if>
 			  		</div>
 				</div>
 				
@@ -53,16 +58,14 @@
 				<div class="form-group">
 					<div class="input-group-text">&nbsp;내용</div>
 					<textarea class="form-control" id="freeContent" name="freeContent">${freeVO.freeContent}</textarea>
-				</div>
-
-				<script>
-					$(document).ready(function() {
-						CKEDITOR.replace("freeContent", {
-							/* filebrowserUploadUrl : "/common/ckUpload", */
-							height : 400
+					<script>
+						$(document).ready(function() {
+							CKEDITOR.replace("freeContent", {
+								height : 400
+							});
 						});
-					});
-				</script>
+					</script>
+				</div>
 
 				<div class="input-group">
 					<input type="file" class="form-control" id="fileUpload" name="fileUpload" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -192,14 +195,13 @@
 
 		if (hiddenStatus) {
 			$("#hiddenStatus").val("1");
-			return true;
+			var formObj = $("form[role='form']");
+			formObj.submit();
 		}else{
 			$("#hiddenStatus").val("0");
-			return true;
+			var formObj = $("form[role='form']");
+			formObj.submit();
 		}
-
-		var formObj = $("form[role='form']");
-		formObj.submit();
 	}
 
 	function checkImageType(fileName) {

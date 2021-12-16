@@ -34,14 +34,19 @@
 			<form role="form" action="modify" method="post" name="frm">
 				<input type='hidden' id="qnaNo" name='qnaNo' value="${qnaVO.qnaNo}">
 				<input type='hidden' id="memberNo" name='memberNo' value="${qnaVO.memberNo}">
-				<input type="hidden" id="hiddenStatus" name="hiddenStatus" value="${qnaVO.hiddenStatus}">
+				<input type="hidden" id="hiddenStatus" name="hiddenStatus">
 				
 				<div class="input-group">
 					<span class="input-group-text" id="inputGroup-sizing-default">작성자</span>
 					<input type="text" class="form-control" name="memberName" value="${qnaVO.memberName}" readonly>
 					<div class="input-group-text">
 						익명&nbsp;
-			    		<input class="form-check-input mt-0" type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus" value="1">
+			    		<c:if test="${0 eq qnaVO.hiddenStatus}">
+			    			<input class="form-check-input mt-0" type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus" value="1">
+			    		</c:if>
+			    		<c:if test="${1 eq qnaVO.hiddenStatus}">
+			    			<input class="form-check-input mt-0" type="checkbox" name="ckhiddenStatus" id="ckhiddenStatus" value="1" checked>
+			    		</c:if>
 			  		</div>
 				</div>
 				
@@ -236,14 +241,13 @@
 
 		if (hiddenStatus) {
 			$("#hiddenStatus").val("1");
-			return true;
+			var formObj = $("form[role='form']");
+			formObj.submit();
 		} else {
 			$("#hiddenStatus").val("0");
-			return true;
+			var formObj = $("form[role='form']");
+			formObj.submit();
 		}
-		
-		var formObj = $("form[role='form']");
-		formObj.submit();
 	}
 
 	function checkImageType(fileName) {

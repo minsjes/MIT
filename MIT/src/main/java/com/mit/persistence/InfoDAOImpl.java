@@ -1,4 +1,3 @@
-
 package com.mit.persistence;
 
 import java.util.List;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mit.domain.InfoFileVO;
 import com.mit.domain.InfoVO;
-import com.mit.domain.SearchCriteria;
 
 @Repository
 public class InfoDAOImpl implements InfoDAO {
@@ -24,7 +22,6 @@ public class InfoDAOImpl implements InfoDAO {
 	public int create(InfoVO vo) throws Exception {
 		session.insert(namespace + ".create", vo);
 		return vo.getInfoNo();
-
 	}
 
 	@Override
@@ -35,37 +32,26 @@ public class InfoDAOImpl implements InfoDAO {
 	@Override
 	public void update(InfoVO vo) throws Exception {
 		session.update(namespace + ".update", vo);
-
 	}
 
 	@Override
 	public void delete(int infoNo) throws Exception {
 		session.delete(namespace + ".delete", infoNo);
-
 	}
 
 	@Override
-	public List<InfoVO> listSearch(SearchCriteria cri) throws Exception {
-
-		return session.selectList(namespace + ".listSearch", cri);
+	public List<InfoVO> list() throws Exception {
+		return session.selectList(namespace + ".list");
 	}
-
-	@Override
-	public int listSearchCount(SearchCriteria cri) throws Exception {
-
-		return session.selectOne(namespace + ".listSearchCount", cri);
-	}
-
+	
 	@Override
 	public void insertFile(InfoFileVO fVo) throws Exception {
 		session.insert(namespace + ".insertFile", fVo);
-
 	}
 
 	@Override
 	public void deleteFile(int infoNo) throws Exception {
 		session.delete(namespace + ".deleteFile", infoNo);
-
 	}
 
 	@Override
@@ -77,5 +63,4 @@ public class InfoDAOImpl implements InfoDAO {
 	public void updateViewCount(int infoNo) throws Exception {
 		session.update(namespace + ".updateViewCount", infoNo);
 	}
-
 }

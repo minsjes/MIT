@@ -18,7 +18,7 @@ import com.mit.domain.StudyCommentVO;
 import com.mit.service.StudyCommentService;
 
 @RestController
-@RequestMapping("/studyComment") // 조금 다르게 함
+@RequestMapping("/studyComment")
 public class StudyCommentController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StudyCommentController.class);
@@ -44,7 +44,7 @@ public class StudyCommentController {
 	}
 	
 	@RequestMapping(value = "/{commentNo}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("commentNo") int commentNo) { // 조금 다르게 함
+	public ResponseEntity<String> remove(@PathVariable("commentNo") int commentNo) {
 		ResponseEntity<String> entity = null;
 		
 		try {

@@ -18,57 +18,57 @@ import com.mit.domain.InfoCommentVO;
 import com.mit.service.InfoCommentService;
 
 @RestController
-@RequestMapping("/icomment")
+@RequestMapping("/infoComment")
 public class InfoCommentController {
-	@Inject
-	private InfoCommentService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(InfoCommentController.class);
 	
-	// 1.댓글 생성
-		@RequestMapping(value = "", method = RequestMethod.POST)
-		public ResponseEntity<String> register(@RequestBody InfoCommentVO icvo) {
-			ResponseEntity<String> entity = null;
-
-			try {
-				service.add(icvo);
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-
-				logger.info("reply get.,...........");
-			}
-			return entity;
-		}
-
-		// 2.댓글 삭제
-		@RequestMapping(value = "/{infoCommentNo}", method = RequestMethod.DELETE)
-		public ResponseEntity<String> remove(@PathVariable("infoCommentNo") int commentNo) {
-
-			ResponseEntity<String> entity = null;
-			try {
-				service.remove(commentNo);
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-		}
-
-		// 3.댓글 전체 보기
-		@RequestMapping(value = "/all/{infoNo}", method = { RequestMethod.GET, RequestMethod.POST })
-		public ResponseEntity<List<InfoCommentVO>> list(@PathVariable("infoNo") int infoNo) {
-			ResponseEntity<List<InfoCommentVO>> entity = null;
-			try {
-				entity = new ResponseEntity<>(service.list(infoNo), HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-		}
+	@Inject
+	private InfoCommentService service;
 	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<String> register(@RequestBody InfoCommentVO cvo) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.register(cvo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
+			logger.info("reply get...");
+		}
+		
+		return entity;
+	}
+
+	@RequestMapping(value = "/{commentNo}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> remove(@PathVariable("commentNo") int commentNo) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.remove(commentNo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+
+	@RequestMapping(value = "/all/{infoNo}", method = { RequestMethod.GET, RequestMethod.POST })
+	public ResponseEntity<List<InfoCommentVO>> list(@PathVariable("infoNo") int infoNo) {
+		ResponseEntity<List<InfoCommentVO>> entity = null;
+		
+		try {
+			entity = new ResponseEntity<>(service.list(infoNo), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 }

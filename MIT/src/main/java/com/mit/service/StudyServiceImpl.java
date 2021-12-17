@@ -24,8 +24,8 @@ public class StudyServiceImpl implements StudyService {
 	public void register(StudyVO vo) throws Exception {
 		int studyNo = dao.create(vo);
 		
-		if(vo.getFiles() != null) {
-			for(int i=0; i<vo.getFiles().length; i++) {
+		if (vo.getFiles() != null) {
+			for (int i=0; i<vo.getFiles().length; i++) {
 				StudyFileVO fVo = new StudyFileVO();
 				fVo.setStudyNo(studyNo);
 				fVo.setFileName(vo.getFiles()[i]);

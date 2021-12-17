@@ -1,4 +1,3 @@
-
 package com.mit.domain;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class InfoVO {
 	private int rnum;
 	
 	private String[] files;
-	private ArrayList<InfoFileVO> filList;
+	private ArrayList<InfoFileVO> fileList;
 	
 	private int commentNo;
 
@@ -102,12 +101,12 @@ public class InfoVO {
 		this.files = files;
 	}
 
-	public ArrayList<InfoFileVO> getFilList() {
-		return filList;
+	public ArrayList<InfoFileVO> getFileList() {
+		return fileList;
 	}
 
-	public void setFilList(ArrayList<InfoFileVO> filList) {
-		this.filList = filList;
+	public void setFileList(ArrayList<InfoFileVO> fileList) {
+		this.fileList = fileList;
 	}
 
 	public int getCommentNo() {
@@ -122,7 +121,7 @@ public class InfoVO {
 	public String toString() {
 		return "InfoVO [infoNo=" + infoNo + ", infoClass=" + infoClass + ", infoTitle=" + infoTitle + ", infoContent="
 				+ infoContent + ", infoDate=" + infoDate + ", infoView=" + infoView + ", memberNo=" + memberNo
-				+ ", memberName=" + memberName + ", rnum=" + rnum + ", files=" + Arrays.toString(files) + ", filList="
-				+ filList + ", commentNo=" + commentNo + "]";
+				+ ", memberName=" + memberName + ", rnum=" + rnum + ", files=" + Arrays.toString(files) + ", fileList="
+				+ fileList + ", commentNo=" + commentNo + "]";
 	}
 }

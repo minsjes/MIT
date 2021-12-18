@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mit.domain.MemberVO;
 import com.mit.domain.StudyVO;
+import com.mit.service.GathertownService;
 import com.mit.service.StudyService;
 
 @Controller
@@ -25,10 +26,14 @@ public class StudyController {
 	@Inject
 	private StudyService service;
 	
+	@Inject
+	private GathertownService gathertown;
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void list(Model model) throws Exception {
 		logger.info("list...");
-
+		
+		model.addAttribute("gathertown", gathertown.list());
 		model.addAttribute("list", service.list());
 	}
 	

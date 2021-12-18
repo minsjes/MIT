@@ -8,10 +8,110 @@
 	<main>
 		<div class="container-fluid px-4">
 			<h1 class="mt-4" style='text-align: center; margin-bottom: 30px;'>스터디 게시판</h1>
-			<div id="img" style="text-align: center;">
-			<a href = "https://www.gather.town/download">
-			<img class="fit-picture" src="/resources/dist/img/wgt.PNG"
-					style="height: 140px; width: auto;"></a> </div>
+			
+			<c:if test="${null ne login.memberNo}">
+				<div class="card mb-4">
+					<div class="card-header">
+						<span style="vertical-align: middle;">
+							<i class="bi bi-house"></i> 게더타운 스터디룸
+						</span>
+						<c:if test="${12345678 eq login.memberNo}">
+							<button class="btn btn-outline-dark btn-sm" onclick="openRegister()" style="float: right; padding: 0 auto 0 auto;">게더타운 링크 등록</button>
+						</c:if>
+					</div>
+					<div class="card-body">
+						<c:if test="${empty gathertown}">
+							<div style="text-align: center;">등록된 스터디가 없습니다.</div>
+						</c:if>
+						<c:if test="${!empty gathertown}">
+							<div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-interval="false">
+							  <div class="carousel-indicators">
+							  	<c:forEach items="${gathertown}" var="gathertownVO" varStatus="status">
+							  		<c:if test="${1 eq status.count}">
+							  			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${gathertownVO.rnum}" class="active"></button>
+							  		</c:if>
+							  		<c:if test="${1 ne status.count}">
+							  			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${gathertownVO.rnum}"></button>
+							  		</c:if>
+							  	</c:forEach>
+							  </div>
+							  <div class="carousel-inner">
+							  	<c:forEach items="${gathertown}" var="gathertownVO" varStatus="status">
+							  		<c:if test="${1 eq status.count}">
+							  			<div class="carousel-item active">
+									    	<div class="card">
+									    		<div class="row g-0" style="width: 80%; margin: 0 auto;">
+									    			<div class="col-md-4">
+									    				<a href="${gathertownVO.gathertownLink}">
+									    					<c:if test="${empty gathertownVO.thumbnail}">
+									    						<img class="img-fluid" src="/resources/dist/img/MIT.png">
+									    					</c:if>
+									    					<c:if test="${!empty gathertownVO.thumbnail}">
+									    						<img class="img-fluid" src="${gathertownVO.thumbnail}">
+									    					</c:if>
+									    				</a>
+									    			</div>
+									    			<div class="col-md-8">
+										    			<div class="card-body">
+										    				<h5 class="card-title">${gathertownVO.groupName}</h5>
+										    				<p class="card-text">${gathertownVO.groupContent}</p>
+										    				<p class="card-text"><small class="text-muted">참여인원: ${gathertownVO.groupNo}</small></p>
+										    				<a href="javascript:void(window.open('${gathertownVO.gathertownLink}'));"  class="btn btn-primary">접속하기</a>
+										    				<c:if test="${login.memberNo eq gathertownVO.memberNo}">
+																<a href="javascript:void(window.open('/gathertown/modify?gathertownNo=' + ${gathertownVO.gathertownNo} + '', '', 'width=800, height=630, left=' + xPos + ', top=' + yPos + ''));"  class="btn btn-outline-primary">수정</a>
+															</c:if>
+										    			</div>
+									    			</div>
+									    		</div>
+									    		<div class="mb-5"></div>
+									    	</div>
+									    </div>
+							  		</c:if>
+							  		<c:if test="${1 ne status.count}">
+							  			<div class="carousel-item">
+									    	<div class="card">
+									    		<div class="row g-0" style="width: 80%; margin: 0 auto;">
+									    			<div class="col-md-4">
+									    				<a href="${gathertownVO.gathertownLink}">
+									    					<c:if test="${empty gathertownVO.thumbnail}">
+									    						<img class="img-fluid" src="/resources/dist/img/MIT.png">
+									    					</c:if>
+									    					<c:if test="${!empty gathertownVO.thumbnail}">
+									    						<img class="img-fluid" src="${gathertownVO.thumbnail}">
+									    					</c:if>
+									    				</a>
+									    			</div>
+									    			<div class="col-md-8">
+										    			<div class="card-body">
+										    				<h5 class="card-title">${gathertownVO.groupName}</h5>
+										    				<p class="card-text">${gathertownVO.groupContent}</p>
+										    				<p class="card-text"><small class="text-muted">참여인원: ${gathertownVO.groupNo}</small></p>
+										    				<a href="javascript:void(window.open('${gathertownVO.gathertownLink}'));"  class="btn btn-primary">접속하기</a>
+										    				<c:if test="${login.memberNo eq gathertownVO.memberNo}">
+																<a href="javascript:void(window.open('/gathertown/modify?gathertownNo=' + ${gathertownVO.gathertownNo} + '', '', 'width=800, height=630, left=' + xPos + ', top=' + yPos + ''));"  class="btn btn-outline-primary">수정</a>
+															</c:if>
+										    			</div>
+									    			</div>
+									    		</div>
+									    		<div class="mb-5"></div>
+									    	</div>
+									    </div>
+							  		</c:if>
+							  	</c:forEach>
+							  </div>
+							  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							    <span class="visually-hidden">Previous</span>
+							  </button>
+							  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+							    <span class="visually-hidden">Next</span>
+							  </button>
+							</div>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
 			
 			<div class="card mb-4">
 				<div class="card-header">
@@ -93,6 +193,13 @@
 			self.location = "register";
 		});
 	});
+	
+	var xPos = (document.body.offsetWidth/2) - (800/2);
+	var yPos = (document.body.offsetHeight/2) - (630/2);
+	
+	function openRegister() {
+		window.open("/gathertown/register", "", "width=800, height=630, left=" + xPos + ", top=" + yPos + "");
+	}
 </script>
 
 <%@include file="../include/footer.jsp"%>

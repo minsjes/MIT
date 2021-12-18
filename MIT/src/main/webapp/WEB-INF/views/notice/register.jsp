@@ -10,8 +10,7 @@
 			<h2 class="mt-4" style="text-align: center; margin-bottom: 30px;">공지사항 등록하기</h2>
 			
 			<form role="form" method="post" name="frm">
-				<input type="hidden" value="${login.memberNo}" id="inlineFormInputGroupUsername" name="memberNo"> 
-				
+				<input type="hidden" value="${login.memberNo}" id="memberNo" name="memberNo"> 
 				
 				<div class="input-group">
 					<span class="input-group-text" id="inputGroup-sizing-default" style="padding: 0 20px 0 20px;">제목</span>

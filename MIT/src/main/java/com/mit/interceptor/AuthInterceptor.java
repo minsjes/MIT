@@ -46,20 +46,20 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		} /*else {
 			MemberVO checkAuth = (MemberVO) session.getAttribute(LOGIN);
 			
-			if(checkAuth.getMemberNo() == 12345678) { // ê´€ë¦¬ì
+			if (checkAuth.getMemberNo() == 12345678) { // °ü¸®ÀÚ
 				logger.info("admin access...");
-			} else { // íšŒì›
+			} else { // È¸¿ø
 				logger.info("user access...");
 				
-				// ì ‘ê·¼ í•˜ì§€ ë§ì•„ì•¼ í•  ê²½ë¡œ ì¸ì§€ í™•ì¸
+				// Á¢±Ù ÇÏÁö ¸»¾Æ¾ß ÇÒ °æ·Î ÀÎÁö È®ÀÎ
 				saveDest(request);
 				String dest = (String) session.getAttribute("dest");
 				
-				logger.info("ì˜ëª»ëœ ì ‘ê·¼...");
+				logger.info("Àß¸øµÈ Á¢±Ù...");
 				response.sendRedirect("/");
 				
-				if (dest.contains("admin")) { //ê²½ë¡œì— adminì´ í¬í•¨ë˜ë©´ ë¦¬ë‹¤ì´ë ‰íŠ¸
-					logger.info("ì˜ëª»ëœ ì ‘ê·¼...");
+				if (dest.contains("admin")) { //°æ·Î¿¡ adminÀÌ Æ÷ÇÔµÇ¸é ¸®´ÙÀÌ·ºÆ®
+					logger.info("Àß¸øµÈ Á¢±Ù...");
 					response.sendRedirect("/");
 				}
 			}

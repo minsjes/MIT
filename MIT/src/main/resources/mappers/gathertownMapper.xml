@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mit.mapper.GathertownMapper">
+
+	<insert id="create">
+		<selectKey keyProperty="gathertownNo" resultType="int" order="BEFORE">
+			SELECT SEQ_GATHERTOWN.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO GATHERTOWN (GATHERTOWN_NO, GROUP_NAME, GROUP_CONTENT, GATHERTOWN_LINK, GROUP_NO, MEMBER_NO)
+		VALUES (#{gathertownNo}, #{groupName}, #{groupContent}, #{gathertownLink}, #{groupNo}, #{memberNo})
+	</insert>
+	<!-- 이미지 업로드는 추후 추가 예정 -->
+	
+	<select id="read" resultType="com.mit.domain.GathertownVO">
+		SELECT G.GATHERTOWN_NO, G.GROUP_NAME, G.GROUP_CONTENT, G.GATHERTOWN_LINK, G.THUMBNAIL, G.GROUP_NO, M.MEMBER_NO
+		FROM GATHERTOWN G, MEMBER M
+		WHERE M.MEMBER_NO = G.MEMBER_NO
+		AND GATHERTOWN_NO = #{gathertownNo}
+	</select>
+	
+	<update id="update">
+		UPDATE GATHERTOWN SET
+		GROUP_NAME = #{groupName},
+		GROUP_CONTENT = #{groupContent},
+		GATHERTOWN_LINK = #{gathertownLink},
+		THUMBNAIL = #{thumbnail},
+		GROUP_NO = #{groupNo}
+		WHERE GATHERTOWN_NO = #{gathertownNo}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM GATHERTOWN
+		WHERE GATHERTOWN_NO = #{gathertownNo}
+	</delete>
+	
+	<select id="list" resultType="com.mit.domain.GathertownVO">
+		<![CDATA[
+			SELECT * FROM (
+				SELECT ROWNUM RNUM, GATHERTOWN_NO, GROUP_NAME, GROUP_CONTENT, GATHERTOWN_LINK, THUMBNAIL, GROUP_NO, MEMBER_NO
+      			FROM (
+      				SELECT G.GATHERTOWN_NO, G.GROUP_NAME, G.GROUP_CONTENT, G.GATHERTOWN_LINK, G.THUMBNAIL, G.GROUP_NO, G.MEMBER_NO
+      				FROM  GATHERTOWN G, MEMBER M
+      				WHERE M.MEMBER_NO = G.MEMBER_NO
+      				AND G.GATHERTOWN_NO > 0
+		]]>
+		<![CDATA[
+			ORDER BY G.GATHERTOWN_NO ASC))
+			WHERE GATHERTOWN_NO >= 1
+			ORDER BY GATHERTOWN_NO ASC
+		]]>
+	</select>
+	
+</mapper>

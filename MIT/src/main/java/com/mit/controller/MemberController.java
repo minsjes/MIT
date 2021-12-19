@@ -1,9 +1,5 @@
 package com.mit.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mit.domain.MemberVO;
-import com.mit.domain.SearchCriteria;
 import com.mit.dto.LoginDTO;
 import com.mit.service.MemberService;
 
@@ -48,7 +43,7 @@ public class MemberController {
 			return;
 		}
 
-		// 로그인 정보가 있는 경우, session 객체에 정보 담기 → Interceptor에게 이관
+		// 로그인 정보가 있는 경우, session 객체에 정보 담기 -> Interceptor에게 이관
 		// model 객체에 정보 담기
 		model.addAttribute("memberVO", vo);
 	}
@@ -123,7 +118,7 @@ public class MemberController {
 		model.addAttribute(service.read(memberNo));
 	}
 
-	@RequestMapping(value = "/modify", method = RequestMethod.POST) // 실제 데이터베이스 수정
+	@RequestMapping(value = "/modify", method = RequestMethod.POST) // 실제 게시글 데이터베이스 수정
 	public String modifyPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
 		logger.info("modify post...");
 		
@@ -141,7 +136,7 @@ public class MemberController {
 		model.addAttribute(service.read(memberNo));
 	}
 
-	@RequestMapping(value = "/modifyMyPage", method = RequestMethod.POST) // 실제 데이터베이스 수정
+	@RequestMapping(value = "/modifyMyPage", method = RequestMethod.POST) // 실제 게시글 데이터베이스 수정
 	public String modifyMyPagePOST(MemberVO vo,RedirectAttributes rttr) throws Exception {
 		
 		int memberNo = vo.getMemberNo();
@@ -150,10 +145,9 @@ public class MemberController {
 
 		rttr.addAttribute("memberNo", memberNo);
 		
-		rttr.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
+		rttr.addFlashAttribute("msg", "수정되었습니다.");
 
 		return "redirect:/member/logout";
 		
 	}
-	
 }

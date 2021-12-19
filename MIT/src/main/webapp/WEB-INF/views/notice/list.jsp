@@ -17,6 +17,16 @@
 	            </c:if>
 	         </div>
 	         <div class="card-body">
+	         <c:if test="${empty list}">
+				<table id="datatablesSimple" class="dataTable-table">
+					<thead>
+						<tr>
+							<th style="text-align: center;">등록된 게시글이 없습니다.</th>
+						</tr>
+					</thead>
+				</table>
+			</c:if>
+			<c:if test="${!empty list}">
 	            <table id="datatablesSimple">
 	               <thead>
 	                  <tr>
@@ -37,6 +47,7 @@
 	                  </c:forEach>
 	               </tbody>
 	            </table>
+	           </c:if>
 	         </div>
 	      </div>
 	   </div>

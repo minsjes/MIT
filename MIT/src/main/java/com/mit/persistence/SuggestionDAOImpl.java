@@ -16,7 +16,7 @@ public class SuggestionDAOImpl implements SuggestionDAO {
 	@Inject
 	private SqlSession session;
 	
-	private static final String namespace = "com.mit.mapper.SuggstionMapper";
+	private static final String namespace = "com.mit.mapper.SuggestionMapper";
 	
 	@Override
 	public int create(SuggestionVO vo) throws Exception {

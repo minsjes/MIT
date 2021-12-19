@@ -116,7 +116,7 @@
 								<i class="bi bi-chat-square-text"></i>
 							</div> 자유 게시판
 						</a>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="/suggestion/list">
 							<div class="sb-nav-link-icon">
 								<i class="bi bi-pencil-square"></i>
 							</div> 건의사항

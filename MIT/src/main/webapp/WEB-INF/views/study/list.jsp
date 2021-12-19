@@ -123,41 +123,52 @@
 					</c:if>
 				</div>
 				<div class="card-body">
-					<table id="datatablesSimple">
-						<thead>
-							<tr>
-								<th style="width: 10px">NO</th>
-								<th>유형</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th>조회수</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list}" var="studyVO" varStatus="status">
+					<c:if test="${empty list}">
+						<table id="datatablesSimple" class="dataTable-table">
+							<thead>
 								<tr>
-									<td>${studyVO.rnum}</td>
-									<td>
-										<c:if test="${1 eq studyVO.studyClass}">
-      										웹디자인
-										</c:if>
-										<c:if test="${2 eq studyVO.studyClass}">
-											파이썬 기초
-										</c:if>
-									</td>
-									<td>
-										<a href='/study/read?studyNo=${studyVO.studyNo}'>
-											${studyVO.studyTitle}
-										</a>
-									</td>
-									<td>${studyVO.memberName}</td>
-									<td>${studyVO.studyDate}</td>
-									<td>${studyVO.studyView}</td>
+									<th style="text-align: center;">등록된 게시글이 없습니다.</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+						</table>
+					</c:if>
+					<c:if test="${!empty list}">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th style="width: 10px">NO</th>
+									<th>유형</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="studyVO" varStatus="status">
+									<tr>
+										<td>${studyVO.rnum}</td>
+										<td>
+											<c:if test="${1 eq studyVO.studyClass}">
+	      										웹디자인
+											</c:if>
+											<c:if test="${2 eq studyVO.studyClass}">
+												파이썬 기초
+											</c:if>
+										</td>
+										<td>
+											<a href='/study/read?studyNo=${studyVO.studyNo}'>
+												${studyVO.studyTitle}
+											</a>
+										</td>
+										<td>${studyVO.memberName}</td>
+										<td>${studyVO.studyDate}</td>
+										<td>${studyVO.studyView}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
 				</div>
 			</div>
 		</div>

@@ -19,42 +19,53 @@
 					</c:if>
 				</div>
 				<div class="card-body">
-					<table id="datatablesSimple">
-						<thead>
-							<tr>
-								<th style="width: 10px">NO</th>
-								<th>유형</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th>조회수</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list}" var="qnaVO" varStatus="status">
+					<c:if test="${empty list}">
+						<table id="datatablesSimple" class="dataTable-table">
+							<thead>
 								<tr>
-									<td>${qnaVO.rnum}</td>
-									<td>
-										<c:if test="${1 eq qnaVO.qnaClass}">동아리</c:if> 
-	                        			<c:if test="${2 eq qnaVO.qnaClass}">코딩오류</c:if> 
-	                        			<c:if test="${3 eq qnaVO.qnaClass}">전공과목</c:if> 
-	                        			<c:if test="${4 eq qnaVO.qnaClass}">학교생활</c:if>
-	                        		</td>
-									<td>
-										<a href='/qna/read?qnaNo=${qnaVO.qnaNo}'>
-											${qnaVO.qnaTitle}
-										</a>
-									</td>
-									<td>
-										<c:if test="${0 eq qnaVO.hiddenStatus}">${qnaVO.memberName}</c:if> 
-										<c:if test="${1 eq qnaVO.hiddenStatus}">익명 </c:if>
-									</td>
-									<td>${qnaVO.qnaDate}</td>
-									<td>${qnaVO.qnaView}</td>
+									<th style="text-align: center;">등록된 게시글이 없습니다.</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+						</table>
+					</c:if>
+					<c:if test="${!empty list}">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th style="width: 10px">NO</th>
+									<th>유형</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="qnaVO" varStatus="status">
+									<tr>
+										<td>${qnaVO.rnum}</td>
+										<td>
+											<c:if test="${1 eq qnaVO.qnaClass}">동아리</c:if> 
+		                        			<c:if test="${2 eq qnaVO.qnaClass}">코딩오류</c:if> 
+		                        			<c:if test="${3 eq qnaVO.qnaClass}">전공과목</c:if> 
+		                        			<c:if test="${4 eq qnaVO.qnaClass}">학교생활</c:if>
+		                        		</td>
+										<td>
+											<a href='/qna/read?qnaNo=${qnaVO.qnaNo}'>
+												${qnaVO.qnaTitle}
+											</a>
+										</td>
+										<td>
+											<c:if test="${0 eq qnaVO.hiddenStatus}">${qnaVO.memberName}</c:if> 
+											<c:if test="${1 eq qnaVO.hiddenStatus}">익명 </c:if>
+										</td>
+										<td>${qnaVO.qnaDate}</td>
+										<td>${qnaVO.qnaView}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
 				</div>
 			</div>
 		</div>

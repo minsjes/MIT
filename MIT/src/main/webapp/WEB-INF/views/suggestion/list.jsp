@@ -19,33 +19,44 @@
 					</c:if>
 				</div>
 				<div class="card-body">
-					<table id="datatablesSimple">
-						<thead>
-							<tr>
-								<th style="width: 10px">NO</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list}" var="suggestionVO" varStatus="status">
+					<c:if test="${empty list}">
+						<table id="datatablesSimple" class="dataTable-table">
+							<thead>
 								<tr>
-									<td>${suggestionVO.rnum}</td>
-									<td>
-										<a href='/suggestion/read?suggestionNo=${suggestionVO.suggestionNo}'>
-											${suggestionVO.suggestionTitle}
-										</a>
-									</td>
-									<td>
-										<c:if test="${0 eq suggestionVO.hiddenStatus}">${suggestionVO.memberName}</c:if> 
-										<c:if test="${1 eq suggestionVO.hiddenStatus}">익명 </c:if>
-									</td>
-									<td>${suggestionVO.suggestionDate}</td>
+									<th style="text-align: center;">등록된 게시글이 없습니다.</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+						</table>
+					</c:if>
+					<c:if test="${!empty list}">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th style="width: 10px">NO</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="suggestionVO" varStatus="status">
+									<tr>
+										<td>${suggestionVO.rnum}</td>
+										<td>
+											<a href='/suggestion/read?suggestionNo=${suggestionVO.suggestionNo}'>
+												${suggestionVO.suggestionTitle}
+											</a>
+										</td>
+										<td>
+											<c:if test="${0 eq suggestionVO.hiddenStatus}">${suggestionVO.memberName}</c:if> 
+											<c:if test="${1 eq suggestionVO.hiddenStatus}">익명 </c:if>
+										</td>
+										<td>${suggestionVO.suggestionDate}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
 				</div>
 			</div>
 		</div>

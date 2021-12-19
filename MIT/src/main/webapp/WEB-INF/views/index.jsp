@@ -59,7 +59,7 @@
 					<div class="card mb-4">
 						<div class="card-header">
 							<a href="/calendar/list" style="text-decoration: none; color: black;">
-								<i class="bi bi-calendar-check"></i> 일정 게시판
+								<i class="bi bi-calendar-check"></i> 동아리 일정
 							</a>
 						</div>
 						<div class="card-body">

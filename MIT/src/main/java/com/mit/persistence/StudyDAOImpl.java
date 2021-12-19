@@ -46,17 +46,17 @@ public class StudyDAOImpl implements StudyDAO {
 
 	@Override
 	public void insertFile(StudyFileVO fVo) throws Exception {
-		session.insert(namespace+".insertFile", fVo);
+		session.insert(namespace + ".insertFile", fVo);
 	}
 
 	@Override
 	public void deleteFile(int studyNo) throws Exception {
-		session.delete(namespace+".deleteFile", studyNo);
+		session.delete(namespace + ".deleteFile", studyNo);
 	}
 
 	@Override
 	public List<StudyFileVO> fileList(int studyNo) throws Exception {
-		return session.selectList(namespace+".fileList", studyNo);
+		return session.selectList(namespace + ".fileList", studyNo);
 	}
 
 	@Override

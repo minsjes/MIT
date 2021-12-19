@@ -1,18 +1,12 @@
 package com.mit.domain;
 
 public class HistoryVO {
-	private int rnum;
 	private int historyNo;
 	private String historyDate;
 	private String historyContent;
 	private int memberNo;
-	private String memberName;
-	public int getRnum() {
-		return rnum;
-	}
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
+	private int rnum;
+	
 	public int getHistoryNo() {
 		return historyNo;
 	}
@@ -37,16 +31,16 @@ public class HistoryVO {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	public String getMemberName() {
-		return memberName;
+	public int getRnum() {
+		return rnum;
 	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	@Override
-	public String toString() {
-		return "HistoryVO [rnum=" + rnum + ", historyNo=" + historyNo + ", historyDate=" + historyDate
-				+ ", historyContent=" + historyContent + ", memberNo=" + memberNo + ", memberName=" + memberName + "]";
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	
+	@Override
+	public String toString() {
+		return "HistoryVO [historyNo=" + historyNo + ", historyDate=" + historyDate + ", historyContent="
+				+ historyContent + ", memberNo=" + memberNo + ", rnum=" + rnum + "]";
+	}
 }

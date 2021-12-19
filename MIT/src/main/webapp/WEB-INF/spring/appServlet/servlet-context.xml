@@ -54,6 +54,8 @@
 		</interceptor>
 
 		<interceptor>
+			<mapping path="/member/modifyMyPage" />
+			<mapping path="/member/readMyPage" />
 
 			<mapping path="/info/register" />
 			<mapping path="/info/modify" />

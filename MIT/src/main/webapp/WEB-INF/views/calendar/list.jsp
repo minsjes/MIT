@@ -13,15 +13,14 @@
 			document.addEventListener('DOMContentLoaded', function() {
 				var calendarEl = document.getElementById('calendar');
 				var calendar = new FullCalendar.Calendar(calendarEl, {
-					googleCalendarApiKey: 'AIzaSyAlyKH0kQ91QYqW4MBWyxc_r5KHoW0lO6c',
-					eventSources: [{
-						googleCalendarId: '1fvaf8auo5mhhbbdvbjss702b0@group.calendar.google.com',
-						className: '메모',
-						color: '#568dbe', //rgb,#ffffff 등의 형식으로 할 수 있어요.
+					googleCalendarApiKey : 'AIzaSyBlictKgUZJ-73uYvibOIq-wwXo9_pq7lk',
+					eventSources : [{
+						googleCalendarId : 'hnumitcircle@gmail.com',
+						className : 'MIT',
+						color : '#568dbe', //rgb,#ffffff 등의 형식으로 할 수 있어요.
 						//textColor: 'black' 
-					},{
+					}, {
 						googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
-						className : '대한민국의 휴일',
 						color : '#8080c0',
 						//textColor: 'black' 
 					}]

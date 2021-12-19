@@ -19,44 +19,55 @@
 					</c:if>
 				</div>
 				<div class="card-body">
-					<table id="datatablesSimple">
-						<thead>
-							<tr>
-								<th style="width: 10px">NO</th>
-								<th>유형</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th>조회수</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list}" var="infoVO" varStatus="status">
+					<c:if test="${empty list}">
+						<table id="datatablesSimple" class="dataTable-table">
+							<thead>
 								<tr>
-									<td>${infoVO.rnum}</td>
-									<td>
-										<c:if test="${1 eq infoVO.infoClass}">
-											진로
-										</c:if>
-										<c:if test="${2 eq infoVO.infoClass}">
-											취업
-										</c:if>
-										<c:if test="${9 eq infoVO.infoClass}">
-											기타
-										</c:if>
-									</td>
-									<td>
-										<a href='/info/read?infoNo=${infoVO.infoNo}'>
-											${infoVO.infoTitle}
-										</a>
-									</td>
-									<td>${infoVO.memberName}</td>
-									<td>${infoVO.infoDate}</td>
-									<td>${infoVO.infoView}</td>
+									<th style="text-align: center;">등록된 게시글이 없습니다.</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+						</table>
+					</c:if>
+					<c:if test="${!empty list}">
+						<table id="datatablesSimple">
+							<thead>
+								<tr>
+									<th style="width: 10px">NO</th>
+									<th>유형</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="infoVO" varStatus="status">
+									<tr>
+										<td>${infoVO.rnum}</td>
+										<td>
+											<c:if test="${1 eq infoVO.infoClass}">
+												진로
+											</c:if>
+											<c:if test="${2 eq infoVO.infoClass}">
+												취업
+											</c:if>
+											<c:if test="${9 eq infoVO.infoClass}">
+												기타
+											</c:if>
+										</td>
+										<td>
+											<a href='/info/read?infoNo=${infoVO.infoNo}'>
+												${infoVO.infoTitle}
+											</a>
+										</td>
+										<td>${infoVO.memberName}</td>
+										<td>${infoVO.infoDate}</td>
+										<td>${infoVO.infoView}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
 				</div>
 			</div>
 		</div>

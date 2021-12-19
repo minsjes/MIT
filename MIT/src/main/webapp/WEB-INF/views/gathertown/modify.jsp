@@ -133,7 +133,7 @@
 	var result = '${msg}';
 
 	if (result == 'MODIFY') {
-		alert("수정되었습니다.");
+		alert("수정되었습니다. 창을 닫고 새로고침을 눌러주세요!");
 	}
 </script>
 

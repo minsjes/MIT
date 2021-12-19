@@ -52,7 +52,7 @@ public class SuggestionController {
 		logger.info("suggestion read...");
 
 		model.addAttribute(service.read(suggestionNo));
-		model.addAttribute("SuggestionFileVO", service.fileList(suggestionNo));
+		model.addAttribute("suggestionFileVO", service.fileList(suggestionNo));
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)

@@ -4,11 +4,35 @@
 
 <%@include file="include/header.jsp"%>
 
+<style>
+.video-wrap {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
+
+.video-wrap iframe,
+
+.video-wrap object,
+
+.video-wrap embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+</style>
+
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
 			<div id="img" style="text-align: center;">
-				<img class="fit-picture" src="/resources/dist/img/MIT.png" style="height: 500px; width: auto;">
+				<a href="/history/list">
+					<img class="fit-picture" src="/resources/dist/img/MIT.png" style="height: 500px; width: auto;">
+				</a>
 			</div>
 			<div class="card mb-4">
 				<div class="card-header">
@@ -54,51 +78,73 @@
 			</div>
 		</div>
 		<div class="container-fluid px-4">
-			<div class="row">
-				<div class="col-6 col-12-small">
-					<div class="card mb-4">
-						<div class="card-header">
-							<a href="/calendar/list" style="text-decoration: none; color: black;">
-								<i class="bi bi-calendar-check"></i> 동아리 일정
-							</a>
-						</div>
-						<div class="card-body">
-							<link href='${pageContext.request.contextPath}/resources/fullcalendar-5.9.0/lib/main.css' rel='stylesheet' />
-							<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.9.0/lib/main.js'></script>
-							<script type='text/javascript'>
-								document.addEventListener('DOMContentLoaded', function() {
-									var calendarEl = document.getElementById('calendar');
-									var calendar = new FullCalendar.Calendar(calendarEl, {
-										googleCalendarApiKey : 'AIzaSyAlyKH0kQ91QYqW4MBWyxc_r5KHoW0lO6c',
-										eventSources : [{
-											googleCalendarId : '1fvaf8auo5mhhbbdvbjss702b0@group.calendar.google.com',
-											className : '메모',
-											color : '#568dbe', //rgb,#ffffff 등의 형식으로 할 수 있어요.
-											//textColor: 'black' 
-										}, {
-											googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
-											className : '대한민국의 휴일',
-											color : '#8080c0',
-											//textColor: 'black' 
-										} ]
-									});
-									
-									calendar.render();
+			<div class="card-group mb-4">
+				<div class="card">
+					<div class="card-header">
+						<a href="/calendar/list" style="text-decoration: none; color: black;">
+							<i class="bi bi-calendar-check"></i> 동아리 일정
+						</a>
+					</div>
+					<div class="card-body">
+						<link href='${pageContext.request.contextPath}/resources/fullcalendar-5.9.0/lib/main.css' rel='stylesheet' />
+						<script src='${pageContext.request.contextPath}/resources/fullcalendar-5.9.0/lib/main.js'></script>
+						<script type='text/javascript'>
+							document.addEventListener('DOMContentLoaded', function() {
+								var calendarEl = document.getElementById('calendar');
+								var calendar = new FullCalendar.Calendar(calendarEl, {
+									googleCalendarApiKey : 'AIzaSyBlictKgUZJ-73uYvibOIq-wwXo9_pq7lk',
+									eventSources : [{
+										googleCalendarId : 'hnumitcircle@gmail.com',
+										className : 'MIT',
+										color : '#568dbe', //rgb,#ffffff 등의 형식으로 할 수 있어요.
+										//textColor: 'black' 
+									}, {
+										googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
+										className : '대한민국의 휴일',
+										color : '#8080c0',
+										//textColor: 'black' 
+									} ]
 								});
-							</script>
-							<style>
-								#calendar {
-									width: 100%;
-									margin: 20px auto;
-								}
-							</style>
-							<div id='calendar'></div>
+										
+								calendar.render();
+							});
+						</script>
+						<style>
+							#calendar {
+								width: 100%;
+								margin: 20px auto;
+							}
+						</style>
+						<div id='calendar'></div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<a href="https://www.youtube.com/embed/Zc9Vyke-t9I" style="text-decoration: none; color: black;">
+							<i class="bi bi-vinyl-fill"></i> 추천 플레이리스트
+						</a>
+					</div>
+					<div class="card-body">
+						<img class="img-fluid mb-4" src="/resources/dist/img/playlist.PNG">
+						<div class="video-wrap">
+							<iframe id="video" width="100%" height="315" src="https://www.youtube.com/embed/Zc9Vyke-t9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
+
+<script>
+	var $videoIframe = document.getElementById('video');
+	var responsiveHeight = $videoIframe.offsetWidth * 0.5625;
+	$videoIframe.setAttribute('height', responsiveHeight);
+	
+	window.addEventListener('resize', function(){
+	    responsiveHeight = $videoIframe.offsetWidth * 0.5625;
+	    $videoIframe.setAttribute('height', responsiveHeight);
+	});
+</script>
 
 <script>
 	var msg = '${msg}';

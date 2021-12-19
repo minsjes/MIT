@@ -70,7 +70,12 @@
 									<textarea class="form-control" id="joinText" name="joinText" rows="5" placeholder="사유를 반드시 써주세요." style="font-weight: bold;"></textarea>
 								</div>
 								<div class="form-group">
-									<label class="form-control-label">한남대 학생이 아닌 가입 희망자는 다음 연락처로 연락바랍니다. abc@gmail.com</label>
+									<label class="form-control-label">
+										한남대 학생이 아닌 가입 희망자는 다음 연락처로 연락 바랍니다.
+										<a href="mailto:hnumitcircle@gmail.com">
+											hnumitcircle@gmail.com
+										</a>
+									</label>
 								</div>
 								<div class="col-lg-12 loginbttm">
 									<div class="col-lg-6 login-btm login-text"></div>

@@ -40,7 +40,10 @@
 				
 				<p>
 					◎ 문의사항<br>
-					혹시 궁금하신 내용이 있다면 메일 주시길 바랍니다.
+					혹시 궁금하신 내용이 있다면 메일로 물어봐 주시길 바랍니다.<br>
+					<a href="mailto:hnumitcircle@gmail.com">
+						hnumitcircle@gmail.com
+					</a>
 				</p>
 			</div>
 		</div>

@@ -55,29 +55,25 @@
 
 		<interceptor>
 
-			<mapping path="/history/register" />
-			<mapping path="/history/modify" />
-			<mapping path="/history/remove" />
-
-			<mapping path="/notice/register" />
-			<mapping path="/notice/modify" />
-			<mapping path="/notice/remove" />
+			<mapping path="/info/register" />
+			<mapping path="/info/modify" />
+			<mapping path="/info/remove" />
 
 			<mapping path="/qna/register" />
 			<mapping path="/qna/modify" />
 			<mapping path="/qna/remove" />
+			
+			<mapping path="/study/register" />
+			<mapping path="/study/modify" />
+			<mapping path="/study/remove" />
 
 			<mapping path="/free/register" />
 			<mapping path="/free/modify" />
 			<mapping path="/free/remove" />
-
-			<mapping path="/photo/register" />
-			<mapping path="/photo/modify" />
-			<mapping path="/photo/remove" />
-
-			<mapping path="/info/register" />
-			<mapping path="/info/modify" />
-			<mapping path="/info/remove" />
+			
+			<mapping path="/suggestion/register" />
+			<mapping path="/suggestion/modify" />
+			<mapping path="/suggestion/remove" />
 
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
@@ -93,6 +89,18 @@
 			<mapping path="/join/modifyA" />
 			<mapping path="/join/modifyB" />
 			<mapping path="/join/remove" />
+			
+			<mapping path="/history/register" />
+			<mapping path="/history/modify" />
+			<mapping path="/history/remove" />
+
+			<mapping path="/notice/register" />
+			<mapping path="/notice/modify" />
+			<mapping path="/notice/remove" />
+			
+			<mapping path="/gathertown/register" />
+			<mapping path="/gathertown/modify" />
+			<mapping path="/gathertown/remove" />
 
 			<beans:ref bean="adminInterceptor" />
 		</interceptor>

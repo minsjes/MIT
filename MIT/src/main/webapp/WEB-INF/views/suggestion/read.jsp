@@ -97,7 +97,7 @@
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/excelIcon.png" />
 															</c:when>
 															<c:when test="${token eq 'jpg' || token eq 'gif' || token eq 'png' || token eq 'bmp' }">
-																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-size" src="/displayFile?fileName=${studyFileVO.fileLocation}">
+																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-size" src="/displayFile?fileName=${suggestionFileVO.fileLocation}">
 															</c:when>
 															<c:when test="${token eq 'psd'}">
 																<img data-dz-thumbnail="" class="avatar-sm rounded bg-light preview-icon" src="/resources/dist/img/psd.png" alt="${fileName}" />
@@ -211,7 +211,7 @@
 
 
 <script>
-    var freeNo = $("#suggestionNo").val(); // 게시글 번호
+    var suggestionNo = $("#suggestionNo").val(); // 게시글 번호
     var loginNo = $("#newUserNo").val(); // 댓글 작성자 학번
     var writeUser = $("#memberNo").val(); // 게시글 쓴 사람 정보 가져오기, 게시글 작성자 학번
     
@@ -275,54 +275,28 @@
 			return;
 		}
 		
-		if (ckHidden) {
-			// 댓글 입력처리 수행
-			$.ajax({
-				type : "post",
-				url : "/suggestionComment/",
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : "text",
-				data : JSON.stringify({
-					suggestionNo : suggestionNo,
-					memberNo : memberNo,
-					commentText : commentText
-				}),
-				success : function(result) {
-					if (result === "SUCCESS") {
-						alert("댓글이 등록되었습니다.");
-						$("#newReplyText").val(""); //댓글 입력창 공백처리
-						getReplies(); //댓글 목록 호출
-					}
+		// 댓글 입력처리 수행
+		$.ajax({
+			type : "post",
+			url : "/suggestionComment/",
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			dataType : "text",
+			data : JSON.stringify({
+				suggestionNo : suggestionNo,
+				memberNo : memberNo,
+				commentText : commentText
+			}),
+			success : function(result) {
+				if (result === "SUCCESS") {
+					alert("댓글이 등록되었습니다.");
+					$("#newReplyText").val(""); //댓글 입력창 공백처리
+					getReplies(); //댓글 목록 호출
 				}
-			});
-			
-		} else {
-			// 댓글 입력처리 수행
-			$.ajax({
-				type : "post",
-				url : "/suggestionComment/",
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : "text",
-				data : JSON.stringify({
-					suggestionNo : suggestionNo,
-					memberNo : memberNo,
-					commentText : commentText
-				}),
-				success : function(result) {
-					if (result === "SUCCESS") {
-						alert("댓글이 등록되었습니다.");
-						$("#newReplyText").val(""); //댓글 입력창 공백처리
-						getReplies(); //댓글 목록 호출
-					}
-				}
-			});
-		}
+			}
+		});
 	});
 	
 	function deleteReply(commentNo) {

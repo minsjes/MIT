@@ -31,7 +31,7 @@
 		<div class="container-fluid px-4">
 			<div id="img" style="text-align: center;">
 				<a href="/history/list">
-					<img class="fit-picture" src="/resources/dist/img/MIT.png" style="height: 500px; width: auto;">
+					<img class="fit-picture" src="/resources/dist/img/MIT.png">
 				</a>
 			</div>
 			<div class="card mb-4">

@@ -6780,6 +6780,10 @@ textarea.form-control-lg {
   align-content: flex-end !important;
 }
 
+@media screen and (max-width:768px) {
+  .fit-picture img {width:100%;} 
+}
+
 .align-content-center {
   align-content: center !important;
 }

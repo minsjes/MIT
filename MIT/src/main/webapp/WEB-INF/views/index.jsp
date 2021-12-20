@@ -29,9 +29,9 @@
 <div id="layoutSidenav_content">
 	<main>
 		<div class="container-fluid px-4">
-			<div id="img" style="text-align: center;">
+			<div id="img" style="text-align: center;" class="fit-picture">
 				<a href="/history/list">
-					<img class="fit-picture" src="/resources/dist/img/MIT.png" style="height: 500px; width: auto;">
+					<img class="" src="/resources/dist/img/MIT.png">
 				</a>
 			</div>
 			<div class="card mb-4">
